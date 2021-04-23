@@ -1,5 +1,9 @@
 # jb file input
+
 multi file upload web component
+this component just let user select file and wait for you to get the value and handle it yourself and it's not handling any kind of upload or something
+sample: <https://codepen.io/javadbat/pen/xxgmWNB>
+
 ## instructions
 
 ### placehoder title
