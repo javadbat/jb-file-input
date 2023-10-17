@@ -1,1 +1,1 @@
-import './dist/JBFileInput.js';
+import './dist/jb-file-input.js';
