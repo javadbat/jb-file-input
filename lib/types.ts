@@ -7,3 +7,4 @@ export type ElementObjects = {
 }
 export type ValidationErrorType = "REQUIRED";
 export type FileInputStatus = "empty" | "selected"
+export type ValidationValue = {file:File}

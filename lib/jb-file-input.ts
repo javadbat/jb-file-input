@@ -1,8 +1,10 @@
+import { ValidationHelper } from "../../../common/scripts/validation/validation-helper";
+import { ValidationItem, WithValidation } from "../../../common/scripts/validation/validation-helper-types";
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
-import { ElementObjects, FileInputStatus, ValidationErrorType } from "./types";
+import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
 
-export class JBFileInputWebComponent extends HTMLElement {
+export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   #value: File | null = null;
   #elements!: ElementObjects;
   #required = false;
@@ -39,6 +41,10 @@ export class JBFileInputWebComponent extends HTMLElement {
       return null;
     }
     return null;
+  }
+  #validation = new ValidationHelper<ValidationValue>(this.showValidationError.bind(this),this.clearValidationError.bind(this),()=>({file:this.#value}),(val)=>(val.file.name),this.#getInsideValidation.bind(this))
+  get validation (){
+    return this.#validation;
   }
   constructor() {
     super();
@@ -151,7 +157,7 @@ export class JBFileInputWebComponent extends HTMLElement {
     }
     const isAllValid = requiredValid; //& other validation if they added
     if (isAllValid) {
-      this.#clearValidationError();
+      this.clearValidationError();
     } else if (showError && errorType) {
       this.showValidationError(errorType);
     }
@@ -159,12 +165,10 @@ export class JBFileInputWebComponent extends HTMLElement {
       isAllValid,
     };
   }
-  showValidationError(errorType: ValidationErrorType) {
-    if (errorType == "REQUIRED") {
-      this.#elements.componentWrapper.classList.add("--has-error");
-    }
+  showValidationError(message:string) {
+    this.#elements.componentWrapper.classList.add("--has-error");
   }
-  #clearValidationError() {
+  clearValidationError() {
     this.#elements.componentWrapper.classList.remove("--has-error");
   }
   resetValue() {
@@ -176,6 +180,20 @@ export class JBFileInputWebComponent extends HTMLElement {
   _triggerOnChangeEvent() {
     const event = new Event("change");
     this.dispatchEvent(event);
+  }
+  #getInsideValidation(){
+    const ValidationList:ValidationItem<ValidationValue>[] = [];
+    if(this.#required){
+      const message = `فایل حتما باید انتخاب شود`;
+      ValidationList.push({
+        validator:({file})=>{
+          return file !== null;
+        },
+        message:message,
+      });
+    }
+    //TODO: add validation for file size
+    return ValidationList;
   }
 }
 
