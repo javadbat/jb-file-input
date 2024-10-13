@@ -46,6 +46,13 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   get validation (){
     return this.#validation;
   }
+  #isAutoValidationDisabled = false;
+  get isAutoValidationDisabled(){
+    return this.#isAutoValidationDisabled;
+  }
+  set isAutoValidationDisabled(value:boolean){
+    this.#isAutoValidationDisabled = value;
+  }
   constructor() {
     super();
     this.initWebComponent();
