@@ -1,5 +1,5 @@
 import { ValidationHelper } from "jb-validation";
-import { ValidationItem, WithValidation } from "jb-validation/types";
+import { ValidationItem, ValidationResult, WithValidation } from "jb-validation/types";
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
@@ -8,6 +8,14 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #value: File | null = null;
   #elements!: ElementObjects;
   #required = false;
+  set required(value:boolean){
+    this.#required = value;
+    this.#validation.checkValidity(false);
+  }
+  get required() {
+    return this.#required;
+  }
+  #internals?: ElementInternals;
   #status: FileInputStatus = "empty";
   #acceptTypes =
     "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
@@ -42,7 +50,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     }
     return null;
   }
-  #validation = new ValidationHelper<ValidationValue>(this.showValidationError.bind(this),this.clearValidationError.bind(this),()=>({file:this.#value}),(val)=>(val.file.name),this.#getInsideValidation.bind(this))
+  #validation = new ValidationHelper<ValidationValue>(this.showValidationError.bind(this),this.clearValidationError.bind(this),()=>({file:this.#value}),(val)=>(val.file.name),this.#getInsideValidation.bind(this),this.#setValidationResult.bind(this))
   get validation (){
     return this.#validation;
   }
@@ -55,6 +63,10 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   constructor() {
     super();
+    if (typeof this.attachInternals == "function") {
+      //some browser dont support attachInternals
+      this.#internals = this.attachInternals();
+    }
     this.initWebComponent();
     this.initProp();
     this.registerEventListener();
@@ -197,10 +209,57 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
           return file !== null;
         },
         message:message,
+        stateType:"valueMissing"
       });
     }
     //TODO: add validation for file size
     return ValidationList;
+  }
+  /**
+   * @public
+   * @description this method used to check for validity but doesn't show error to user and just return the result
+   * this method used by #internal of component
+   */
+  checkValidity(): boolean {
+    const validationResult = this.#validation.checkValidity(false);
+    if (!validationResult.isAllValid) {
+      const event = new CustomEvent('invalid');
+      this.dispatchEvent(event);
+    }
+    return validationResult.isAllValid;
+  }
+  /**
+  * @public
+ * @description this method used to check for validity and show error to user
+ */
+  reportValidity(): boolean {
+    const validationResult = this.#validation.checkValidity(true);
+    if (!validationResult.isAllValid) {
+      const event = new CustomEvent('invalid');
+      this.dispatchEvent(event);
+    }
+    return validationResult.isAllValid;
+  }
+  /**
+   * @description this method called on every checkValidity calls and update validation result of #internal
+   */
+  #setValidationResult(result: ValidationResult<ValidationValue>) {
+    if (result.isAllValid) {
+      this.#internals.setValidity({}, '');
+    } else {
+      const states: ValidityStateFlags = {};
+      let message = "";
+      result.validationList.forEach((res) => {
+        if (!res.isValid) {
+          if (res.validation.stateType) { states[res.validation.stateType] = true; }
+          if (message == '') { message = res.message; }
+        }
+      });
+      this.#internals.setValidity(states, message);
+    }
+  }
+  get validationMessage(){
+    return this.#internals.validationMessage;
   }
 }
 
