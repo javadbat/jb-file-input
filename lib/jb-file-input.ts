@@ -1,5 +1,5 @@
 import { ValidationHelper } from "jb-validation";
-import { ValidationItem, ValidationResult, WithValidation } from "jb-validation/types";
+import { ValidationItem, ValidationResult, WithValidation } from "jb-validation";
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
