@@ -1,5 +1,4 @@
-import { ValidationHelper } from "jb-validation";
-import { ValidationItem, ValidationResult, WithValidation } from "jb-validation";
+import { ValidationHelper, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
@@ -10,7 +9,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #required = false;
   set required(value:boolean){
     this.#required = value;
-    this.#validation.checkValidity(false);
+    this.#validation.checkValidity({showError:false});
   }
   get required() {
     return this.#required;
@@ -50,7 +49,14 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     }
     return null;
   }
-  #validation = new ValidationHelper<ValidationValue>(this.showValidationError.bind(this),this.clearValidationError.bind(this),()=>({file:this.#value}),(val)=>(val.file.name),this.#getInsideValidation.bind(this),this.#setValidationResult.bind(this))
+  #validation = new ValidationHelper<ValidationValue>({
+    clearValidationError:this.clearValidationError.bind(this),
+    getInputtedValue:()=>({file:this.#value}),
+    getInsideValidations:this.#getInsideValidation.bind(this),
+    getValueString:(val)=>(val.file.name),
+    setValidationResult:this.#setValidationResult.bind(this),
+    showValidationError:this.showValidationError.bind(this)
+  });
   get validation (){
     return this.#validation;
   }
@@ -221,7 +227,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
    * this method used by #internal of component
    */
   checkValidity(): boolean {
-    const validationResult = this.#validation.checkValidity(false);
+    const validationResult = this.#validation.checkValiditySync({showError:false});
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);
@@ -233,7 +239,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
  * @description this method used to check for validity and show error to user
  */
   reportValidity(): boolean {
-    const validationResult = this.#validation.checkValidity(true);
+    const validationResult = this.#validation.checkValiditySync({showError:true});
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);

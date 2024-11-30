@@ -8,7 +8,7 @@ sample: <https://codepen.io/javadbat/pen/xxgmWNB>
 
 ### placehoder title
 
-you can cahnge file input place holder text by set `placeholder-title="select your special file"` attribute in dom
+you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom
 
 ### reset value
 
