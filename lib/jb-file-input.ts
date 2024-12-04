@@ -51,8 +51,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   #validation = new ValidationHelper<ValidationValue>({
     clearValidationError:this.clearValidationError.bind(this),
-    getInputtedValue:()=>({file:this.#value}),
-    getInsideValidations:this.#getInsideValidation.bind(this),
+    getValue:()=>({file:this.#value}),
+    getValidations:this.#getInsideValidation.bind(this),
     getValueString:(val)=>(val.file.name),
     setValidationResult:this.#setValidationResult.bind(this),
     showValidationError:this.showValidationError.bind(this)
