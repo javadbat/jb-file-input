@@ -1,0 +1,39 @@
+{
+  "name": "jb-file-input-react",
+  "description": "file input react component",
+  "type": "module",
+  "author": {
+    "name": "mohammad javad bathaei",
+    "email": "javadbat@gmail.com"
+  },
+  "keywords": [
+    "jb",
+    "jb-file-input",
+    "jb-file-input-react",
+    "file",
+    "file input",
+    "file picker",
+    "react component",
+    "react"
+  ],
+  "version": "0.1.0",
+  "bugs": "https://github.com/javadbat/jb-file-input-react/issues",
+  "license": "MIT",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "lib/",
+    "dist/"
+  ],
+  "main": "index.js",
+  "module": "index.js",
+  "homepage": "https://github.com/javadbat/jb-file-input-react",
+  "types": "./dist/jb-file-input/lib/JBFileInput.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/javadbat/jb-file-input-react"
+  },
+  "dependencies": {
+    "jb-file-input": ">=2.0.2"
+  }
+}
