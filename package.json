@@ -12,16 +12,18 @@
     "file input",
     "web component"
   ],
-  "version": "2.1.1",
+  "version": "2.2.0",
   "bugs": "https://github.com/javadbat/jb-file-input/issues",
   "license": "MIT",
   "files": [
     "LICENSE",
     "README.md",
     "lib/",
-    "dist/"
+    "dist/",
+    "react/",
+    "react/dist/"
   ],
-  "types": "./dist/jb-file-input.d.ts",
+  "types": "./dist/web-component/jb-file-input/react/lib/JBFileInput.d.ts",
   "main": "index.js",
   "repository": {
 		"type": "git",

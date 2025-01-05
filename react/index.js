@@ -1,1 +1,1 @@
-export {JBFileInput} from './dist/JBFileInput.js';
+export * from './dist/JBFileInput.js';
