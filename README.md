@@ -1,7 +1,7 @@
 # jb file input
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-file-input)
-[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-file-input/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-file-input/main/LICENSE)
 [![NPM Downloads](https://img.shields.io/npm/dw/jb-file-input)](https://www.npmjs.com/package/jb-file-input)
 
 multi file upload web component
@@ -38,6 +38,6 @@ you can reset input file value by `dom.value = null` or `dom.resetValue()`
 
 - see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react); if you want to use this component in react
 
-- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/master/docs/component-list.md) for more components
+- see [All JB Design system Component List](https://github.com/javadbat/design-system/blob/main/docs/component-list.md) for more components
 
-- use [Contribution Guide](https://github.com/javadbat/design-system/blob/master/docs/contribution-guide.md) if you want to contribute in this component.
+- use [Contribution Guide](https://github.com/javadbat/design-system/blob/main/docs/contribution-guide.md) if you want to contribute in this component.

@@ -268,5 +268,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     return this.#internals.validationMessage;
   }
 }
-
-window.customElements.define("jb-file-input", JBFileInputWebComponent);
+const myElementNotExists = !customElements.get("jb-file-input");
+if(myElementNotExists){
+  window.customElements.define("jb-file-input", JBFileInputWebComponent);
+}
