@@ -2,7 +2,7 @@ import { ValidationHelper, type ValidationItem, type ValidationResult, type With
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
-
+export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   #value: File | null = null;
   #elements!: ElementObjects;

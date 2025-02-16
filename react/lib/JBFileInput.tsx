@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef,
 import 'jb-file-input';
 // eslint-disable-next-line no-duplicate-imports
 import { JBFileInputWebComponent } from 'jb-file-input';
-import { useBindEvent } from '../../../../common/hooks/use-event.js';
+import {useEvents, EventProps} from './events-hook.js';
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -61,17 +61,15 @@ const JBFileInput = forwardRef<JBFileInputWebComponent | null | undefined, JBFil
     }
   }, [props.onChange]);
 
-  useBindEvent(element, 'change', onchange, true);
-
+  useEvents(element,props);
   return (
     <jb-file-input ref={element} class={props.className}></jb-file-input>
   );
 });
 
 JBFileInput.displayName = "JBFileInput";
-type JBFileInputProps = {
+type JBFileInputProps = EventProps & {
     className?: string,
-    onChange?: (e: JBFileInputEventType<Event>) => void,
     acceptTypes?: string,
     placeholderTitle?:string,
     required?:boolean,
