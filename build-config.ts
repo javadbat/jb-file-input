@@ -6,6 +6,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
     path: "./lib/jb-file-input.ts",
     outputPath: "./dist/jb-file-input.js",
     umdName: "JBFileInput",
+    external:["jb-validation","jb-core"]
   },
 ];
 export const reactComponentList: ReactComponentBuildConfig[] = [
@@ -13,10 +14,11 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
     name: "jb-file-input-react",
     path: "./react/lib/JBFileInput.tsx",
     outputPath: "./react/dist/JBFileInput.js",
-    external: ["jb-file-input", "prop-types", "react"],
+    external: ["jb-file-input", "prop-types", "react", "jb-core", "jb-core/react"],
     globals: {
       react: "React",
       "prop-types": "PropTypes",
+      "jb-core/react":"JBCoreReact",
     },
     umdName: "JBFileInputReact",
     dir: "./react"
