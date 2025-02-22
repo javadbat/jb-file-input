@@ -17,6 +17,7 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
     external: ["jb-file-input", "prop-types", "react", "jb-core", "jb-core/react"],
     globals: {
       react: "React",
+      "jb-file-input": "JBFileInput",
       "prop-types": "PropTypes",
       "jb-core/react":"JBCoreReact",
     },
