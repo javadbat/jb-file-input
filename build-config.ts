@@ -6,7 +6,11 @@ export const webComponentList: WebComponentBuildConfig[] = [
     path: "./lib/jb-file-input.ts",
     outputPath: "./dist/jb-file-input.js",
     umdName: "JBFileInput",
-    external:["jb-validation","jb-core"]
+    external:["jb-validation","jb-core"],
+    globals: {
+      "jb-validation": "JBValidation",
+      "jb-core": "JBCore",
+    },
   },
 ];
 export const reactComponentList: ReactComponentBuildConfig[] = [
