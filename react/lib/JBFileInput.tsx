@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import 'jb-file-input';
 // eslint-disable-next-line no-duplicate-imports
 import { JBFileInputWebComponent } from 'jb-file-input';
@@ -20,22 +20,17 @@ declare global {
 export type JBFileInputEventType<T> = T & {
     target: JBFileInputWebComponent
 }
-const JBFileInput = forwardRef<JBFileInputWebComponent | null | undefined, JBFileInputProps>((props, ref) => {
+export const JBFileInput = forwardRef((props:Props, ref) => {
 
-  const element = useRef<JBFileInputWebComponent | null>(null);
-  const [refChangeCount, refChangeCountSetter] = useState(0);
+  const element = useRef<JBFileInputWebComponent>(null);
 
   useImperativeHandle(
     ref,
     () => {
-      return (element ? element.current as JBFileInputWebComponent : {} as unknown as JBFileInputWebComponent);
+      return (element ? element.current as JBFileInputWebComponent : undefined);
     },
     [element],
   );
-
-  useEffect(() => {
-    refChangeCountSetter(refChangeCount + 1);
-  }, [element.current]);
 
   useEffect(() => {
     if (element.current && props.acceptTypes) {
@@ -55,11 +50,6 @@ const JBFileInput = forwardRef<JBFileInputWebComponent | null | undefined, JBFil
     }
   }, [props.required]);
 
-  const onchange = useCallback((e: JBFileInputEventType<Event>) => {
-    if (props.onChange) {
-      props.onChange(e);
-    }
-  }, [props.onChange]);
 
   useEvents(element,props);
   return (
@@ -68,10 +58,9 @@ const JBFileInput = forwardRef<JBFileInputWebComponent | null | undefined, JBFil
 });
 
 JBFileInput.displayName = "JBFileInput";
-type JBFileInputProps = EventProps & {
+export type Props = EventProps & {
     className?: string,
     acceptTypes?: string,
     placeholderTitle?:string,
     required?:boolean,
 }
-export { JBFileInput };
