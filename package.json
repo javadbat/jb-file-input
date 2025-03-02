@@ -23,7 +23,7 @@
     "react/",
     "react/dist/"
   ],
-  "types": "./dist/web-component/jb-file-input/lib/jb-file-input.d.ts",
+  "types": "./dist/jb-file-input.d.ts",
   "main": "index.js",
   "repository": {
 		"type": "git",

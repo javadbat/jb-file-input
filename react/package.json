@@ -28,7 +28,7 @@
   "main": "index.js",
   "module": "index.js",
   "homepage": "https://github.com/javadbat/jb-file-input",
-  "types": "./dist/web-component/jb-file-input/react/lib/JBFileInput.d.ts",
+  "types": "./dist/JBFileInput.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/javadbat/jb-file-input"
