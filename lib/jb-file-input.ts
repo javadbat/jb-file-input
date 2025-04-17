@@ -2,6 +2,7 @@ import { ValidationHelper, type ValidationItem, type ValidationResult, type With
 import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
+import {defineColors} from 'jb-core/theme/colors';
 export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   #value: File | null = null;
@@ -83,6 +84,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       delegatesFocus: true,
       slotAssignment: "named",
     });
+    defineColors();
     const html = `<style>${CSS}</style>` + "\n" + HTML;
     const element = document.createElement("template");
     element.innerHTML = html;

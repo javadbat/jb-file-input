@@ -1,0 +1,11 @@
+:host{
+  --bg-color: var(--jb-file-input-bg-color,var(--jb-neutral-10));
+  --border-color-error:var(--jb-file-input-border-color-error,var(--jb-error));
+  --bg-color-error:var(--jb-file-input-bg-color-error,var(--jb-neutral-10));
+  --icon-neutral-color:var(--jb-file-input-icon-neutral-color, var(--jb-neutral));
+  --icon-primary-color:var(--jb-file-input-icon-primary-color, var(--jb-primary));
+  --placeholder-title-color:var(--jb-file-input-placeholder-title-color, var(--jb-neutral));
+  --file-name-color:var(--jb-file-input-file-name-color, var(--jb-neutral));
+
+
+}

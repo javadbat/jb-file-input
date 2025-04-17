@@ -1,5 +1,7 @@
+@use './variables.css';
+
 .jb-file-input-web-component {
-    background-color: #f7f6f6;
+    background-color: var(--bg-color);
     width: 100%;
     height: 100%;
     border-radius: 24px;
@@ -9,9 +11,9 @@
     overflow: hidden;
     box-sizing: border-box;
     &.--has-error{
-        border: solid 1px #ff1229;
-        border-bottom: solid 3px #ff1229;
-        background-color: #fdf1f1;
+        border: solid 1px var(--border-color-error);
+        border-bottom: solid 3px var(--border-color-error);
+        background-color: var(--bg-color-error);
     }
     &[status="empty"] {
         .placeholder-wrapper {
@@ -32,18 +34,18 @@
             svg {
                 width: 64px;
                 height: 64px;
-                fill: #1e2832;
+                fill: var(--icon-neutral-color);
 
                 .st0 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-miterlimit: 10;
                 }
 
                 .st1 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-linecap: round;
                     stroke-linejoin: round;
@@ -51,12 +53,12 @@
                 }
 
                 .st2 {
-                    fill: #ff1229;
+                    fill: var(--icon-primary-color);
                 }
 
                 .st3 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-linejoin: round;
                     stroke-miterlimit: 10;
@@ -65,7 +67,7 @@
         }
 
         .placeholder-title {
-            color: #1e2832;
+            color: var(--placeholder-title-color);
             font-variation-settings: "wght"600;
         }
     }
@@ -87,18 +89,18 @@
             svg {
                 width: 64px;
                 height: 64px;
-                fill: #1e2832;
+                fill: var(--icon-neutral-color);
 
                 .st0 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-miterlimit: 10;
                 }
 
                 .st1 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-linecap: round;
                     stroke-linejoin: round;
@@ -106,12 +108,12 @@
                 }
 
                 .st2 {
-                    fill: #ff1229;
+                    fill: var(--icon-primary-color);
                 }
 
                 .st3 {
                     fill: none;
-                    stroke: #1e2832;
+                    stroke: var(--icon-neutral-color);
                     stroke-width: 3;
                     stroke-linejoin: round;
                     stroke-miterlimit: 10;
@@ -120,7 +122,7 @@
         }
 
         .file-name {
-            color: #1e2832;
+            color: var(--file-name-color);
             font-variation-settings: "wght"600;
         }
     }
