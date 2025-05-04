@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 
 const meta: Meta<Props> = {
-  title: "Example/form elements/JBFileInput",
+  title: "Components/form elements/JBFileInput",
   component: JBFileInput,
 };
 export default meta;
