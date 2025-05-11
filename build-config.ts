@@ -18,11 +18,10 @@ export const reactComponentList: ReactComponentBuildConfig[] = [
     name: "jb-file-input-react",
     path: "./react/lib/JBFileInput.tsx",
     outputPath: "./react/dist/JBFileInput.js",
-    external: ["jb-file-input", "prop-types", "react", "jb-core", "jb-core/react"],
+    external: ["jb-file-input", "react", "jb-core", "jb-core/react"],
     globals: {
       react: "React",
       "jb-file-input": "JBFileInput",
-      "prop-types": "PropTypes",
       "jb-core/react":"JBCoreReact",
     },
     umdName: "JBFileInputReact",
