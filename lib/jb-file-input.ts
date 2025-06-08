@@ -1,8 +1,8 @@
 import { ValidationHelper, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
-import HTML from "./jb-file-input.html";
 import CSS from "./jb-file-input.scss";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
 import {registerDefaultVariables} from 'jb-core/theme';
+import { renderHTML } from "./render";
 export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   #value: File | null = null;
@@ -85,7 +85,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       slotAssignment: "named",
     });
     registerDefaultVariables();
-    const html = `<style>${CSS}</style>` + "\n" + HTML;
+    const html = `<style>${CSS}</style>` + "\n" + renderHTML();
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));

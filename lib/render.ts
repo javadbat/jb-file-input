@@ -1,4 +1,6 @@
-<div class="jb-file-input-web-component">
+export function renderHTML(): string {
+  return /* html */ `
+  <div class="jb-file-input-web-component">
     <div class="placeholder-wrapper">
         <div class="icon-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -47,4 +49,6 @@
         </div>
         <div class="file-name"></div>
     </div>
-</div>
+  </div>
+      `;
+}
