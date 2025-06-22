@@ -1,10 +1,11 @@
+'use client';
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import 'jb-file-input';
 // eslint-disable-next-line no-duplicate-imports
 import { JBFileInputWebComponent } from 'jb-file-input';
 import {useEvents, EventProps} from './events-hook.js';
 
-declare global {
+declare module "react" {
     // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace JSX {
         interface IntrinsicElements {
