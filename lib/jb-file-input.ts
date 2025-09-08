@@ -142,12 +142,15 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       case "required":
         if (value == "" || value == "true") {
           this.#required = true;
+          this.#internals.ariaRequired = "true";
         } else {
           this.#required = false;
+          this.#internals.ariaRequired = "false";
         }
         break;
       case "placeholder-title":
         this.#elements.placeholderTitle.innerHTML = value;
+        this.#internals.ariaPlaceholder = value;
         break;
       case "accept":
         this.acceptTypes = value;
