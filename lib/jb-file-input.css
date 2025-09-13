@@ -1,5 +1,3 @@
-@use './variables.css';
-
 .jb-file-input-web-component {
     background-color: var(--bg-color);
     width: 100%;
