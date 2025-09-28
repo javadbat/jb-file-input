@@ -14,3 +14,9 @@ export const Normal:Story = {
     
   }
 };
+export const Required:Story = {
+  args:{
+    required:true,
+    placeholderTitle:"click and open select file then hit the cancel for test"
+  }
+};

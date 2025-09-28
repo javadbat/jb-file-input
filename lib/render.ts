@@ -1,3 +1,6 @@
+import { i18n } from "jb-core/i18n";
+import { dictionary } from "./i18n";
+
 export function renderHTML(): string {
   return /* html */ `
   <div class="jb-file-input-web-component">
@@ -23,7 +26,7 @@ export function renderHTML(): string {
                 <line class="st3" x1="54.5" y1="25.1" x2="54.5" y2="19.3" />
             </svg>
         </div>
-        <div class="placeholder-title">انتخاب فایل</div>
+        <div class="placeholder-title">${dictionary.get(i18n,"chooseFile")}</div>
     </div>
     <div class="file-wrapper">
         <div class="icon-wrapper">

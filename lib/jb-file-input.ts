@@ -1,9 +1,11 @@
-import { ValidationHelper, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
+import { ValidationHelper, type ShowValidationErrorParameters, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
 import {registerDefaultVariables} from 'jb-core/theme';
 import { renderHTML } from "./render";
+import { dictionary } from "./i18n";
+import { i18n } from "jb-core/i18n";
 export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   #value: File | null = null;
@@ -112,10 +114,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.#required = false;
   }
   registerEventListener() {
-    this.#elements.placeholderWrapper.addEventListener(
-      "click",
-      this.openFileSelector.bind(this)
-    );
+    this.#elements.placeholderWrapper.addEventListener("click",this.openFileSelector.bind(this));
     //TODO: bind selected file to open input on clicked
     //this._shadowRoot.querySelector('.image-wrapper img').addEventListener('click', this.openImageSelector.bind(this));
   }
@@ -169,34 +168,16 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       this.#elements.fileNameWrapper.innerHTML = file.name;
       this.setStatus("selected");
       this._triggerOnChangeEvent();
+    }else{
+      //user click on cancel button of file select dialog
     }
+    this.#validation.checkValiditySync({showError:true});
   }
   setStatus(status: FileInputStatus) {
     this.#elements.componentWrapper.setAttribute("status", status);
     this.#status = status;
   }
-  triggerInputValidation(showError = true) {
-    // this method is public and used outside of component to check if field validity param are met
-
-    let errorType: ValidationErrorType | null = null;
-    let requiredValid = true;
-    if (this.#required) {
-      requiredValid = this.value != null;
-      if (!requiredValid) {
-        errorType = "REQUIRED";
-      }
-    }
-    const isAllValid = requiredValid; //& other validation if they added
-    if (isAllValid) {
-      this.clearValidationError();
-    } else if (showError && errorType) {
-      this.showValidationError(errorType);
-    }
-    return {
-      isAllValid,
-    };
-  }
-  showValidationError(message:string) {
+  showValidationError(error: ShowValidationErrorParameters) {
     this.#elements.componentWrapper.classList.add("--has-error");
   }
   clearValidationError() {
@@ -215,7 +196,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #getInsideValidation(){
     const ValidationList:ValidationItem<ValidationValue>[] = [];
     if(this.#required){
-      const message = `فایل حتما باید انتخاب شود`;
+      const message = dictionary.get(i18n,"requiredMessage");
       ValidationList.push({
         validator:({file})=>{
           return file !== null;
