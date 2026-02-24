@@ -1,9 +1,11 @@
 'use client';
-import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef, type PropsWithChildren } from 'react';
 import 'jb-file-input';
 // eslint-disable-next-line no-duplicate-imports
 import { JBFileInputWebComponent } from 'jb-file-input';
 import {useEvents, EventProps} from './events-hook.js';
+import { useJBFileInputAttribute, type JBFileInputAttributes } from './attributes-hook.js';
+import type { JBElementStandardProps } from 'jb-core/react';
 
 declare module "react" {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -12,7 +14,6 @@ declare module "react" {
             'jb-file-input': JBFileInputType;
         }
         interface JBFileInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBFileInputWebComponent>, JBFileInputWebComponent> {
-            class?: string,
             label?: string,
             name?: string,
         }
@@ -33,35 +34,16 @@ export const JBFileInput = forwardRef((props:Props, ref) => {
     [element],
   );
 
-  useEffect(() => {
-    if (element.current && props.acceptTypes) {
-      element.current.acceptTypes = props.acceptTypes;
-    }
-  }, [props.acceptTypes]);
-
-  useEffect(() => {
-    if (element.current && props.placeholderTitle) {
-      element.current.setAttribute('placeholder-title',props.placeholderTitle);
-    }
-  }, [props.placeholderTitle]);
-
-  useEffect(() => {
-    if (element.current && props.required) {
-      element.current.setAttribute('required', props.required?"true":"false");
-    }
-  }, [props.required]);
-
-
-  useEvents(element,props);
+  const {acceptTypes,placeholderTitle,required,onChange,onInit,onLoad,children, ...otherProps} = props;
+  useJBFileInputAttribute(element,{acceptTypes,placeholderTitle,required})
+  useEvents(element,{onChange,onInit,onLoad});
   return (
-    <jb-file-input ref={element} class={props.className}></jb-file-input>
+    <jb-file-input ref={element} {...otherProps}>{children}</jb-file-input>
   );
 });
 
 JBFileInput.displayName = "JBFileInput";
-export type Props = EventProps & {
-    className?: string,
-    acceptTypes?: string,
-    placeholderTitle?:string,
-    required?:boolean,
-}
+type JBFileInputProps = PropsWithChildren<EventProps & JBFileInputAttributes & {
+  name?:string
+}>
+export type Props = JBFileInputProps & JBElementStandardProps<JBFileInputWebComponent, keyof JBFileInputProps>

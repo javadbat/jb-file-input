@@ -2,7 +2,7 @@ import { ValidationHelper, type ShowValidationErrorParameters, type ValidationIt
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
 import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
-import {registerDefaultVariables} from 'jb-core/theme';
+import { registerDefaultVariables } from 'jb-core/theme';
 import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
@@ -11,9 +11,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #value: File | null = null;
   #elements!: ElementObjects;
   #required = false;
-  set required(value:boolean){
+  set required(value: boolean) {
     this.#required = value;
-    this.#validation.checkValidity({showError:false});
+    this.#validation.checkValidity({ showError: false });
   }
   get required() {
     return this.#required;
@@ -22,6 +22,15 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #status: FileInputStatus = "empty";
   #acceptTypes =
     "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
+  get name() { return this.getAttribute('name') || ''; }
+  set name(value: string | null | undefined) {
+    if (value) {
+      this.setAttribute('name', value)
+    }
+    else {
+      this.removeAttribute('name')
+    }
+  }
   get acceptTypes() {
     return this.#acceptTypes;
   }
@@ -45,7 +54,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     //it is read only variable
     return this.#value;
   }
-  get selectedFileType(): string | null{
+  get selectedFileType(): string | null {
     if (this.#value) {
       this.#value.type;
     } else {
@@ -54,21 +63,21 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     return null;
   }
   #validation = new ValidationHelper<ValidationValue>({
-    clearValidationError:this.clearValidationError.bind(this),
-    getValue:()=>({file:this.#value}),
-    getValidations:this.#getInsideValidation.bind(this),
-    getValueString:(val)=>(val.file.name),
-    setValidationResult:this.#setValidationResult.bind(this),
-    showValidationError:this.showValidationError.bind(this)
+    clearValidationError: this.clearValidationError.bind(this),
+    getValue: () => ({ file: this.#value }),
+    getValidations: this.#getInsideValidation.bind(this),
+    getValueString: (val) => (val.file.name),
+    setValidationResult: this.#setValidationResult.bind(this),
+    showValidationError: this.showValidationError.bind(this)
   });
-  get validation (){
+  get validation() {
     return this.#validation;
   }
   #isAutoValidationDisabled = false;
-  get isAutoValidationDisabled(){
+  get isAutoValidationDisabled() {
     return this.#isAutoValidationDisabled;
   }
-  set isAutoValidationDisabled(value:boolean){
+  set isAutoValidationDisabled(value: boolean) {
     this.#isAutoValidationDisabled = value;
   }
   constructor() {
@@ -114,7 +123,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.#required = false;
   }
   registerEventListener() {
-    this.#elements.placeholderWrapper.addEventListener("click",this.openFileSelector.bind(this));
+    this.#elements.placeholderWrapper.addEventListener("click", this.openFileSelector.bind(this));
     //TODO: bind selected file to open input on clicked
     //this._shadowRoot.querySelector('.image-wrapper img').addEventListener('click', this.openImageSelector.bind(this));
   }
@@ -168,10 +177,10 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       this.#elements.fileNameWrapper.innerHTML = file.name;
       this.setStatus("selected");
       this._triggerOnChangeEvent();
-    }else{
+    } else {
       //user click on cancel button of file select dialog
     }
-    this.#validation.checkValiditySync({showError:true});
+    this.#validation.checkValiditySync({ showError: true });
   }
   setStatus(status: FileInputStatus) {
     this.#elements.componentWrapper.setAttribute("status", status);
@@ -193,16 +202,16 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     const event = new Event("change");
     this.dispatchEvent(event);
   }
-  #getInsideValidation(){
-    const ValidationList:ValidationItem<ValidationValue>[] = [];
-    if(this.#required){
-      const message = dictionary.get(i18n,"requiredMessage");
+  #getInsideValidation() {
+    const ValidationList: ValidationItem<ValidationValue>[] = [];
+    if (this.#required) {
+      const message = dictionary.get(i18n, "requiredMessage");
       ValidationList.push({
-        validator:({file})=>{
+        validator: ({ file }) => {
           return file !== null;
         },
-        message:message,
-        stateType:"valueMissing"
+        message: message,
+        stateType: "valueMissing"
       });
     }
     //TODO: add validation for file size
@@ -214,7 +223,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
    * this method used by #internal of component
    */
   checkValidity(): boolean {
-    const validationResult = this.#validation.checkValiditySync({showError:false});
+    const validationResult = this.#validation.checkValiditySync({ showError: false });
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);
@@ -226,7 +235,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
  * @description this method used to check for validity and show error to user
  */
   reportValidity(): boolean {
-    const validationResult = this.#validation.checkValiditySync({showError:true});
+    const validationResult = this.#validation.checkValiditySync({ showError: true });
     if (!validationResult.isAllValid) {
       const event = new CustomEvent('invalid');
       this.dispatchEvent(event);
@@ -251,11 +260,11 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       this.#internals.setValidity(states, message);
     }
   }
-  get validationMessage(){
+  get validationMessage() {
     return this.#internals.validationMessage;
   }
 }
 const myElementNotExists = !customElements.get("jb-file-input");
-if(myElementNotExists){
+if (myElementNotExists) {
   window.customElements.define("jb-file-input", JBFileInputWebComponent);
 }
