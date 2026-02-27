@@ -57,8 +57,6 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   get selectedFileType(): string | null {
     if (this.#value) {
       this.#value.type;
-    } else {
-      return null;
     }
     return null;
   }
@@ -97,24 +95,16 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       slotAssignment: "named",
     });
     registerDefaultVariables();
-    const html = `<style>${CSS} ${VariablesCSS}</style>` + "\n" + renderHTML();
+    const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
     const element = document.createElement("template");
     element.innerHTML = html;
     shadowRoot.appendChild(element.content.cloneNode(true));
     this.#elements = {
-      componentWrapper: shadowRoot.querySelector(
-        ".jb-file-input-web-component"
-      ) as HTMLDivElement,
-      placeholderWrapper: shadowRoot.querySelector(
-        ".placeholder-wrapper"
-      ) as HTMLDivElement,
+      componentWrapper: shadowRoot.querySelector(".jb-file-input-web-component") as HTMLDivElement,
+      placeholderWrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
       virtualInput: this.#createVirtualInputFile(),
-      placeholderTitle: shadowRoot.querySelector(
-        ".placeholder-title"
-      ) as HTMLDivElement,
-      fileNameWrapper: shadowRoot.querySelector(
-        ".file-wrapper .file-name"
-      ) as HTMLDivElement,
+      placeholderTitle: shadowRoot.querySelector(".placeholder-title") as HTMLDivElement,
+      fileNameWrapper: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement,
     };
   }
   initProp() {

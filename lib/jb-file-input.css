@@ -8,10 +8,17 @@
     align-items: center;
     overflow: hidden;
     box-sizing: border-box;
+    transition: all 0.3s 0s ease;
     &.--has-error{
         border: solid 1px var(--border-color-error);
         border-bottom: solid 3px var(--border-color-error);
         background-color: var(--bg-color-error);
+    }
+    &:hover{
+        background-color:var(--bg-color-hover);
+    }
+    &:active{
+        background-color: var(--bg-color-pressed);
     }
     &[status="empty"] {
         .placeholder-wrapper {
@@ -27,40 +34,18 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 32px;
+        padding: var(--padding);
         .icon-wrapper {
             svg {
-                width: 64px;
-                height: 64px;
-                fill: var(--icon-neutral-color);
-
-                .st0 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-miterlimit: 10;
-                }
-
-                .st1 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                    stroke-miterlimit: 10;
-                }
-
-                .st2 {
+                width: 4rem;
+                height: 4rem;
+                fill: var(--icon-base-color);
+                color:var(--icon-base-color);
+                .primary-part{
                     fill: var(--icon-primary-color);
+                    color:var(--icon-primary-color);
                 }
 
-                .st3 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-linejoin: round;
-                    stroke-miterlimit: 10;
-                }
             }
         }
 
@@ -82,39 +67,16 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 32px;
+        padding: var(--padding);
         .icon-wrapper {
             svg {
-                width: 64px;
-                height: 64px;
+                width: 4rem;
+                height: 4rem;
                 fill: var(--icon-neutral-color);
-
-                .st0 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-miterlimit: 10;
-                }
-
-                .st1 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-linecap: round;
-                    stroke-linejoin: round;
-                    stroke-miterlimit: 10;
-                }
-
-                .st2 {
+                color:var(--icon-neutral-color);
+               .primary-part{
                     fill: var(--icon-primary-color);
-                }
-
-                .st3 {
-                    fill: none;
-                    stroke: var(--icon-neutral-color);
-                    stroke-width: 3;
-                    stroke-linejoin: round;
-                    stroke-miterlimit: 10;
+                    color:var(--icon-primary-color);
                 }
             }
         }
