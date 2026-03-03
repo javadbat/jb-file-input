@@ -1,13 +1,14 @@
 import { ValidationHelper, type ShowValidationErrorParameters, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
-import { ElementObjects, FileInputStatus, ValidationErrorType, ValidationValue } from "./types";
+import type { ElementObjects, FileInputStatus, ValidationValue } from "./types";
 import { registerDefaultVariables } from 'jb-core/theme';
 import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
 export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
+  static formAssociated = true;
   #value: File | null = null;
   #elements!: ElementObjects;
   #required = false;
@@ -19,7 +20,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     return this.#required;
   }
   #internals?: ElementInternals;
-  #status: FileInputStatus = "empty";
+  #fileInputStatus: FileInputStatus = "empty";
   #acceptTypes =
     "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
   get name() { return this.getAttribute('name') || ''; }
@@ -48,17 +49,29 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       this.resetValue();
     } else {
       this.#value = value;
+      this.#internals.states.add("fill");
+      this.#internals.states.delete("empty")
+      this.#internals.setFormValue(value);
     }
   }
   get status() {
     //it is read only variable
-    return this.#value;
+    return this.#fileInputStatus;
   }
   get selectedFileType(): string | null {
     if (this.#value) {
       this.#value.type;
     }
     return null;
+  }
+  #uploadPercent:number | null = null;
+  get uploadPercent(){
+    return this.#uploadPercent;
+  }
+  set uploadPercent(value:number | null){
+    this.#elements
+    this.#uploadPercent = value;
+    this.#elements.uploader.bg.style.setProperty("--upload-percent", `${value}%`);
   }
   #validation = new ValidationHelper<ValidationValue>({
     clearValidationError: this.clearValidationError.bind(this),
@@ -105,10 +118,14 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       virtualInput: this.#createVirtualInputFile(),
       placeholderTitle: shadowRoot.querySelector(".placeholder-title") as HTMLDivElement,
       fileNameWrapper: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement,
+      uploader:{
+        bg:shadowRoot.querySelector(".upload-bg") as HTMLDivElement
+      }
     };
   }
   initProp() {
     this.setStatus("empty");
+    this.#internals.states.add("empty")
     this.#value = null;
     this.#required = false;
   }
@@ -163,7 +180,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       //if user select file and not click on cancel
       //when user select a image from his computer but dont want to edit
       const file = target.files[0];
-      this.#value = file;
+      this.value = file;
       this.#elements.fileNameWrapper.innerHTML = file.name;
       this.setStatus("selected");
       this._triggerOnChangeEvent();
@@ -173,8 +190,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.#validation.checkValiditySync({ showError: true });
   }
   setStatus(status: FileInputStatus) {
-    this.#elements.componentWrapper.setAttribute("status", status);
-    this.#status = status;
+    // this.#elements.componentWrapper.setAttribute("status", status);
+    this.#fileInputStatus = status;
   }
   showValidationError(error: ShowValidationErrorParameters) {
     this.#elements.componentWrapper.classList.add("--has-error");
@@ -185,6 +202,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   resetValue() {
     //this function is public and called outside of web component and call inside if user set value = null
     this.#value = null;
+    this.#internals.states.add("empty")
+    this.#internals.states.delete("fill")
+    this.#internals.setFormValue(null);
     this.setStatus("empty");
     this.#elements.virtualInput.value = "";
   }

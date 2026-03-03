@@ -7,9 +7,12 @@ export type ElementObjects = {
     virtualInput:HTMLInputElement,
     placeholderTitle:HTMLDivElement,
     fileNameWrapper:HTMLDivElement,
+    uploader:{
+        //change to svg mask
+        bg:HTMLDivElement
+    }
 }
 export type ValidationErrorType = "REQUIRED";
 export type FileInputStatus = "empty" | "selected"
 export type ValidationValue = {file:File}
-
 export type JBFileInputEventType<TEvent> = EventTypeWithTarget<TEvent,JBFileInputWebComponent>;

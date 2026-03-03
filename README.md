@@ -8,11 +8,11 @@ multi file upload web component
 this component just let user select file and wait for you to get the value and handle it yourself and it's not handling any kind of upload or something
 sample: <https://codepen.io/javadbat/pen/xxgmWNB>
 
-## using with JS frameworks
+## Using with JS frameworks
 
 to use this component in **react** see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react);
 
-## usage
+## Usage
 
 just import package with import or from js CDN and write web component tag in your html
 
@@ -25,14 +25,33 @@ just import package with import or from js CDN and write web component tag in yo
 ```
 
 
-## placeholder title
+## Placeholder Title
 
 you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom
 
-## reset value
+## Value
+`jb-date-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`.
 
+### Reset Value
 you can reset input file value by `dom.value = null` or `dom.resetValue()`
 
+## Loading State
+jb-file-input dont show any loading by default because it's just a file input and not file uploader. but you can show upload state in file uploader by set some attribute and property.
+
+in HTML
+
+```html
+<jb-file-input uploading>
+```
+
+or in javascript:
+
+```ts
+// show upload section 
+document.querySelector("jb-file-input").setAttribute("uploading","")
+// set upload percent
+document.querySelector("jb-file-input").uploadPercent = 10; //10% of file uploaded
+```
 
 ## Other Related Docs:
 
