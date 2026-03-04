@@ -1,7 +1,8 @@
 import {JBDictionary} from 'jb-core/i18n';
 export type JBFileInputDictionary = {
   requiredMessage:string,
-  chooseFile:string
+  chooseFile:string,
+  uploading: string,
 }
 
 /**
@@ -18,10 +19,12 @@ export type JBFileInputDictionary = {
 export const dictionary = new JBDictionary<JBFileInputDictionary>({
   "fa":{
     requiredMessage:"فایل حتما باید انتخاب شود",
-    chooseFile:"انتخاب فایل"
+    chooseFile:"انتخاب فایل",
+    uploading:"در حال آپلود"
   },
   "en":{
     requiredMessage:"you must select a file",
-    chooseFile:"Choose File"
+    chooseFile:"Choose File",
+    uploading:"Uploading"
   }
 });

@@ -47,11 +47,13 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   set value(value) {
     if (value == null) {
       this.resetValue();
-    } else {
+    } else if(value instanceof File){
       this.#value = value;
+      this.#elements.file.fileName.innerHTML = value.name;
       this.#internals.states.add("fill");
       this.#internals.states.delete("empty")
       this.#internals.setFormValue(value);
+      this.#validation.checkValidity({showError:false});
     }
   }
   get status() {
@@ -114,10 +116,17 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     shadowRoot.appendChild(element.content.cloneNode(true));
     this.#elements = {
       componentWrapper: shadowRoot.querySelector(".jb-file-input-web-component") as HTMLDivElement,
-      placeholderWrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
+      placeholder:{
+        section:shadowRoot.querySelector(".placeholder-section") as HTMLDivElement,
+        wrapper:shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
+        title:shadowRoot.querySelector(".placeholder-title") as HTMLDivElement
+      },
+      file:{
+        section:shadowRoot.querySelector(".file-section") as HTMLDivElement,
+        wrapper:shadowRoot.querySelector(".file-wrapper") as HTMLDivElement,
+        fileName:shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement
+      },
       virtualInput: this.#createVirtualInputFile(),
-      placeholderTitle: shadowRoot.querySelector(".placeholder-title") as HTMLDivElement,
-      fileNameWrapper: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement,
       uploader:{
         bg:shadowRoot.querySelector(".upload-bg") as HTMLDivElement
       }
@@ -130,9 +139,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.#required = false;
   }
   registerEventListener() {
-    this.#elements.placeholderWrapper.addEventListener("click", this.openFileSelector.bind(this));
-    //TODO: bind selected file to open input on clicked
-    //this._shadowRoot.querySelector('.image-wrapper img').addEventListener('click', this.openImageSelector.bind(this));
+    this.#elements.placeholder.section.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.file.section.addEventListener("click", this.openFileSelector.bind(this));
   }
   #createVirtualInputFile() {
     const virtualInputFile = document.createElement(
@@ -165,7 +173,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
         }
         break;
       case "placeholder-title":
-        this.#elements.placeholderTitle.innerHTML = value;
+        this.#elements.placeholder.title.innerHTML = value;
         this.#internals.ariaPlaceholder = value;
         break;
       case "accept":
@@ -181,7 +189,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       //when user select a image from his computer but dont want to edit
       const file = target.files[0];
       this.value = file;
-      this.#elements.fileNameWrapper.innerHTML = file.name;
+      this.#elements.file.fileName.innerHTML = file.name;
       this.setStatus("selected");
       this._triggerOnChangeEvent();
     } else {

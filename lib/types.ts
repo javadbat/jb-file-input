@@ -3,12 +3,18 @@ import type { JBFileInputWebComponent } from './jb-file-input';
 
 export type ElementObjects = {
     componentWrapper:HTMLDivElement,
-    placeholderWrapper:HTMLDivElement,
     virtualInput:HTMLInputElement,
-    placeholderTitle:HTMLDivElement,
-    fileNameWrapper:HTMLDivElement,
+    placeholder:{
+        section:HTMLDivElement
+        wrapper:HTMLDivElement,
+        title:HTMLDivElement
+    }
+    file:{
+        section:HTMLDivElement,
+        wrapper:HTMLDivElement,
+        fileName:HTMLDivElement
+    }
     uploader:{
-        //change to svg mask
         bg:HTMLDivElement
     }
 }

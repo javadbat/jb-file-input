@@ -34,7 +34,7 @@ export const JBFileInput = forwardRef((props:Props, ref) => {
     },
     [element],
   );
-
+  // [value,uploadPercent] passed by ...otherProps
   const {acceptTypes,uploading,placeholderTitle,required,onChange,onInit,onLoad,children, ...otherProps} = props;
   useJBFileInputAttribute(element,{acceptTypes,placeholderTitle,required})
   useEvents(element,{onChange,onInit,onLoad});
@@ -46,7 +46,9 @@ export const JBFileInput = forwardRef((props:Props, ref) => {
 JBFileInput.displayName = "JBFileInput";
 type JBFileInputProps = PropsWithChildren<EventProps & JBFileInputAttributes & {
   name?:string,
+  //TODO// make it generic TValue with file default and add support for intentValueObject with Potential file download
+  value?: File,
   uploading?:boolean,
-  uploadPercent?:number
+  uploadPercent?:number,
 }>
 export type Props = JBFileInputProps & JBElementStandardProps<JBFileInputWebComponent, keyof JBFileInputProps>

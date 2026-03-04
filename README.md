@@ -2,15 +2,23 @@
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-file-input)
 [![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-file-input/main/LICENSE)
-[![NPM Downloads](https://img.shields.io/npm/dw/jb-file-input)](https://www.npmjs.com/package/jb-file-input)
+[![NPM Version](https://img.shields.io/npm/v/jb-file-input)](https://www.npmjs.com/package/jb-file-input)
+![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-file-input)
 
-multi file upload web component
+File upload web component.
 this component just let user select file and wait for you to get the value and handle it yourself and it's not handling any kind of upload or something
-sample: <https://codepen.io/javadbat/pen/xxgmWNB>
+
+## Samples
+ - [Codepen](https://codepen.io/javadbat/pen/xxgmWNB)
+ - [Storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput)
 
 ## Using with JS frameworks
 
 to use this component in **react** see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react);
+
+## using with JS frameworks
+
+- [<img src="https://img.shields.io/badge/jb--file--input/react-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput-react-readme--docs)
 
 ## Usage
 
