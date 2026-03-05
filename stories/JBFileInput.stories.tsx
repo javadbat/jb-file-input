@@ -49,6 +49,9 @@ export const Sizes:Story = {
         <JBFileInput style={{height:`4rem`}}/>
         <JBFileInput style={{height:`4rem`}} value={file}/>
         <JBFileInput style={{height:`4rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`3rem`}}/>
+        <JBFileInput style={{height:`3rem`}} value={file}/>
+        <JBFileInput style={{height:`3rem`}} uploading uploadPercent={70}/>
         <JBFileInput style={{height:`2rem`}}/>
         <JBFileInput style={{height:`2rem`}} value={file}/>
         <JBFileInput style={{height:`2rem`}} uploading uploadPercent={70}/>

@@ -1,31 +1,46 @@
-:host{
+:host {
   /*sizes*/
-  --border-radius:var(--jb-file-input-border-radius,var(--jb-radius-xl));
+  --border-radius: var(--jb-file-input-border-radius, var(--jb-radius-xl));
   --padding: var(--jb-file-input-padding, 1rem);
   /*colors*/
-  --bg-color: var(--jb-file-input-bg-color,var(--jb-neutral-10));
+  --bg-color: var(--jb-file-input-bg-color, var(--jb-neutral-10));
   --bg-color-hover: var(--jb-file-input-bg-color-hover, oklch(from var(--bg-color) calc(l + 0.07) calc(c + 0.07) h));
   --bg-color-pressed: var(--jb-file-input-bg-color-pressed, oklch(from var(--bg-color) calc(l - 0.1) calc(c - 0.05) h));
-  --border-color-error:var(--jb-file-input-border-color-error,var(--jb-error));
-  --bg-color-error:var(--jb-file-input-bg-color-error,var(--jb-neutral-10));
-  --icon-base-color:var(--jb-file-input-icon-base-color, var(--jb-neutral));
-  --icon-primary-color:var(--jb-file-input-icon-primary-color, var(--jb-primary));
-  --placeholder-title-color:var(--jb-file-input-placeholder-title-color, var(--jb-neutral));
-  --file-name-color:var(--jb-file-input-file-name-color, var(--jb-neutral));
+  --border-color-error: var(--jb-file-input-border-color-error, var(--jb-error));
+  --bg-color-error: var(--jb-file-input-bg-color-error, var(--jb-neutral-10));
+  --icon-base-color: var(--jb-file-input-icon-base-color, var(--jb-neutral));
+  --icon-primary-color: var(--jb-file-input-icon-primary-color, var(--jb-primary));
+  --placeholder-title-color: var(--jb-file-input-placeholder-title-color, var(--jb-neutral));
+  --file-name-color: var(--jb-file-input-file-name-color, var(--jb-neutral));
   --loading-bg: var(--jb-file-input-loading-bg, linear-gradient(90deg, var(--jb-primary-l), var(--jb-secondary-l)));
+
 }
-:host(:state(empty)){
-  --display-placeholder:block;
-  --display-file:none;
-  --display-upload:none;
+
+.jb-file-input-web-component {
+
+  /*Responsiveness*/
+  @container (max-height:3rem) {
+    --border-radius: var(--jb-file-input-border-radius, var(--jb-radius));
+  }
+  @container (max-height:2rem) {
+    --border-radius: var(--jb-file-input-border-radius, var(--jb-radius-sm));
+  }
 }
-:host(:state(fill)){
-  --display-placeholder:none;
-  --display-file:block;
-  --display-upload:none;
+
+:host(:state(empty)) {
+  --display-placeholder: block;
+  --display-file: none;
+  --display-upload: none;
 }
-:host([uploading]){
-  --display-placeholder:none;
-  --display-file:none;
-  --display-upload:block;
+
+:host(:state(fill)) {
+  --display-placeholder: none;
+  --display-file: block;
+  --display-upload: none;
+}
+
+:host([uploading]) {
+  --display-placeholder: none;
+  --display-file: none;
+  --display-upload: block;
 }

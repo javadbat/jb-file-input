@@ -2,6 +2,8 @@
   width: 100%;
   height: 100%;
   display: block;
+  container-type: size;
+  transition: all 0.3s 0s ease;
 }
 
 .jb-file-input-web-component {
@@ -15,7 +17,6 @@
   overflow: hidden;
   box-sizing: border-box;
   transition: all 0.3s 0s ease;
-  container-type: size;
 
   &.--has-error {
     border: solid 1px var(--border-color-error);
@@ -43,7 +44,6 @@
     @container (max-height:3rem) {
       font-size: 0.75rem;
       line-height: 0.75rem;
-
     }
   }
 
