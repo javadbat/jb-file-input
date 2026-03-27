@@ -108,6 +108,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       mode: "open",
       delegatesFocus: true,
       slotAssignment: "named",
+      clonable:true,
+      serializable:true,
     });
     registerDefaultVariables();
     const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
