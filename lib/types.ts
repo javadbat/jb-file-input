@@ -1,5 +1,6 @@
 import type {EventTypeWithTarget} from 'jb-core';
 import type { JBFileInputWebComponent } from './jb-file-input';
+import type { JBButtonWebComponent } from 'jb-button';
 
 export type ElementObjects = {
     componentWrapper:HTMLDivElement,
@@ -16,6 +17,11 @@ export type ElementObjects = {
     }
     uploader:{
         bg:HTMLDivElement
+    },
+    overlay:{
+        wrapper:HTMLDivElement,
+        delete:JBButtonWebComponent,
+        download:JBButtonWebComponent
     }
 }
 export type ValidationErrorType = "REQUIRED";

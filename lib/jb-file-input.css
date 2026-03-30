@@ -54,7 +54,8 @@
       height: 100%;
     }
 
-    svg,jb-loading {
+    svg,
+    jb-loading {
       height: 100%;
       aspect-ratio: 1 / 1;
       fill: var(--icon-base-color);
@@ -131,6 +132,7 @@
       .loading-content {
         position: relative;
         z-index: 1;
+
         .loading-icon {
           --jb-loading-color: var(--jb-primary-subtle);
         }
@@ -146,14 +148,71 @@
     display: var(--display-file);
     width: 100%;
     height: 100%;
+    position: relative;
 
     .file-wrapper {
       cursor: pointer;
 
-      .icon-wrapper {}
-
       .file-name {
         color: var(--file-name-color);
+      }
+    }
+
+    &:hover .file-overlay {
+      opacity: 1;
+    }
+
+    .file-overlay {
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s 0s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--overlay-bg-color);
+      backdrop-filter: blur(8px);
+      z-index: 1;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      @container (max-height:3rem) {
+        font-size: 0.75rem;
+        line-height: 0.75rem;
+
+
+      }
+
+      jb-button {
+        @container (max-height:3rem) {
+          /*all variables copies from size sm of jb-button*/
+          --jb-button-height: 2rem;
+          --jb-button-padding: 0.25rem 0.5rem;
+          --jb-button-border-radius: var(--jb-radius-sm);
+          --jb-button-icon-size: 1.25rem
+        }
+        @container (max-height:2rem) {
+          /*all variables copies from size xs of jb-button*/
+          --jb-button-height: 1.5rem;
+          --jb-button-padding: 0.125rem 0.25rem;
+          --jb-button-border-radius: var(--jb-radius-xs);
+          --jb-button-icon-size: 1rem
+        }
+
+      }
+
+      .reselect-button {
+        background-color: transparent;
+        border-radius: 1rem;
+        padding: 0.25rem 0.5rem;
+        color: var(--reselect-button-color);
       }
     }
   }

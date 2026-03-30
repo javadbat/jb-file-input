@@ -47,13 +47,13 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   set value(value) {
     if (value == null) {
       this.resetValue();
-    } else if(value instanceof File){
+    } else if (value instanceof File) {
       this.#value = value;
       this.#elements.file.fileName.innerHTML = value.name;
       this.#internals.states.add("fill");
       this.#internals.states.delete("empty")
       this.#internals.setFormValue(value);
-      this.#validation.checkValidity({showError:false});
+      this.#validation.checkValidity({ showError: false });
     }
   }
   get status() {
@@ -66,11 +66,11 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     }
     return null;
   }
-  #uploadPercent:number | null = null;
-  get uploadPercent(){
+  #uploadPercent: number | null = null;
+  get uploadPercent() {
     return this.#uploadPercent;
   }
-  set uploadPercent(value:number | null){
+  set uploadPercent(value: number | null) {
     this.#elements
     this.#uploadPercent = value;
     this.#elements.uploader.bg.style.setProperty("--upload-percent", `${value}%`);
@@ -108,8 +108,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       mode: "open",
       delegatesFocus: true,
       slotAssignment: "named",
-      clonable:true,
-      serializable:true,
+      serializable: true,
     });
     registerDefaultVariables();
     const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
@@ -118,19 +117,24 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     shadowRoot.appendChild(element.content.cloneNode(true));
     this.#elements = {
       componentWrapper: shadowRoot.querySelector(".jb-file-input-web-component") as HTMLDivElement,
-      placeholder:{
-        section:shadowRoot.querySelector(".placeholder-section") as HTMLDivElement,
-        wrapper:shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
-        title:shadowRoot.querySelector(".placeholder-title") as HTMLDivElement
+      placeholder: {
+        section: shadowRoot.querySelector(".placeholder-section") as HTMLDivElement,
+        wrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
+        title: shadowRoot.querySelector(".placeholder-title") as HTMLDivElement
       },
-      file:{
-        section:shadowRoot.querySelector(".file-section") as HTMLDivElement,
-        wrapper:shadowRoot.querySelector(".file-wrapper") as HTMLDivElement,
-        fileName:shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement
+      file: {
+        section: shadowRoot.querySelector(".file-section") as HTMLDivElement,
+        wrapper: shadowRoot.querySelector(".file-wrapper") as HTMLDivElement,
+        fileName: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement
       },
       virtualInput: this.#createVirtualInputFile(),
-      uploader:{
-        bg:shadowRoot.querySelector(".upload-bg") as HTMLDivElement
+      uploader: {
+        bg: shadowRoot.querySelector(".upload-bg") as HTMLDivElement
+      },
+      overlay: {
+        delete: shadowRoot.querySelector(".delete-button"),
+        download: shadowRoot.querySelector(".download-button"),
+        wrapper: shadowRoot.querySelector(".file-overlay")
       }
     };
   }
@@ -143,6 +147,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   registerEventListener() {
     this.#elements.placeholder.section.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.file.section.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.overlay.wrapper.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.overlay.delete.addEventListener("click", this.#onDeleteClick.bind(this));
+    this.#elements.overlay.download.addEventListener("click", this.#onDownloadClick.bind(this));
   }
   #createVirtualInputFile() {
     const virtualInputFile = document.createElement(
@@ -193,7 +200,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       this.value = file;
       this.#elements.file.fileName.innerHTML = file.name;
       this.setStatus("selected");
-      this._triggerOnChangeEvent();
+      this.#triggerOnChangeEvent();
     } else {
       //user click on cancel button of file select dialog
     }
@@ -218,7 +225,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.setStatus("empty");
     this.#elements.virtualInput.value = "";
   }
-  _triggerOnChangeEvent() {
+  #triggerOnChangeEvent() {
     const event = new Event("change");
     this.dispatchEvent(event);
   }
@@ -282,6 +289,22 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   get validationMessage() {
     return this.#internals.validationMessage;
+  }
+  #onDownloadClick(e: MouseEvent) {
+    e.stopPropagation();
+    const event = new CustomEvent("download", { cancelable: false });
+    this.dispatchEvent(event);
+  }
+  #onDeleteClick(e: MouseEvent) {
+    e.stopPropagation();
+    this.value = null;
+    this.validation.checkValiditySync({ showError: true });
+    this.#triggerOnChangeEvent();
+    this.#dispatchDeleteEvent();
+  }
+  #dispatchDeleteEvent() {
+    const e = new CustomEvent("delete", { cancelable: false });
+    this.dispatchEvent(e);
   }
 }
 const myElementNotExists = !customElements.get("jb-file-input");

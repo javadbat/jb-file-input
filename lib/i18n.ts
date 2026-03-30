@@ -3,6 +3,7 @@ export type JBFileInputDictionary = {
   requiredMessage:string,
   chooseFile:string,
   uploading: string,
+  reselectFile:string
 }
 
 /**
@@ -20,11 +21,13 @@ export const dictionary = new JBDictionary<JBFileInputDictionary>({
   "fa":{
     requiredMessage:"فایل حتما باید انتخاب شود",
     chooseFile:"انتخاب فایل",
-    uploading:"در حال آپلود"
+    uploading:"در حال آپلود",
+    reselectFile:"انتخاب مجدد فایل"
   },
   "en":{
     requiredMessage:"you must select a file",
     chooseFile:"Choose File",
-    uploading:"Uploading"
+    uploading:"Uploading",
+    reselectFile: "Re-select File"
   }
 });
