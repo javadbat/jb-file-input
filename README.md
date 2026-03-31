@@ -60,6 +60,22 @@ document.querySelector("jb-file-input").setAttribute("uploading","")
 // set upload percent
 document.querySelector("jb-file-input").uploadPercent = 10; //10% of file uploaded
 ```
+## Download Button
+
+when file upload is complete user access to download button and you can add your own function to download file by add event listener:
+
+```ts
+document.querySelector("jb-file-input").addEventListener("download",()=>{
+  //download file however you want
+})
+```
+download button has no default functionality because file download in every project has it's own way so we just create a ui button to enable you ad function for it.
+
+### Hide Download Button
+if you dont want download button to be shown add `hide-download` attribute to dom:
+```HTML
+<jb-file-input hide-download></jb-file-input>
+```
 
 ## Other Related Docs:
 

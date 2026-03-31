@@ -31,6 +31,11 @@ export const Uploading:Story = {
     uploadPercent:70
   }
 };
+export const HideDownloadButton:Story = {
+  args:{
+    hideDownload:true
+  }
+};
 
 export const Sizes:Story = {
   render:()=>{

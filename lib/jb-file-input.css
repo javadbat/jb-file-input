@@ -205,7 +205,9 @@
           --jb-button-border-radius: var(--jb-radius-xs);
           --jb-button-icon-size: 1rem
         }
-
+        &.download-button{
+          display: var(--download-button-display, block);
+        }
       }
 
       .reselect-button {

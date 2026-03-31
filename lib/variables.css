@@ -45,3 +45,6 @@
   --display-file: none;
   --display-upload: block;
 }
+:host([hide-download]) {
+  --download-button-display:none;
+}
