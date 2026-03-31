@@ -38,7 +38,7 @@ just import package with import or from js CDN and write web component tag in yo
 you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom
 
 ## Value
-`jb-date-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`.
+`jb-file-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`.
 
 ### Reset Value
 you can reset input file value by `dom.value = null` or `dom.resetValue()`
