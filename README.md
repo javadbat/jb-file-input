@@ -14,11 +14,7 @@ this component just let user select file and wait for you to get the value and h
 
 ## Using with JS frameworks
 
-to use this component in **react** see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react);
-
-## using with JS frameworks
-
-- [<img src="https://img.shields.io/badge/jb--file--input/react-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput-react-readme--docs)
+- [<img src="https://img.shields.io/badge/React.js-jb--file--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-file-input/tree/main/react)
 
 ## Usage
 
