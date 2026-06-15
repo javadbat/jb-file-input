@@ -12,11 +12,20 @@ this component just let user select file and wait for you to get the value and h
  - [Codepen](https://codepen.io/javadbat/pen/xxgmWNB)
  - [Storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput)
 
-## Using with JS frameworks
-
+## Using With JS Frameworks
 - [<img src="https://img.shields.io/badge/React.js-jb--file--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" />](https://github.com/javadbat/jb-file-input/tree/main/react)
 
 ## Usage
+
+## Attributes/Properties
+
+| name | type | description |
+| --- | --- | --- |
+| `placeholder-title` | attribute | Text shown in the placeholder area. |
+| `loading` | attribute/property | Shows the loading state while an upload flow is running outside the component. |
+| `file-name` | attribute/property | Shows the selected or uploaded file name. |
+| `hide-download` | attribute | Hides the download button. |
+| `value` | property | The selected file value. Set it to `null` to reset the component. |
 
 just import package with import or from js CDN and write web component tag in your html
 
@@ -40,7 +49,7 @@ you can change file input place holder text by set `placeholder-title="select yo
 you can reset input file value by `dom.value = null` or `dom.resetValue()`
 
 ## Loading State
-jb-file-input dont show any loading by default because it's just a file input and not file uploader. but you can show upload state in file uploader by set some attribute and property.
+jb-file-input don't show any loading by default because it's just a file input and not file uploader. but you can show upload state in file uploader by set some attribute and property.
 
 in HTML
 
@@ -68,13 +77,28 @@ document.querySelector("jb-file-input").addEventListener("download",()=>{
 download button has no default functionality because file download in every project has it's own way so we just create a ui button to enable you ad function for it.
 
 ### Hide Download Button
-if you dont want download button to be shown add `hide-download` attribute to dom:
+if you don't want download button to be shown add `hide-download` attribute to dom:
 ```HTML
 <jb-file-input hide-download></jb-file-input>
 ```
 
-## Other Related Docs:
+## CSS Variables
+| CSS variable name | description |
+| --- | --- |
+| --jb-file-input-bg-color | Customize bg color. |
+| --jb-file-input-bg-color-error | Customize bg color error. |
+| --jb-file-input-bg-color-hover | Customize bg color hover. |
+| --jb-file-input-bg-color-pressed | Customize bg color pressed. |
+| --jb-file-input-border-color-error | Customize border color error. |
+| --jb-file-input-border-radius | Customize border radius. |
+| --jb-file-input-file-name-color | Customize file name color. |
+| --jb-file-input-icon-base-color | Customize icon base color. |
+| --jb-file-input-icon-primary-color | Customize icon primary color. |
+| --jb-file-input-loading-bg | Customize loading bg. |
+| --jb-file-input-padding | Customize padding. |
+| --jb-file-input-placeholder-title-color | Customize placeholder title color. |
 
+## Related Docs
 - see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react); if you want to use this component in react
 
 - see [All JB Design system Component List](https://javadbat.github.io/design-system/) for more components
