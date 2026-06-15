@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "README.md",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "lib/jb-file-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Form-associated file picker web component that lets the user select one file, exposes the selected File through value, supports required validation, custom placeholder/upload/file/overlay slots, and provides visual upload progress for upload flows handled outside the component.",
+          "name": "JBFileInputWebComponent",
+          "tagName": "jb-file-input",
+          "customElement": true,
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "attributes": [
+            {
+              "name": "name",
+              "description": "Form field name.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "required",
+              "description": "Enables required validation.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "placeholder-title",
+              "description": "Text shown in the default placeholder area.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "accept",
+              "description": "Native file accept string forwarded to the internal file input.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "uploading",
+              "description": "Visual state attribute that shows the upload progress section. The upload itself must be handled outside the component.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "hide-download",
+              "description": "Hides the default download button in the file overlay.",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "description": "Selected file. Set to null to reset the component.",
+              "type": {
+                "text": "File | null"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "acceptTypes",
+              "description": "Native accept string used by the internal file input.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "uploadPercent",
+              "description": "Visual upload progress percentage used by the upload state background.",
+              "type": {
+                "text": "number | null"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "description": "Enables required validation.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "description": "Current file input status.",
+              "type": {
+                "text": "'empty' | 'selected'"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "selectedFileType",
+              "description": "Reserved for selected file MIME type. Current implementation returns null.",
+              "type": {
+                "text": "string | null"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "validation",
+              "description": "jb-validation helper. Set validation.list for custom validation rules.",
+              "type": {
+                "text": "ValidationHelper<{ file: File | null }>"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "description": "Current native validation message from ElementInternals.",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true
+            }
+          ],
+          "methods": [
+            {
+              "name": "openFileSelector",
+              "description": "Opens the native file picker."
+            },
+            {
+              "name": "resetValue",
+              "description": "Clears the selected file and resets the visual state to empty."
+            },
+            {
+              "name": "checkValidity",
+              "description": "Runs validation without showing the error state and returns whether the file input is valid.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "name": "reportValidity",
+              "description": "Runs validation, shows the error state, and returns whether the file input is valid.",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "description": "Fired when a file is selected or deleted."
+            },
+            {
+              "name": "download",
+              "description": "Fired when the default download button is clicked. The component does not download anything by itself."
+            },
+            {
+              "name": "delete",
+              "description": "Fired after the selected file is cleared from the default delete button."
+            },
+            {
+              "name": "invalid",
+              "description": "Dispatched when checkValidity or reportValidity finds an invalid value."
+            }
+          ],
+          "slots": [
+            {
+              "name": "placeholder",
+              "description": "Replaces the entire empty placeholder section."
+            },
+            {
+              "name": "placeholder-icon",
+              "description": "Replaces the default upload icon inside the default placeholder."
+            },
+            {
+              "name": "upload",
+              "description": "Replaces the entire upload progress section."
+            },
+            {
+              "name": "uploader-icon",
+              "description": "Replaces the loading icon inside the default upload section."
+            },
+            {
+              "name": "file-icon",
+              "description": "Replaces the default selected-file icon."
+            },
+            {
+              "name": "overlay",
+              "description": "Replaces the entire selected-file hover overlay."
+            },
+            {
+              "name": "overlay-content",
+              "description": "Replaces the content inside the default overlay."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "placeholder-title",
+              "description": "Title text in the default placeholder section."
+            },
+            {
+              "name": "uploading-title",
+              "description": "Title text in the default upload section."
+            },
+            {
+              "name": "file-name",
+              "description": "Selected file name text."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--jb-file-input-bg-color",
+              "description": "Background color."
+            },
+            {
+              "name": "--jb-file-input-bg-color-error",
+              "description": "Background color in error state."
+            },
+            {
+              "name": "--jb-file-input-border-color-error",
+              "description": "Border color in error state."
+            },
+            {
+              "name": "--jb-file-input-border-radius",
+              "description": "Border radius."
+            },
+            {
+              "name": "--jb-file-input-loading-bg",
+              "description": "Upload progress background."
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "JBFileInputWebComponent",
+          "declaration": {
+            "name": "JBFileInputWebComponent",
+            "module": "lib/jb-file-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "jb-file-input",
+          "declaration": {
+            "name": "JBFileInputWebComponent",
+            "module": "lib/jb-file-input.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
