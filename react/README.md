@@ -1,5 +1,10 @@
 # jb-file-input React component
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jb-file-input)
+[![GitHub license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://raw.githubusercontent.com/javadbat/jb-file-input/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/jb-file-input-react)](https://www.npmjs.com/package/jb-file-input-react)
+![GitHub Created At](https://img.shields.io/github/created-at/javadbat/jb-file-input)
+
 file upload web-component
 
 this component is a simple react component that use [jb-file-input](https://github.com/javadbat/jb-file-input) inside and its just a simple wrapper for it so i suggest you to read jb-date-input document too, it has more complete & updated document.
