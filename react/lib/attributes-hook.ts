@@ -8,7 +8,7 @@ export type JBFileInputAttributes = {
   required?: boolean,
   validationList?: ValidationItem<ValidationValue>[],
 }
-export function useJBFileInputAttribute(element: RefObject<JBFileInputWebComponent>, props: JBFileInputAttributes) {
+export function useJBFileInputAttribute(element: RefObject<JBFileInputWebComponent | null>, props: JBFileInputAttributes) {
   useEffect(() => {
     if (element.current && props.acceptTypes) {
       element.current.acceptTypes = props.acceptTypes;

@@ -26,5 +26,5 @@ export type ElementObjects = {
 }
 export type ValidationErrorType = "REQUIRED";
 export type FileInputStatus = "empty" | "selected"
-export type ValidationValue = {file:File}
+export type ValidationValue = {file:File | null}
 export type JBFileInputEventType<TEvent> = EventTypeWithTarget<TEvent,JBFileInputWebComponent>;

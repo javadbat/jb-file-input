@@ -2,6 +2,7 @@ import { ValidationHelper, type ShowValidationErrorParameters, type ValidationIt
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
 import type { ElementObjects, FileInputStatus, ValidationValue } from "./types";
+import type { JBButtonWebComponent } from "jb-button";
 import { registerDefaultVariables } from 'jb-core/theme';
 import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
@@ -50,9 +51,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     } else if (value instanceof File) {
       this.#value = value;
       this.#elements.file.fileName.innerHTML = value.name;
-      this.#internals.states.add("fill");
-      this.#internals.states.delete("empty")
-      this.#internals.setFormValue(value);
+      this.#internals?.states?.add("fill");
+      this.#internals?.states?.delete("empty")
+      this.#internals?.setFormValue(value);
       this.#validation.checkValidity({ showError: false });
     }
   }
@@ -79,7 +80,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     clearValidationError: this.clearValidationError.bind(this),
     getValue: () => ({ file: this.#value }),
     getValidations: this.#getInsideValidation.bind(this),
-    getValueString: (val) => (val.file.name),
+    getValueString: (val) => (val.file?.name ?? ""),
     setValidationResult: this.#setValidationResult.bind(this),
     showValidationError: this.showValidationError.bind(this)
   });
@@ -132,15 +133,15 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
         bg: shadowRoot.querySelector(".upload-bg") as HTMLDivElement
       },
       overlay: {
-        delete: shadowRoot.querySelector(".delete-button"),
-        download: shadowRoot.querySelector(".download-button"),
-        wrapper: shadowRoot.querySelector(".file-overlay")
+        delete: shadowRoot.querySelector(".delete-button") as JBButtonWebComponent,
+        download: shadowRoot.querySelector(".download-button") as JBButtonWebComponent,
+        wrapper: shadowRoot.querySelector(".file-overlay") as HTMLDivElement
       }
     };
   }
   initProp() {
     this.setStatus("empty");
-    this.#internals.states.add("empty")
+    this.#internals?.states?.add("empty")
     this.#value = null;
     this.#required = false;
   }
@@ -175,15 +176,15 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       case "required":
         if (value == "" || value == "true") {
           this.#required = true;
-          this.#internals!.ariaRequired = "true";
+          if (this.#internals) { this.#internals.ariaRequired = "true"; }
         } else {
           this.#required = false;
-          this.#internals!.ariaRequired = "false";
+          if (this.#internals) { this.#internals.ariaRequired = "false"; }
         }
         break;
       case "placeholder-title":
         this.#elements.placeholder.title.innerHTML = value;
-        this.#internals!.ariaPlaceholder = value;
+        if (this.#internals) { this.#internals.ariaPlaceholder = value; }
         break;
       case "accept":
         this.acceptTypes = value;
@@ -219,9 +220,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   resetValue() {
     //this function is public and called outside of web component and call inside if user set value = null
     this.#value = null;
-    this.#internals.states.add("empty")
-    this.#internals.states.delete("fill")
-    this.#internals.setFormValue(null);
+    this.#internals?.states?.add("empty")
+    this.#internals?.states?.delete("fill")
+    this.#internals?.setFormValue(null);
     this.setStatus("empty");
     this.#elements.virtualInput.value = "";
   }
@@ -274,21 +275,21 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
    */
   #setValidationResult(result: ValidationResult<ValidationValue>) {
     if (result.isAllValid) {
-      this.#internals.setValidity({}, '');
+      this.#internals?.setValidity({}, '');
     } else {
       const states: ValidityStateFlags = {};
       let message = "";
       result.validationList.forEach((res) => {
         if (!res.isValid) {
           if (res.validation.stateType) { states[res.validation.stateType] = true; }
-          if (message == '') { message = res.message; }
+          if (message == '') { message = res.message ?? ""; }
         }
       });
-      this.#internals.setValidity(states, message);
+      this.#internals?.setValidity(states, message);
     }
   }
   get validationMessage() {
-    return this.#internals.validationMessage;
+    return this.#internals?.validationMessage ?? null;
   }
   #onDownloadClick(e: MouseEvent) {
     e.stopPropagation();

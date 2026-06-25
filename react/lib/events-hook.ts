@@ -1,5 +1,5 @@
 import { useEvent } from "jb-core/react";
-import { RefObject } from "react";
+import type { RefObject } from "react";
 import type {JBFileInputWebComponent, JBFileInputEventType} from 'jb-file-input';
 
 export type EventProps = {
@@ -17,7 +17,7 @@ export type EventProps = {
   onChange?: (e: JBFileInputEventType<Event>) => void,
 
 }
-export function useEvents(element:RefObject<JBFileInputWebComponent>,props:EventProps){
+export function useEvents(element:RefObject<JBFileInputWebComponent | null>,props:EventProps){
   useEvent(element, 'load', props.onLoad, true);
   useEvent(element, 'init', props.onInit, true);
   useEvent(element, 'change', props.onChange, true);
