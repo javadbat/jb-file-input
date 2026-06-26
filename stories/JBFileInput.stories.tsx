@@ -1,17 +1,17 @@
 import React, { useMemo } from 'react';
-import {JBFileInput, type Props} from 'jb-file-input/react';
+import {JBFileInput} from 'jb-file-input/react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 
-const meta: Meta<Props> = {
+const meta = {
   title: "Components/form elements/JBFileInput",
   component: JBFileInput,
   args:{
     style:{height:`10rem`}
   }
-};
+} satisfies Meta<typeof JBFileInput>;
 export default meta;
-type Story = StoryObj<typeof JBFileInput>;
+type Story = StoryObj<typeof meta>;
 
 export const Normal:Story = {
   args:{
