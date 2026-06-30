@@ -6,21 +6,8 @@ import type { JBFileInputWebComponent } from 'jb-file-input';
 import {useEvents, type EventProps} from './events-hook.js';
 import { useJBFileInputAttribute, type JBFileInputAttributes } from './attributes-hook.js';
 import type { JBElementStandardProps } from 'jb-core/react';
+import './module-declaration.js';
 
-declare module "react" {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace JSX {
-        interface IntrinsicElements {
-            'jb-file-input': JBFileInputType;
-        }
-        interface JBFileInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBFileInputWebComponent>, JBFileInputWebComponent> {
-            label?: string,
-            name?: string,
-            uploading?:string,
-            "hide-download"?:string
-        }
-    }
-}
 export type JBFileInputEventType<T> = T & {
     target: JBFileInputWebComponent
 }
