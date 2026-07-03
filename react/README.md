@@ -49,6 +49,88 @@ Use `JBFileInput` when the user needs to choose one local file and your applicat
 
 The web component also dispatches `download` and `delete` events. Use a ref and `addEventListener` if you need those from React.
 
+## Value
+
+`event.target.value` and `ref.current.value` are the selected `File` or `null`. Set the underlying value to `null` or call `ref.current.resetValue()` when you need to clear the selection imperatively.
+
+```jsx
+const fileInputRef = useRef(null);
+
+<JBFileInput
+  ref={fileInputRef}
+  onChange={(event) => console.log(event.target.value)}
+/>;
+
+fileInputRef.current?.resetValue();
+```
+
+## Validation
+
+Use `required` when the user must select a file. Use `validationList` for custom file checks such as size or MIME type.
+
+```jsx
+const validationList = [
+  {
+    validator: ({ file }) => !file || file.size < 1024 * 1024,
+    message: 'File must be smaller than 1MB',
+  },
+];
+
+<JBFileInput required validationList={validationList} />;
+```
+
+## Loading State
+
+`JBFileInput` does not upload files by itself. Use `uploading` and `uploadPercent` to display progress from an upload flow owned by your app.
+
+```jsx
+<JBFileInput uploading uploadPercent={45} />
+```
+
+## Download Button
+
+The default download button has no built-in download logic. Listen for the underlying `download` event with a ref when you use the default overlay button.
+
+```jsx
+useEffect(() => {
+  const input = fileInputRef.current;
+  if (!input) return;
+
+  const onDownload = () => downloadFile(input.value);
+  input.addEventListener('download', onDownload);
+  return () => input.removeEventListener('download', onDownload);
+}, []);
+```
+
+Use `hideDownload` to hide the default button.
+
+```jsx
+<JBFileInput hideDownload />
+```
+
+## Slots
+
+Pass custom slot content as JSX children. Supported slot names include `placeholder`, `placeholder-icon`, `upload`, `uploader-icon`, `file-icon`, `overlay`, and `overlay-content`.
+
+```jsx
+<JBFileInput>
+  <div slot="placeholder">Drop or select a file</div>
+</JBFileInput>
+```
+
+## CSS parts and states
+
+The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[uploading]`, and `[hide-download]`.
+
+```css
+.contract-file::part(file-name) {
+  font-weight: 600;
+}
+
+.contract-file[uploading] {
+  --jb-file-input-loading-bg: linear-gradient(90deg, #2563eb, #14b8a6);
+}
+```
 
 ## Shared Documentation
 
