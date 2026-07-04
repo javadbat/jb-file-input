@@ -3,8 +3,9 @@ import type { ReactComponentBuildConfig, WebComponentBuildConfig } from "../../t
 export const webComponentList: WebComponentBuildConfig[] = [
   {
     name: "jb-file-input",
-    path: "./lib/jb-file-input.ts",
-    outputPath: "./dist/jb-file-input.js",
+    path: "./web-component/lib/jb-file-input.ts",
+    outputPath: "./web-component/dist/jb-file-input.js",
+    tsConfigPath: "./web-component/tsconfig.json",
     umdName: "JBFileInput",
     external:["jb-validation", "jb-loading", "jb-button","jb-core", "jb-core/i18n", "jb-core/theme"],
     globals: {
