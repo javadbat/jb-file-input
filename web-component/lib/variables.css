@@ -25,6 +25,7 @@
   --overlay-button-border-radius-xs: var(--jb-file-input-overlay-button-border-radius-xs, var(--jb-radius-xs));
   --overlay-button-icon-size-sm: var(--jb-file-input-overlay-button-icon-size-sm, 1.25rem);
   --overlay-button-icon-size-xs: var(--jb-file-input-overlay-button-icon-size-xs, 1rem);
+  --download-button-display: var(--jb-file-input-download-button-display, block);
 }
 
 .jb-file-input-web-component {
@@ -39,22 +40,22 @@
 }
 
 :host(:state(empty)) {
-  --display-placeholder: block;
-  --display-file: none;
-  --display-upload: none;
+  --display-placeholder: var(--jb-file-input-display-placeholder-empty, block);
+  --display-file: var(--jb-file-input-display-file-empty, none);
+  --display-upload: var(--jb-file-input-display-upload-empty, none);
 }
 
 :host(:state(fill)) {
-  --display-placeholder: none;
-  --display-file: block;
-  --display-upload: none;
+  --display-placeholder: var(--jb-file-input-display-placeholder-fill, none);
+  --display-file: var(--jb-file-input-display-file-fill, block);
+  --display-upload: var(--jb-file-input-display-upload-fill, none);
 }
 
 :host([uploading]) {
-  --display-placeholder: none;
-  --display-file: none;
-  --display-upload: block;
+  --display-placeholder: var(--jb-file-input-display-placeholder-uploading, none);
+  --display-file: var(--jb-file-input-display-file-uploading, none);
+  --display-upload: var(--jb-file-input-display-upload-uploading, block);
 }
 :host([hide-download]) {
-  --download-button-display:none;
+  --download-button-display: var(--jb-file-input-download-button-display-hidden, none);
 }

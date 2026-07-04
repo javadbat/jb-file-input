@@ -194,6 +194,17 @@ jb-file-input[uploading] {
 | --jb-file-input-bg-color-pressed | Customize bg color pressed. |
 | --jb-file-input-border-color-error | Customize border color error. |
 | --jb-file-input-border-radius | Customize border radius. |
+| --jb-file-input-display-file-empty | File section display when empty. |
+| --jb-file-input-display-file-fill | File section display when filled. |
+| --jb-file-input-display-file-uploading | File section display while uploading. |
+| --jb-file-input-display-placeholder-empty | Placeholder section display when empty. |
+| --jb-file-input-display-placeholder-fill | Placeholder section display when filled. |
+| --jb-file-input-display-placeholder-uploading | Placeholder section display while uploading. |
+| --jb-file-input-display-upload-empty | Upload section display when empty. |
+| --jb-file-input-display-upload-fill | Upload section display when filled. |
+| --jb-file-input-display-upload-uploading | Upload section display while uploading. |
+| --jb-file-input-download-button-display | Download button display value. |
+| --jb-file-input-download-button-display-hidden | Download button display value when hidden. |
 | --jb-file-input-file-name-color | Customize file name color. |
 | --jb-file-input-icon-base-color | Customize icon base color. |
 | --jb-file-input-icon-primary-color | Customize icon primary color. |
