@@ -1,0 +1,32 @@
+.carbon-file-input {
+    display: block;
+    width: 100%;
+    --jb-file-input-bg-color: #262626;
+    --jb-file-input-bg-color-hover: #393939;
+    --jb-file-input-bg-color-pressed: #161616;
+    --jb-file-input-bg-color-error: #2a1215;
+    --jb-file-input-border-color-error: #fa4d56;
+    --jb-file-input-border-radius: 0;
+    --jb-file-input-padding: 1rem;
+    --jb-file-input-icon-base-color: #8d8d8d;
+    --jb-file-input-icon-primary-color: #0f62fe;
+    --jb-file-input-placeholder-title-color: #f4f4f4;
+    --jb-file-input-file-name-color: #ffffff;
+    --jb-file-input-loading-bg: linear-gradient(90deg, #0f62fe, #8a3ffc);
+    --jb-file-input-loading-color: #ffffff;
+    --jb-file-input-overlay-bg-color: oklch(0% 0 0 / 0.68);
+    --jb-file-input-reselect-button-color: #ffffff;
+    --jb-file-input-overlay-button-border-radius-sm: 0;
+    --jb-file-input-overlay-button-border-radius-xs: 0;
+}
+
+.carbon-file-input::part(placeholder-title),
+.carbon-file-input::part(file-name),
+.carbon-file-input::part(uploading-title) {
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.carbon-file-input::part(file-icon) {
+    filter: drop-shadow(0 0.25rem 0 #0f62fe);
+}

@@ -1,0 +1,29 @@
+.cupertino-file-input {
+    display: block;
+    width: 100%;
+    --jb-file-input-bg-color: oklch(99% 0.01 250 / 0.92);
+    --jb-file-input-bg-color-hover: #ffffff;
+    --jb-file-input-bg-color-pressed: #e5e5ea;
+    --jb-file-input-bg-color-error: #fff2f2;
+    --jb-file-input-border-color-error: #ff3b30;
+    --jb-file-input-border-radius: 1.25rem;
+    --jb-file-input-padding: 1rem;
+    --jb-file-input-icon-base-color: #8e8e93;
+    --jb-file-input-icon-primary-color: #007aff;
+    --jb-file-input-placeholder-title-color: #1d1d1f;
+    --jb-file-input-file-name-color: #1d1d1f;
+    --jb-file-input-loading-bg: linear-gradient(90deg, #007aff, #34c759);
+    --jb-file-input-loading-color: #ffffff;
+    --jb-file-input-overlay-bg-color: oklch(98% 0.01 250 / 0.78);
+    --jb-file-input-reselect-button-color: #007aff;
+    --jb-file-input-overlay-button-border-radius-sm: 999px;
+    --jb-file-input-overlay-button-border-radius-xs: 999px;
+}
+
+.cupertino-file-input {
+    box-shadow: inset 0 0 0 1px oklch(90% 0.01 250 / 0.8);
+}
+
+.cupertino-file-input::part(file-name) {
+    font-weight: 600;
+}

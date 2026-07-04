@@ -217,6 +217,14 @@
             {
               "name": "file-name",
               "description": "Selected file name text."
+            },
+            {
+              "name": "placeholder-icon",
+              "description": "Default placeholder SVG icon."
+            },
+            {
+              "name": "file-icon",
+              "description": "Default selected-file SVG icon."
             }
           ],
           "cssProperties": [
@@ -247,6 +255,50 @@
             {
               "name": "--jb-file-input-file-name-color",
               "description": "Selected file name color."
+            },
+            {
+              "name": "--jb-file-input-display-placeholder-empty",
+              "description": "Placeholder section display value in empty state."
+            },
+            {
+              "name": "--jb-file-input-display-file-empty",
+              "description": "File section display value in empty state."
+            },
+            {
+              "name": "--jb-file-input-display-upload-empty",
+              "description": "Upload section display value in empty state."
+            },
+            {
+              "name": "--jb-file-input-display-placeholder-fill",
+              "description": "Placeholder section display value in filled state."
+            },
+            {
+              "name": "--jb-file-input-display-file-fill",
+              "description": "File section display value in filled state."
+            },
+            {
+              "name": "--jb-file-input-display-upload-fill",
+              "description": "Upload section display value in filled state."
+            },
+            {
+              "name": "--jb-file-input-display-placeholder-uploading",
+              "description": "Placeholder section display value while uploading."
+            },
+            {
+              "name": "--jb-file-input-display-file-uploading",
+              "description": "File section display value while uploading."
+            },
+            {
+              "name": "--jb-file-input-display-upload-uploading",
+              "description": "Upload section display value while uploading."
+            },
+            {
+              "name": "--jb-file-input-download-button-display",
+              "description": "Default download button display value."
+            },
+            {
+              "name": "--jb-file-input-download-button-display-hidden",
+              "description": "Download button display value when hide-download is present."
             },
             {
               "name": "--jb-file-input-icon-base-color",

@@ -145,6 +145,8 @@ if you don't want download button to be shown add `hide-download` attribute to d
 
 ## CSS Variables
 
+For complete styling guidance, live examples, official parts and states, and the full CSS variable reference, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput-styling).
+
 ## Slots
 
 | slot | description |
@@ -164,6 +166,8 @@ if you don't want download button to be shown add `hide-download` attribute to d
 | `placeholder-title` | Title text in the default placeholder section. |
 | `uploading-title` | Title text in the default upload section. |
 | `file-name` | Selected file name text. |
+| `placeholder-icon` | Default placeholder SVG icon. |
+| `file-icon` | Default selected-file SVG icon. |
 
 | state or attribute | description |
 | --- | --- |
@@ -185,43 +189,6 @@ jb-file-input[uploading] {
   --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-primary), var(--jb-secondary));
 }
 ```
-
-| CSS variable name | description |
-| --- | --- |
-| --jb-file-input-bg-color | Customize bg color. |
-| --jb-file-input-bg-color-error | Customize bg color error. |
-| --jb-file-input-bg-color-hover | Customize bg color hover. |
-| --jb-file-input-bg-color-pressed | Customize bg color pressed. |
-| --jb-file-input-border-color-error | Customize border color error. |
-| --jb-file-input-border-radius | Customize border radius. |
-| --jb-file-input-display-file-empty | File section display when empty. |
-| --jb-file-input-display-file-fill | File section display when filled. |
-| --jb-file-input-display-file-uploading | File section display while uploading. |
-| --jb-file-input-display-placeholder-empty | Placeholder section display when empty. |
-| --jb-file-input-display-placeholder-fill | Placeholder section display when filled. |
-| --jb-file-input-display-placeholder-uploading | Placeholder section display while uploading. |
-| --jb-file-input-display-upload-empty | Upload section display when empty. |
-| --jb-file-input-display-upload-fill | Upload section display when filled. |
-| --jb-file-input-display-upload-uploading | Upload section display while uploading. |
-| --jb-file-input-download-button-display | Download button display value. |
-| --jb-file-input-download-button-display-hidden | Download button display value when hidden. |
-| --jb-file-input-file-name-color | Customize file name color. |
-| --jb-file-input-icon-base-color | Customize icon base color. |
-| --jb-file-input-icon-primary-color | Customize icon primary color. |
-| --jb-file-input-loading-bg | Customize loading bg. |
-| --jb-file-input-loading-color | Customize loading text and icon color. |
-| --jb-file-input-overlay-bg-color | Customize file overlay background color. |
-| --jb-file-input-overlay-button-border-radius-sm | Customize overlay button border radius in small height. |
-| --jb-file-input-overlay-button-border-radius-xs | Customize overlay button border radius in extra small height. |
-| --jb-file-input-overlay-button-height-sm | Customize overlay button height in small height. |
-| --jb-file-input-overlay-button-height-xs | Customize overlay button height in extra small height. |
-| --jb-file-input-overlay-button-icon-size-sm | Customize overlay button icon size in small height. |
-| --jb-file-input-overlay-button-icon-size-xs | Customize overlay button icon size in extra small height. |
-| --jb-file-input-overlay-button-padding-sm | Customize overlay button padding in small height. |
-| --jb-file-input-overlay-button-padding-xs | Customize overlay button padding in extra small height. |
-| --jb-file-input-padding | Customize padding. |
-| --jb-file-input-placeholder-title-color | Customize placeholder title color. |
-| --jb-file-input-reselect-button-color | Customize reselect button text color. |
 
 ## Related Docs
 - see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react); if you want to use this component in react

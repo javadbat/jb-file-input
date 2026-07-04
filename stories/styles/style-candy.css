@@ -1,0 +1,31 @@
+.candy-file-input {
+    display: block;
+    width: 100%;
+    --jb-file-input-bg-color: #fff7fb;
+    --jb-file-input-bg-color-hover: #ffe0ef;
+    --jb-file-input-bg-color-pressed: #ffd5e8;
+    --jb-file-input-bg-color-error: #fff0f6;
+    --jb-file-input-border-color-error: #fb7185;
+    --jb-file-input-border-radius: 2rem;
+    --jb-file-input-padding: 1.25rem;
+    --jb-file-input-icon-base-color: #6e5575;
+    --jb-file-input-icon-primary-color: #ec4899;
+    --jb-file-input-placeholder-title-color: #423047;
+    --jb-file-input-file-name-color: #423047;
+    --jb-file-input-loading-bg: linear-gradient(90deg, #ec4899, #f9a8d4, #a78bfa);
+    --jb-file-input-loading-color: #423047;
+    --jb-file-input-overlay-bg-color: oklch(72% 0.13 345 / 0.62);
+    --jb-file-input-reselect-button-color: #ffffff;
+    --jb-file-input-overlay-button-border-radius-sm: 999px;
+    --jb-file-input-overlay-button-border-radius-xs: 999px;
+}
+
+.candy-file-input::part(placeholder-icon),
+.candy-file-input::part(file-icon) {
+    filter: drop-shadow(0 0.4rem 0.75rem oklch(70% 0.18 345 / 0.35));
+}
+
+.candy-file-input::part(placeholder-title),
+.candy-file-input::part(file-name) {
+    font-weight: 700;
+}

@@ -1,0 +1,374 @@
+import { Meta, Source, Story, Title } from '@storybook/addon-docs/blocks';
+import * as StyleStories from './Styles.stories';
+import antDesignThemeCss from '../../../docs/styles/ant-design.css?raw';
+import auroraThemeCss from '../../../docs/styles/aurora.css?raw';
+import bootstrapThemeCss from '../../../docs/styles/bootstrap.css?raw';
+import candyThemeCss from '../../../docs/styles/candy.css?raw';
+import carbonThemeCss from '../../../docs/styles/carbon.css?raw';
+import cupertinoThemeCss from '../../../docs/styles/cupertino.css?raw';
+import fluentThemeCss from '../../../docs/styles/fluent.css?raw';
+import forestThemeCss from '../../../docs/styles/forest.css?raw';
+import materialThemeCss from '../../../docs/styles/material.css?raw';
+import porcelainThemeCss from '../../../docs/styles/porcelain.css?raw';
+import sunsetThemeCss from '../../../docs/styles/sunset.css?raw';
+import terminalThemeCss from '../../../docs/styles/terminal.css?raw';
+import antDesignFileInputCss from './styles/style-ant-design.css?raw';
+import auroraFileInputCss from './styles/style-aurora.css?raw';
+import bootstrapFileInputCss from './styles/style-bootstrap.css?raw';
+import candyFileInputCss from './styles/style-candy.css?raw';
+import carbonFileInputCss from './styles/style-carbon.css?raw';
+import cupertinoFileInputCss from './styles/style-cupertino.css?raw';
+import fluentFileInputCss from './styles/style-fluent.css?raw';
+import forestFileInputCss from './styles/style-forest.css?raw';
+import materialFileInputCss from './styles/style-material.css?raw';
+import porcelainFileInputCss from './styles/style-porcelain.css?raw';
+import sunsetFileInputCss from './styles/style-sunset.css?raw';
+import terminalFileInputCss from './styles/style-terminal.css?raw';
+
+<Meta title="Components/form elements/JBFileInput/Styling" />
+
+<Title>Styling</Title>
+
+`JBFileInput` styling is theme-driven. Use common design tokens for product-level consistency, component variables for the file input API, and CSS parts only for exposed text and icon surfaces that need targeted styling.
+
+## Live Gallery
+
+<Story of={StyleStories.Gallery} />
+
+<Source of={StyleStories.Gallery} />
+
+## Common Design Tokens
+
+Use the core theme docs as the source of truth for shared design-system variables:
+
+- [Theme Colors](../../jb-core/theme/stories/colors.mdx) explains the general color palette variables, default colors, customization approaches, and color generation helpers.
+- [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) explains shared size and radius variables.
+
+File input recipes should use those common tokens where possible, then map them into `--jb-file-input-*` variables only where the file input needs a component-specific value.
+
+## Styling Model
+
+Use three layers when styling file input examples:
+
+- Common design tokens are documented in [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx).
+- Reusable example theme packs live in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) and can be shared across components.
+- Component recipe files live in [`modules/jb-file-input/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-file-input/stories/styles).
+- Public component variables use the `--jb-file-input-*` prefix and are the stable styling API.
+
+Each example uses one shared example theme pack from [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) and one file-input-specific recipe from [`modules/jb-file-input/stories/styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-file-input/stories/styles). The style story applies both classes directly to `JBFileInput`.
+
+## Recommended Customization Path
+
+1. Use `--jb-file-input-*` variables first for the default placeholder, selected-file, uploading, and overlay surfaces.
+2. Use host styles for layout context such as width, height, borders, and shadows around the component.
+3. Use common theme variables from [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) when the style should align with the design system.
+4. Put reusable theme-pack values in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) only when they should be shared by multiple component demos.
+5. Use `::part(...)` sparingly for official exposed surfaces such as `::part(placeholder-title)`, `::part(uploading-title)`, `::part(file-name)`, `::part(placeholder-icon)`, and `::part(file-icon)`.
+6. Add a new component variable only when a needed internal surface cannot be customized with the current public variables or official parts.
+
+## Parts And States
+
+<table>
+  <thead>
+    <tr>
+      <th>Part</th>
+      <th>Element</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>placeholder-title</code></td>
+      <td>Default placeholder title text</td>
+      <td>Use for typography details on the empty state label.</td>
+    </tr>
+    <tr>
+      <td><code>uploading-title</code></td>
+      <td>Default upload progress title text</td>
+      <td>Use for upload-state text emphasis.</td>
+    </tr>
+    <tr>
+      <td><code>file-name</code></td>
+      <td>Selected file name text</td>
+      <td>Use for selected-file typography and state-specific emphasis.</td>
+    </tr>
+    <tr>
+      <td><code>placeholder-icon</code></td>
+      <td>Default placeholder SVG icon</td>
+      <td>Use for effects on the default empty-state icon.</td>
+    </tr>
+    <tr>
+      <td><code>file-icon</code></td>
+      <td>Default selected-file SVG icon</td>
+      <td>Use for effects on the default selected-file icon.</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>State Or Attribute</th>
+      <th>Meaning</th>
+      <th>Example Selector</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>:state(empty)</code></td>
+      <td>Applied when no file is selected.</td>
+      <td><code>jb-file-input:state(empty)::part(placeholder-title)</code></td>
+    </tr>
+    <tr>
+      <td><code>:state(fill)</code></td>
+      <td>Applied when a file is selected.</td>
+      <td><code>jb-file-input:state(fill)::part(file-name)</code></td>
+    </tr>
+    <tr>
+      <td><code>[uploading]</code></td>
+      <td>Shows the upload progress section.</td>
+      <td><code>jb-file-input[uploading]::part(uploading-title)</code></td>
+    </tr>
+    <tr>
+      <td><code>[hide-download]</code></td>
+      <td>Hides the default download button in the overlay.</td>
+      <td><code>jb-file-input[hide-download]</code></td>
+    </tr>
+  </tbody>
+</table>
+
+## CSS Variables
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Category</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>--jb-file-input-bg-color</code></td><td>Theme/Color</td><td>Base component background color.</td></tr>
+    <tr><td><code>--jb-file-input-bg-color-hover</code></td><td>Theme/Color</td><td>Component background color on hover.</td></tr>
+    <tr><td><code>--jb-file-input-bg-color-pressed</code></td><td>Theme/Color</td><td>Component background color while pressed.</td></tr>
+    <tr><td><code>--jb-file-input-bg-color-error</code></td><td>Theme/Color</td><td>Component background color while validation error is visible.</td></tr>
+    <tr><td><code>--jb-file-input-border-color-error</code></td><td>Theme/Color</td><td>Error-state border color.</td></tr>
+    <tr><td><code>--jb-file-input-icon-base-color</code></td><td>Theme/Color</td><td>Base color for the default SVG icons.</td></tr>
+    <tr><td><code>--jb-file-input-icon-primary-color</code></td><td>Theme/Color</td><td>Primary accent color for the default SVG icons.</td></tr>
+    <tr><td><code>--jb-file-input-placeholder-title-color</code></td><td>Theme/Color</td><td>Empty-state placeholder title color.</td></tr>
+    <tr><td><code>--jb-file-input-file-name-color</code></td><td>Theme/Color</td><td>Selected file name color.</td></tr>
+    <tr><td><code>--jb-file-input-loading-bg</code></td><td>Theme/Color</td><td>Upload progress background.</td></tr>
+    <tr><td><code>--jb-file-input-loading-color</code></td><td>Theme/Color</td><td>Upload progress text and loading icon color.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-bg-color</code></td><td>Theme/Color</td><td>Selected-file overlay background color.</td></tr>
+    <tr><td><code>--jb-file-input-reselect-button-color</code></td><td>Theme/Color</td><td>Default reselect action text color.</td></tr>
+    <tr><td><code>--jb-file-input-border-radius</code></td><td>Size</td><td>Component and overlay border radius.</td></tr>
+    <tr><td><code>--jb-file-input-padding</code></td><td>Size</td><td>Inner content padding.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-height-sm</code></td><td>Size</td><td>Overlay action button height in small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-height-xs</code></td><td>Size</td><td>Overlay action button height in extra-small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-padding-sm</code></td><td>Size</td><td>Overlay action button padding in small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-padding-xs</code></td><td>Size</td><td>Overlay action button padding in extra-small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-border-radius-sm</code></td><td>Size</td><td>Overlay action button radius in small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-border-radius-xs</code></td><td>Size</td><td>Overlay action button radius in extra-small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-icon-size-sm</code></td><td>Size</td><td>Overlay action button icon size in small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-overlay-button-icon-size-xs</code></td><td>Size</td><td>Overlay action button icon size in extra-small-height containers.</td></tr>
+    <tr><td><code>--jb-file-input-display-placeholder-empty</code></td><td>Other</td><td>Placeholder section display value in empty state.</td></tr>
+    <tr><td><code>--jb-file-input-display-file-empty</code></td><td>Other</td><td>File section display value in empty state.</td></tr>
+    <tr><td><code>--jb-file-input-display-upload-empty</code></td><td>Other</td><td>Upload section display value in empty state.</td></tr>
+    <tr><td><code>--jb-file-input-display-placeholder-fill</code></td><td>Other</td><td>Placeholder section display value in filled state.</td></tr>
+    <tr><td><code>--jb-file-input-display-file-fill</code></td><td>Other</td><td>File section display value in filled state.</td></tr>
+    <tr><td><code>--jb-file-input-display-upload-fill</code></td><td>Other</td><td>Upload section display value in filled state.</td></tr>
+    <tr><td><code>--jb-file-input-display-placeholder-uploading</code></td><td>Other</td><td>Placeholder section display value while uploading.</td></tr>
+    <tr><td><code>--jb-file-input-display-file-uploading</code></td><td>Other</td><td>File section display value while uploading.</td></tr>
+    <tr><td><code>--jb-file-input-display-upload-uploading</code></td><td>Other</td><td>Upload section display value while uploading.</td></tr>
+    <tr><td><code>--jb-file-input-download-button-display</code></td><td>Other</td><td>Default download button display value.</td></tr>
+    <tr><td><code>--jb-file-input-download-button-display-hidden</code></td><td>Other</td><td>Download button display value when <code>hide-download</code> is present.</td></tr>
+  </tbody>
+</table>
+
+## Style Recipes
+
+### Carbon
+
+<Story of={StyleStories.Carbon} />
+
+<Source of={StyleStories.Carbon} />
+
+Shared style:
+
+<Source code={carbonThemeCss} language="css" />
+
+File input style:
+
+<Source code={carbonFileInputCss} language="css" />
+
+### Aurora
+
+<Story of={StyleStories.Aurora} />
+
+<Source of={StyleStories.Aurora} />
+
+Shared style:
+
+<Source code={auroraThemeCss} language="css" />
+
+File input style:
+
+<Source code={auroraFileInputCss} language="css" />
+
+### Forest
+
+<Story of={StyleStories.Forest} />
+
+<Source of={StyleStories.Forest} />
+
+Shared style:
+
+<Source code={forestThemeCss} language="css" />
+
+File input style:
+
+<Source code={forestFileInputCss} language="css" />
+
+### Sunset
+
+<Story of={StyleStories.Sunset} />
+
+<Source of={StyleStories.Sunset} />
+
+Shared style:
+
+<Source code={sunsetThemeCss} language="css" />
+
+File input style:
+
+<Source code={sunsetFileInputCss} language="css" />
+
+### Porcelain
+
+<Story of={StyleStories.Porcelain} />
+
+<Source of={StyleStories.Porcelain} />
+
+Shared style:
+
+<Source code={porcelainThemeCss} language="css" />
+
+File input style:
+
+<Source code={porcelainFileInputCss} language="css" />
+
+### Candy
+
+<Story of={StyleStories.Candy} />
+
+<Source of={StyleStories.Candy} />
+
+Shared style:
+
+<Source code={candyThemeCss} language="css" />
+
+File input style:
+
+<Source code={candyFileInputCss} language="css" />
+
+### Terminal
+
+<Story of={StyleStories.Terminal} />
+
+<Source of={StyleStories.Terminal} />
+
+Shared style:
+
+<Source code={terminalThemeCss} language="css" />
+
+File input style:
+
+<Source code={terminalFileInputCss} language="css" />
+
+### Material
+
+<Story of={StyleStories.Material} />
+
+<Source of={StyleStories.Material} />
+
+Shared style:
+
+<Source code={materialThemeCss} language="css" />
+
+File input style:
+
+<Source code={materialFileInputCss} language="css" />
+
+### Fluent
+
+<Story of={StyleStories.Fluent} />
+
+<Source of={StyleStories.Fluent} />
+
+Shared style:
+
+<Source code={fluentThemeCss} language="css" />
+
+File input style:
+
+<Source code={fluentFileInputCss} language="css" />
+
+### Bootstrap
+
+<Story of={StyleStories.Bootstrap} />
+
+<Source of={StyleStories.Bootstrap} />
+
+Shared style:
+
+<Source code={bootstrapThemeCss} language="css" />
+
+File input style:
+
+<Source code={bootstrapFileInputCss} language="css" />
+
+### Cupertino
+
+<Story of={StyleStories.Cupertino} />
+
+<Source of={StyleStories.Cupertino} />
+
+Shared style:
+
+<Source code={cupertinoThemeCss} language="css" />
+
+File input style:
+
+<Source code={cupertinoFileInputCss} language="css" />
+
+### Ant Design
+
+<Story of={StyleStories.AntDesign} />
+
+<Source of={StyleStories.AntDesign} />
+
+Shared style:
+
+<Source code={antDesignThemeCss} language="css" />
+
+File input style:
+
+<Source code={antDesignFileInputCss} language="css" />
+
+## Theme File Pattern
+
+Use [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) as the common design-token guides. Theme-pack files should keep reusable demo variables in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles), then each component should keep its own style CSS in its story [`styles`](https://github.com/javadbat/design-system/tree/main/modules/jb-file-input/stories/styles) folder.
+
+```css
+/* https://github.com/javadbat/design-system/blob/main/docs/styles/carbon.css */
+.theme-name-style {
+  /* shared design-system variables */
+}
+
+/* https://github.com/javadbat/design-system/blob/main/modules/jb-file-input/stories/styles/style-carbon.css */
+.theme-name-file-input {
+  /* file-input-specific variables and official parts */
+}
+```
+
+This keeps common theme tokens reusable and lets each component page show only the CSS it needs.

@@ -1,0 +1,29 @@
+.material-file-input {
+    display: block;
+    width: 100%;
+    --jb-file-input-bg-color: #ffffff;
+    --jb-file-input-bg-color-hover: #e8f0fe;
+    --jb-file-input-bg-color-pressed: #d2e3fc;
+    --jb-file-input-bg-color-error: #fce8e6;
+    --jb-file-input-border-color-error: #d93025;
+    --jb-file-input-border-radius: 1rem;
+    --jb-file-input-padding: 1rem;
+    --jb-file-input-icon-base-color: #5f6368;
+    --jb-file-input-icon-primary-color: #1967d2;
+    --jb-file-input-placeholder-title-color: #1f1f1f;
+    --jb-file-input-file-name-color: #1f1f1f;
+    --jb-file-input-loading-bg: linear-gradient(90deg, #1967d2, #fbbc04);
+    --jb-file-input-loading-color: #ffffff;
+    --jb-file-input-overlay-bg-color: oklch(100% 0 0 / 0.78);
+    --jb-file-input-reselect-button-color: #1967d2;
+    --jb-file-input-overlay-button-border-radius-sm: 999px;
+    --jb-file-input-overlay-button-border-radius-xs: 999px;
+}
+
+.material-file-input {
+    box-shadow: 0 0.125rem 0.25rem oklch(0% 0 0 / 0.16), 0 0.125rem 0.75rem oklch(0% 0 0 / 0.1);
+}
+
+.material-file-input::part(uploading-title) {
+    font-weight: 700;
+}

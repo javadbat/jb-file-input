@@ -1,0 +1,29 @@
+.aurora-file-input {
+    display: block;
+    width: 100%;
+    --jb-file-input-bg-color: #192233;
+    --jb-file-input-bg-color-hover: #24314b;
+    --jb-file-input-bg-color-pressed: #10151f;
+    --jb-file-input-bg-color-error: #3a1e2c;
+    --jb-file-input-border-color-error: #ff8fb8;
+    --jb-file-input-border-radius: 1.5rem;
+    --jb-file-input-padding: 1.25rem;
+    --jb-file-input-icon-base-color: #d7e5f2;
+    --jb-file-input-icon-primary-color: #7de4d3;
+    --jb-file-input-placeholder-title-color: #edf7ff;
+    --jb-file-input-file-name-color: #ffffff;
+    --jb-file-input-loading-bg: linear-gradient(120deg, #7de4d3, #a99cff, #ffcf70);
+    --jb-file-input-loading-color: #06131d;
+    --jb-file-input-overlay-bg-color: oklch(12% 0.04 250 / 0.72);
+    --jb-file-input-reselect-button-color: #edf7ff;
+    --jb-file-input-overlay-button-border-radius-sm: 999px;
+    --jb-file-input-overlay-button-border-radius-xs: 999px;
+}
+
+.aurora-file-input::part(placeholder-title) {
+    text-shadow: 0 0 1rem oklch(83% 0.11 185 / 0.65);
+}
+
+.aurora-file-input:state(fill)::part(file-name) {
+    text-shadow: 0 0 0.75rem oklch(78% 0.12 285 / 0.7);
+}
