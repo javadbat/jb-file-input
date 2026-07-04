@@ -229,6 +229,14 @@
               "description": "Background color in error state."
             },
             {
+              "name": "--jb-file-input-bg-color-hover",
+              "description": "Background color in hover state."
+            },
+            {
+              "name": "--jb-file-input-bg-color-pressed",
+              "description": "Background color in pressed state."
+            },
+            {
               "name": "--jb-file-input-border-color-error",
               "description": "Border color in error state."
             },
@@ -237,8 +245,72 @@
               "description": "Border radius."
             },
             {
+              "name": "--jb-file-input-file-name-color",
+              "description": "Selected file name color."
+            },
+            {
+              "name": "--jb-file-input-icon-base-color",
+              "description": "Base icon color."
+            },
+            {
+              "name": "--jb-file-input-icon-primary-color",
+              "description": "Primary icon color."
+            },
+            {
               "name": "--jb-file-input-loading-bg",
               "description": "Upload progress background."
+            },
+            {
+              "name": "--jb-file-input-loading-color",
+              "description": "Upload progress text and loading icon color."
+            },
+            {
+              "name": "--jb-file-input-overlay-bg-color",
+              "description": "Selected-file overlay background color."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-border-radius-sm",
+              "description": "Overlay action button border radius in small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-border-radius-xs",
+              "description": "Overlay action button border radius in extra small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-height-sm",
+              "description": "Overlay action button height in small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-height-xs",
+              "description": "Overlay action button height in extra small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-icon-size-sm",
+              "description": "Overlay action button icon size in small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-icon-size-xs",
+              "description": "Overlay action button icon size in extra small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-padding-sm",
+              "description": "Overlay action button padding in small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-padding-xs",
+              "description": "Overlay action button padding in extra small height."
+            },
+            {
+              "name": "--jb-file-input-padding",
+              "description": "Inner padding."
+            },
+            {
+              "name": "--jb-file-input-placeholder-title-color",
+              "description": "Placeholder title color."
+            },
+            {
+              "name": "--jb-file-input-reselect-button-color",
+              "description": "Reselect button text color."
             }
           ]
         }

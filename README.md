@@ -198,8 +198,19 @@ jb-file-input[uploading] {
 | --jb-file-input-icon-base-color | Customize icon base color. |
 | --jb-file-input-icon-primary-color | Customize icon primary color. |
 | --jb-file-input-loading-bg | Customize loading bg. |
+| --jb-file-input-loading-color | Customize loading text and icon color. |
+| --jb-file-input-overlay-bg-color | Customize file overlay background color. |
+| --jb-file-input-overlay-button-border-radius-sm | Customize overlay button border radius in small height. |
+| --jb-file-input-overlay-button-border-radius-xs | Customize overlay button border radius in extra small height. |
+| --jb-file-input-overlay-button-height-sm | Customize overlay button height in small height. |
+| --jb-file-input-overlay-button-height-xs | Customize overlay button height in extra small height. |
+| --jb-file-input-overlay-button-icon-size-sm | Customize overlay button icon size in small height. |
+| --jb-file-input-overlay-button-icon-size-xs | Customize overlay button icon size in extra small height. |
+| --jb-file-input-overlay-button-padding-sm | Customize overlay button padding in small height. |
+| --jb-file-input-overlay-button-padding-xs | Customize overlay button padding in extra small height. |
 | --jb-file-input-padding | Customize padding. |
 | --jb-file-input-placeholder-title-color | Customize placeholder title color. |
+| --jb-file-input-reselect-button-color | Customize reselect button text color. |
 
 ## Related Docs
 - see [`jb-file-input/react`](https://github.com/javadbat/jb-file-input/tree/main/react); if you want to use this component in react

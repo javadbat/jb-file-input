@@ -134,11 +134,11 @@
         z-index: 1;
 
         .loading-icon {
-          --jb-loading-color: var(--jb-primary-subtle);
+          --jb-loading-color: var(--loading-color);
         }
 
         .uploading-title {
-          color: var(--jb-primary-subtle);
+          color: var(--loading-color);
         }
       }
     }
@@ -193,17 +193,17 @@
       jb-button {
         @container (max-height:3rem) {
           /*all variables copies from size sm of jb-button*/
-          --jb-button-height: 2rem;
-          --jb-button-padding: 0.25rem 0.5rem;
-          --jb-button-border-radius: var(--jb-radius-sm);
-          --jb-button-icon-size: 1.25rem
+          --jb-button-height: var(--overlay-button-height-sm);
+          --jb-button-padding: var(--overlay-button-padding-sm);
+          --jb-button-border-radius: var(--overlay-button-border-radius-sm);
+          --jb-button-icon-size: var(--overlay-button-icon-size-sm)
         }
         @container (max-height:2rem) {
           /*all variables copies from size xs of jb-button*/
-          --jb-button-height: 1.5rem;
-          --jb-button-padding: 0.125rem 0.25rem;
-          --jb-button-border-radius: var(--jb-radius-xs);
-          --jb-button-icon-size: 1rem
+          --jb-button-height: var(--overlay-button-height-xs);
+          --jb-button-padding: var(--overlay-button-padding-xs);
+          --jb-button-border-radius: var(--overlay-button-border-radius-xs);
+          --jb-button-icon-size: var(--overlay-button-icon-size-xs)
         }
         &.download-button{
           display: var(--download-button-display, block);

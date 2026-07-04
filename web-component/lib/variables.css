@@ -1,7 +1,4 @@
 :host {
-  /* Size */
-  --border-radius: var(--jb-file-input-border-radius, var(--jb-radius-xl));
-  --padding: var(--jb-file-input-padding, 1rem);
   /* Theme/Color */
   --bg-color: var(--jb-file-input-bg-color, var(--jb-neutral-10));
   --bg-color-hover: var(--jb-file-input-bg-color-hover, oklch(from var(--bg-color) calc(l + 0.07) calc(c + 0.07) h));
@@ -13,8 +10,21 @@
   --placeholder-title-color: var(--jb-file-input-placeholder-title-color, var(--jb-neutral));
   --file-name-color: var(--jb-file-input-file-name-color, var(--jb-neutral));
   --loading-bg: var(--jb-file-input-loading-bg, linear-gradient(90deg, var(--jb-primary-l), var(--jb-secondary-l)));
-  --overlay-bg-color:oklch(from var(--jb-neutral) l c h / calc(alpha - 0.5));
-  --reselect-button-color: var(--jb-white);
+  --loading-color: var(--jb-file-input-loading-color, var(--jb-primary-subtle));
+  --overlay-bg-color: var(--jb-file-input-overlay-bg-color, oklch(from var(--jb-neutral) l c h / calc(alpha - 0.5)));
+  --reselect-button-color: var(--jb-file-input-reselect-button-color, var(--jb-white));
+
+  /* Size */
+  --border-radius: var(--jb-file-input-border-radius, var(--jb-radius-xl));
+  --padding: var(--jb-file-input-padding, 1rem);
+  --overlay-button-height-sm: var(--jb-file-input-overlay-button-height-sm, 2rem);
+  --overlay-button-height-xs: var(--jb-file-input-overlay-button-height-xs, 1.5rem);
+  --overlay-button-padding-sm: var(--jb-file-input-overlay-button-padding-sm, 0.25rem 0.5rem);
+  --overlay-button-padding-xs: var(--jb-file-input-overlay-button-padding-xs, 0.125rem 0.25rem);
+  --overlay-button-border-radius-sm: var(--jb-file-input-overlay-button-border-radius-sm, var(--jb-radius-sm));
+  --overlay-button-border-radius-xs: var(--jb-file-input-overlay-button-border-radius-xs, var(--jb-radius-xs));
+  --overlay-button-icon-size-sm: var(--jb-file-input-overlay-button-icon-size-sm, 1.25rem);
+  --overlay-button-icon-size-xs: var(--jb-file-input-overlay-button-icon-size-xs, 1rem);
 }
 
 .jb-file-input-web-component {
