@@ -64,7 +64,7 @@ Each example uses one shared example theme pack from [`docs/styles`](https://git
 2. Use host styles for layout context such as width, height, borders, and shadows around the component.
 3. Use common theme variables from [Theme Colors](../../jb-core/theme/stories/colors.mdx) and [Theme Sizes](../../jb-core/theme/stories/sizes.mdx) when the style should align with the design system.
 4. Put reusable theme-pack values in [`docs/styles`](https://github.com/javadbat/design-system/tree/main/docs/styles) only when they should be shared by multiple component demos.
-5. Use `::part(...)` sparingly for official exposed surfaces such as `::part(placeholder-title)`, `::part(uploading-title)`, `::part(file-name)`, `::part(placeholder-icon)`, and `::part(file-icon)`.
+5. Use `::part(...)` sparingly for official exposed surfaces such as `::part(placeholder-title)`, `::part(uploading-title)`, `::part(loading)`, `::part(upload-loading)`, `::part(file-name)`, `::part(placeholder-icon)`, and `::part(file-icon)`.
 6. Add a new component variable only when a needed internal surface cannot be customized with the current public variables or official parts.
 
 ## Parts And States
@@ -87,6 +87,16 @@ Each example uses one shared example theme pack from [`docs/styles`](https://git
       <td><code>uploading-title</code></td>
       <td>Default upload progress title text</td>
       <td>Use for upload-state text emphasis.</td>
+    </tr>
+    <tr>
+      <td><code>loading</code></td>
+      <td>Default loading element</td>
+      <td>Generic part token for styling the component's loading element.</td>
+    </tr>
+    <tr>
+      <td><code>upload-loading</code></td>
+      <td>Default loading element in the upload section</td>
+      <td>Upload-specific part token for styling the loading element.</td>
     </tr>
     <tr>
       <td><code>file-name</code></td>

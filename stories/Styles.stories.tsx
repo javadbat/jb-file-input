@@ -107,6 +107,11 @@ export const Gallery: Story = {
   ),
 };
 
+export const Default: Story = {
+  name: "Default",
+  render: () => <FileInputStyleSample className="" />,
+};
+
 export const Carbon: Story = {
   name: "Carbon",
   render: () => <FileInputStyleSample className="carbon-style carbon-style" />,

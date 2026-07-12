@@ -215,6 +215,14 @@
               "description": "Title text in the default upload section."
             },
             {
+              "name": "loading",
+              "description": "Default loading element."
+            },
+            {
+              "name": "upload-loading",
+              "description": "Default loading element in the upload section."
+            },
+            {
               "name": "file-name",
               "description": "Selected file name text."
             },

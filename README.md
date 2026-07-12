@@ -165,6 +165,8 @@ For complete styling guidance, live examples, official parts and states, and the
 | --- | --- |
 | `placeholder-title` | Title text in the default placeholder section. |
 | `uploading-title` | Title text in the default upload section. |
+| `loading` | Default loading element. |
+| `upload-loading` | Default loading element in the upload section. |
 | `file-name` | Selected file name text. |
 | `placeholder-icon` | Default placeholder SVG icon. |
 | `file-icon` | Default selected-file SVG icon. |
