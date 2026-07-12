@@ -1,30 +1,30 @@
-.sunset-file-input {
+jb-file-input.sunset-style {
     display: block;
     width: 100%;
-    --jb-file-input-bg-color: #8a3f56;
+    --jb-file-input-bg-color: var(--jb-surface);
     --jb-file-input-bg-color-hover: #9a4c62;
-    --jb-file-input-bg-color-pressed: #412553;
+    --jb-file-input-bg-color-pressed: var(--jb-background);
     --jb-file-input-bg-color-error: #5b2436;
-    --jb-file-input-border-color-error: #ffb26b;
+    --jb-file-input-border-color-error: var(--jb-primary-hover);
     --jb-file-input-border-radius: 1.6rem;
     --jb-file-input-padding: 1.25rem;
-    --jb-file-input-icon-base-color: #ffe8da;
-    --jb-file-input-icon-primary-color: #ffd166;
-    --jb-file-input-placeholder-title-color: #fff7ef;
-    --jb-file-input-file-name-color: #fff7ef;
-    --jb-file-input-loading-bg: linear-gradient(90deg, #ffd166, #ff7a90, #8af0d3);
-    --jb-file-input-loading-color: #43223a;
+    --jb-file-input-icon-base-color: var(--jb-text-secondary);
+    --jb-file-input-icon-primary-color: var(--jb-focus-color);
+    --jb-file-input-placeholder-title-color: var(--jb-text-primary);
+    --jb-file-input-file-name-color: var(--jb-text-primary);
+    --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), #ff7a90, var(--jb-success));
+    --jb-file-input-loading-color: var(--jb-text-contrast);
     --jb-file-input-overlay-bg-color: oklch(30% 0.09 20 / 0.72);
-    --jb-file-input-reselect-button-color: #fff7ef;
+    --jb-file-input-reselect-button-color: var(--jb-text-primary);
     --jb-file-input-overlay-button-border-radius-sm: 1rem;
     --jb-file-input-overlay-button-border-radius-xs: 0.75rem;
 }
 
-.sunset-file-input::part(placeholder-title),
-.sunset-file-input::part(file-name) {
+jb-file-input.sunset-style::part(placeholder-title),
+jb-file-input.sunset-style::part(file-name) {
     text-shadow: 0 0.4rem 1rem oklch(0% 0 0 / 0.2);
 }
 
-.sunset-file-input::part(file-icon) {
+jb-file-input.sunset-style::part(file-icon) {
     filter: drop-shadow(0 0.35rem 0.5rem oklch(83% 0.14 75 / 0.45));
 }

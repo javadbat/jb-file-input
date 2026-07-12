@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import {JBFileInput} from 'jb-file-input/react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 
 const meta = {

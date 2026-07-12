@@ -1,31 +1,31 @@
-.terminal-file-input {
+jb-file-input.terminal-style {
     display: block;
     width: 100%;
-    --jb-file-input-bg-color: #0d1117;
-    --jb-file-input-bg-color-hover: #13251b;
-    --jb-file-input-bg-color-pressed: #05080d;
+    --jb-file-input-bg-color: var(--jb-surface);
+    --jb-file-input-bg-color-hover: var(--jb-surface-hover);
+    --jb-file-input-bg-color-pressed: var(--jb-background);
     --jb-file-input-bg-color-error: #211112;
     --jb-file-input-border-color-error: #ff5f56;
     --jb-file-input-border-radius: 0.25rem;
     --jb-file-input-padding: 1rem;
-    --jb-file-input-icon-base-color: #9ce7b7;
-    --jb-file-input-icon-primary-color: #62ff93;
-    --jb-file-input-placeholder-title-color: #d6ffe3;
-    --jb-file-input-file-name-color: #62ff93;
-    --jb-file-input-loading-bg: linear-gradient(90deg, #62ff93, #e8ff77);
-    --jb-file-input-loading-color: #07110b;
+    --jb-file-input-icon-base-color: var(--jb-text-secondary);
+    --jb-file-input-icon-primary-color: var(--jb-focus-color);
+    --jb-file-input-placeholder-title-color: var(--jb-text-primary);
+    --jb-file-input-file-name-color: var(--jb-focus-color);
+    --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), var(--jb-success));
+    --jb-file-input-loading-color: var(--jb-text-contrast);
     --jb-file-input-overlay-bg-color: oklch(4% 0.02 145 / 0.82);
-    --jb-file-input-reselect-button-color: #62ff93;
+    --jb-file-input-reselect-button-color: var(--jb-focus-color);
     --jb-file-input-overlay-button-border-radius-sm: 0.25rem;
     --jb-file-input-overlay-button-border-radius-xs: 0.25rem;
 }
 
-.terminal-file-input {
-    border: 1px solid #243b2f;
+jb-file-input.terminal-style {
+    border: 1px solid var(--jb-border-color);
 }
 
-.terminal-file-input::part(placeholder-title),
-.terminal-file-input::part(file-name),
-.terminal-file-input::part(uploading-title) {
+jb-file-input.terminal-style::part(placeholder-title),
+jb-file-input.terminal-style::part(file-name),
+jb-file-input.terminal-style::part(uploading-title) {
     font-family: Consolas, "Courier New", monospace;
 }

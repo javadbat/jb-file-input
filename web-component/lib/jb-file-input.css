@@ -4,17 +4,17 @@
   display: block;
   container-type: size;
   transition: all 0.3s 0s ease;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .jb-file-input-web-component {
   background-color: var(--bg-color);
   width: 100%;
   height: 100%;
-  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   box-sizing: border-box;
   transition: all 0.3s 0s ease;
 
@@ -198,6 +198,7 @@
           --jb-button-border-radius: var(--overlay-button-border-radius-sm);
           --jb-button-icon-size: var(--overlay-button-icon-size-sm)
         }
+
         @container (max-height:2rem) {
           /*all variables copies from size xs of jb-button*/
           --jb-button-height: var(--overlay-button-height-xs);
@@ -205,7 +206,8 @@
           --jb-button-border-radius: var(--overlay-button-border-radius-xs);
           --jb-button-icon-size: var(--overlay-button-icon-size-xs)
         }
-        &.download-button{
+
+        &.download-button {
           display: var(--download-button-display, block);
         }
       }

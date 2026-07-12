@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { JBFileInput } from 'jb-file-input/react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import '../../../docs/styles/ant-design.css';
 import '../../../docs/styles/aurora.css';
 import '../../../docs/styles/bootstrap.css';
@@ -35,18 +35,18 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const styleSamples = [
-  { name: "Carbon", className: "carbon-style carbon-file-input" },
-  { name: "Aurora", className: "aurora-style aurora-file-input" },
-  { name: "Forest", className: "forest-style forest-file-input" },
-  { name: "Sunset", className: "sunset-style sunset-file-input" },
-  { name: "Porcelain", className: "porcelain-style porcelain-file-input" },
-  { name: "Candy", className: "candy-style candy-file-input" },
-  { name: "Terminal", className: "terminal-style terminal-file-input" },
-  { name: "Material", className: "material-style material-file-input" },
-  { name: "Fluent", className: "fluent-style fluent-file-input" },
-  { name: "Bootstrap", className: "bootstrap-style bootstrap-file-input" },
-  { name: "Cupertino", className: "cupertino-style cupertino-file-input" },
-  { name: "Ant Design", className: "ant-design-style ant-file-input" },
+  { name: "Carbon", className: "carbon-style carbon-style" },
+  { name: "Aurora", className: "aurora-style aurora-style" },
+  { name: "Forest", className: "forest-style forest-style" },
+  { name: "Sunset", className: "sunset-style sunset-style" },
+  { name: "Porcelain", className: "porcelain-style porcelain-style" },
+  { name: "Candy", className: "candy-style candy-style" },
+  { name: "Terminal", className: "terminal-style terminal-style" },
+  { name: "Material", className: "material-style material-style" },
+  { name: "Fluent", className: "fluent-style fluent-style" },
+  { name: "Bootstrap", className: "bootstrap-style bootstrap-style" },
+  { name: "Cupertino", className: "cupertino-style cupertino-style" },
+  { name: "Ant Design", className: "ant-design-style" },
 ];
 
 function FileInputStyleSample({ className }: { className: string }) {
@@ -58,9 +58,9 @@ function FileInputStyleSample({ className }: { className: string }) {
       gap: "0.75rem",
       width: "100%",
     }}>
-      <JBFileInput className={className} style={{ height: "8rem" }} />
-      <JBFileInput className={className} style={{ height: "8rem" }} value={file} />
-      <JBFileInput className={className} style={{ height: "8rem" }} uploading uploadPercent={68} />
+      <JBFileInput className={className} style={{ height: "11rem" }} />
+      <JBFileInput className={className} style={{ height: "11rem" }} value={file} />
+      <JBFileInput className={className} style={{ height: "11rem" }} uploading uploadPercent={68} />
     </div>
   );
 }
@@ -109,60 +109,60 @@ export const Gallery: Story = {
 
 export const Carbon: Story = {
   name: "Carbon",
-  render: () => <FileInputStyleSample className="carbon-style carbon-file-input" />,
+  render: () => <FileInputStyleSample className="carbon-style carbon-style" />,
 };
 
 export const Aurora: Story = {
   name: "Aurora",
-  render: () => <FileInputStyleSample className="aurora-style aurora-file-input" />,
+  render: () => <FileInputStyleSample className="aurora-style aurora-style" />,
 };
 
 export const Forest: Story = {
   name: "Forest",
-  render: () => <FileInputStyleSample className="forest-style forest-file-input" />,
+  render: () => <FileInputStyleSample className="forest-style forest-style" />,
 };
 
 export const Sunset: Story = {
   name: "Sunset",
-  render: () => <FileInputStyleSample className="sunset-style sunset-file-input" />,
+  render: () => <FileInputStyleSample className="sunset-style sunset-style" />,
 };
 
 export const Porcelain: Story = {
   name: "Porcelain",
-  render: () => <FileInputStyleSample className="porcelain-style porcelain-file-input" />,
+  render: () => <FileInputStyleSample className="porcelain-style porcelain-style" />,
 };
 
 export const Candy: Story = {
   name: "Candy",
-  render: () => <FileInputStyleSample className="candy-style candy-file-input" />,
+  render: () => <FileInputStyleSample className="candy-style candy-style" />,
 };
 
 export const Terminal: Story = {
   name: "Terminal",
-  render: () => <FileInputStyleSample className="terminal-style terminal-file-input" />,
+  render: () => <FileInputStyleSample className="terminal-style terminal-style" />,
 };
 
 export const Material: Story = {
   name: "Material",
-  render: () => <FileInputStyleSample className="material-style material-file-input" />,
+  render: () => <FileInputStyleSample className="material-style material-style" />,
 };
 
 export const Fluent: Story = {
   name: "Fluent",
-  render: () => <FileInputStyleSample className="fluent-style fluent-file-input" />,
+  render: () => <FileInputStyleSample className="fluent-style fluent-style" />,
 };
 
 export const Bootstrap: Story = {
   name: "Bootstrap",
-  render: () => <FileInputStyleSample className="bootstrap-style bootstrap-file-input" />,
+  render: () => <FileInputStyleSample className="bootstrap-style bootstrap-style" />,
 };
 
 export const Cupertino: Story = {
   name: "Cupertino",
-  render: () => <FileInputStyleSample className="cupertino-style cupertino-file-input" />,
+  render: () => <FileInputStyleSample className="cupertino-style cupertino-style" />,
 };
 
 export const AntDesign: Story = {
   name: "Ant Design",
-  render: () => <FileInputStyleSample className="ant-design-style ant-file-input" />,
+  render: () => <FileInputStyleSample className="ant-design-style" />,
 };
