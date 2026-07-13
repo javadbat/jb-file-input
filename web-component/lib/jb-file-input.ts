@@ -99,8 +99,10 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     if (typeof this.attachInternals == "function") {
       //some browser dont support attachInternals
       this.#internals = this.attachInternals();
+      this.#internals.role = "group";
     }
     this.initWebComponent();
+    if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, "chooseFile");
     this.initProp();
     this.registerEventListener();
   }
@@ -185,6 +187,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       case "placeholder-title":
         this.#elements.placeholder.title.innerHTML = value;
         if (this.#internals) { this.#internals.ariaPlaceholder = value; }
+        if (this.#internals) { this.#internals.ariaLabel = value; }
         break;
       case "accept":
         this.acceptTypes = value;
@@ -213,9 +216,14 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   showValidationError(error: ShowValidationErrorParameters) {
     this.#elements.componentWrapper.classList.add("--has-error");
+    if (this.#internals) {
+      this.#internals.ariaInvalid = "true";
+      this.#internals.ariaDescription = error.message;
+    }
   }
   clearValidationError() {
     this.#elements.componentWrapper.classList.remove("--has-error");
+    if (this.#internals) this.#internals.ariaInvalid = "false";
   }
   resetValue() {
     //this function is public and called outside of web component and call inside if user set value = null
