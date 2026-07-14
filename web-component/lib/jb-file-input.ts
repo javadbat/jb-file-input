@@ -121,14 +121,14 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.#elements = {
       componentWrapper: shadowRoot.querySelector(".jb-file-input-web-component") as HTMLDivElement,
       placeholder: {
-        section: shadowRoot.querySelector(".placeholder-section") as HTMLDivElement,
-        wrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLDivElement,
-        title: shadowRoot.querySelector(".placeholder-title") as HTMLDivElement
+        section: shadowRoot.querySelector(".placeholder-section") as HTMLButtonElement,
+        wrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLSpanElement,
+        title: shadowRoot.querySelector(".placeholder-title") as HTMLSpanElement
       },
       file: {
         section: shadowRoot.querySelector(".file-section") as HTMLDivElement,
-        wrapper: shadowRoot.querySelector(".file-wrapper") as HTMLDivElement,
-        fileName: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLDivElement
+        wrapper: shadowRoot.querySelector(".file-wrapper") as HTMLButtonElement,
+        fileName: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLSpanElement
       },
       virtualInput: this.#createVirtualInputFile(),
       uploader: {
@@ -137,7 +137,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       overlay: {
         delete: shadowRoot.querySelector(".delete-button") as JBButtonWebComponent,
         download: shadowRoot.querySelector(".download-button") as JBButtonWebComponent,
-        wrapper: shadowRoot.querySelector(".file-overlay") as HTMLDivElement
+        wrapper: shadowRoot.querySelector(".file-overlay") as HTMLDivElement,
+        reselect: shadowRoot.querySelector(".reselect-button") as HTMLButtonElement
       }
     };
   }
@@ -149,8 +150,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   registerEventListener() {
     this.#elements.placeholder.section.addEventListener("click", this.openFileSelector.bind(this));
-    this.#elements.file.section.addEventListener("click", this.openFileSelector.bind(this));
-    this.#elements.overlay.wrapper.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.file.wrapper.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.overlay.reselect.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.overlay.delete.addEventListener("click", this.#onDeleteClick.bind(this));
     this.#elements.overlay.download.addEventListener("click", this.#onDownloadClick.bind(this));
   }

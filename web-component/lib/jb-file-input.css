@@ -18,6 +18,20 @@
   box-sizing: border-box;
   transition: all 0.3s 0s ease;
 
+  :where(.placeholder-section, .file-wrapper, .reselect-button) {
+    all: unset;
+    box-sizing: border-box;
+  }
+
+  :where(.placeholder-section, .file-wrapper, .reselect-button):disabled {
+    cursor: default;
+  }
+
+  :where(.placeholder-section, .file-wrapper, .reselect-button):focus-visible {
+    outline: 2px solid var(--jb-file-input-focus-ring-color, Highlight);
+    outline-offset: 2px;
+  }
+
   &.--has-error {
     border: solid 1px var(--border-color-error);
     border-bottom: solid 3px var(--border-color-error);
@@ -134,7 +148,7 @@
         z-index: 1;
 
         .loading-icon {
-          --jb-loading-color: var(--loading-color);
+          --jb-loading-color: var(--upload-loading-color);
         }
 
         .uploading-title {
@@ -158,7 +172,8 @@
       }
     }
 
-    &:hover .file-overlay {
+    &:hover .file-overlay,
+    &:focus-within .file-overlay {
       opacity: 1;
     }
 
@@ -213,6 +228,7 @@
       }
 
       .reselect-button {
+        cursor: pointer;
         background-color: transparent;
         border-radius: 1rem;
         padding: 0.25rem 0.5rem;

@@ -8,14 +8,14 @@ import 'jb-button';
 export function renderHTML(): string {
   return /* html */ `
   <div class="jb-file-input-web-component">
-    <section class="placeholder-section" role="button" aria-label="${dictionary.get(i18n, "chooseFile")}">
+    <button class="placeholder-section" type="button" aria-label="${dictionary.get(i18n, "chooseFile")}">
       <slot name="placeholder">
-        <div class="placeholder-wrapper section-wrapper">
-          <div class="icon-wrapper" aria-hidden="true"><slot name="placeholder-icon">${uploadIcon}</slot></div>
-          <div class="placeholder-title title" part="placeholder-title">${dictionary.get(i18n, "chooseFile")}</div>
-        </div>
+        <span class="placeholder-wrapper section-wrapper">
+          <span class="icon-wrapper" aria-hidden="true"><slot name="placeholder-icon">${uploadIcon}</slot></span>
+          <span class="placeholder-title title" part="placeholder-title">${dictionary.get(i18n, "chooseFile")}</span>
+        </span>
       </slot>
-    </section>
+    </button>
     <section class="upload-section" role="status" aria-live="polite" aria-label="${dictionary.get(i18n, "uploading")}">
       <slot name="upload">
         <div class="upload-wrapper">
@@ -29,12 +29,12 @@ export function renderHTML(): string {
     </section>
     <section class="file-section" role="group" aria-label="${dictionary.get(i18n, "selectedFile")}">
       ${renderOverlay()}
-      <div class="file-wrapper section-wrapper">
-        <div class="icon-wrapper">
+      <button class="file-wrapper section-wrapper" type="button" aria-label="${dictionary.get(i18n, "reselectFile")}">
+        <span class="icon-wrapper">
           <slot name="file-icon">${uploadedIcon}</slot>
-        </div>
-        <div class="file-name title" part="file-name"></div>
-      </div>
+        </span>
+        <span class="file-name title" part="file-name"></span>
+      </button>
     </section>
   </div>
       `;
@@ -45,7 +45,7 @@ function renderOverlay() {
     <slot name= "overlay">
       <div class="file-overlay">
         <slot name="overlay-content">
-          <div class="reselect-button" role="button">${dictionary.get(i18n, "reselectFile")}</div>
+          <button class="reselect-button" type="button">${dictionary.get(i18n, "reselectFile")}</button>
           <jb-button class="download-button" color="light" variant="ghost" aria-label="${dictionary.get(i18n, "downloadFile")}">
             <svg id="DownloadIcon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path id="S1" d="M15.0382 12.5084L12.1222 15.4364L9.20621 12.5084"  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

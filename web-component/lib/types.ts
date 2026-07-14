@@ -6,20 +6,21 @@ export type ElementObjects = {
     componentWrapper:HTMLDivElement,
     virtualInput:HTMLInputElement,
     placeholder:{
-        section:HTMLDivElement
-        wrapper:HTMLDivElement,
-        title:HTMLDivElement
+        section:HTMLButtonElement
+        wrapper:HTMLSpanElement,
+        title:HTMLSpanElement
     }
     file:{
         section:HTMLDivElement,
-        wrapper:HTMLDivElement,
-        fileName:HTMLDivElement
+        wrapper:HTMLButtonElement,
+        fileName:HTMLSpanElement
     }
     uploader:{
         bg:HTMLDivElement
     },
     overlay:{
         wrapper:HTMLDivElement,
+        reselect:HTMLButtonElement,
         delete:JBButtonWebComponent,
         download:JBButtonWebComponent
     }
