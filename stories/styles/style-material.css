@@ -1,29 +1,31 @@
 jb-file-input.material-style {
     display: block;
     width: 100%;
-    --jb-file-input-bg-color: var(--jb-surface);
-    --jb-file-input-bg-color-hover: var(--jb-surface-hover);
-    --jb-file-input-bg-color-pressed: #d2e3fc;
-    --jb-file-input-bg-color-error: #fce8e6;
-    --jb-file-input-border-color-error: #d93025;
-    --jb-file-input-border-radius: 1rem;
+    --jb-file-input-bg-color: var(--jb-surface-container-low);
+    --jb-file-input-bg-color-hover: var(--jb-primary-container);
+    --jb-file-input-bg-color-pressed: var(--jb-surface-hover);
+    --jb-file-input-bg-color-error: var(--jb-error-container);
+    --jb-file-input-border-color-error: var(--jb-error);
+    --jb-file-input-border-radius: var(--jb-radius-lg);
     --jb-file-input-padding: 1rem;
-    --jb-file-input-icon-base-color: #5f6368;
+    --jb-file-input-icon-base-color: var(--jb-text-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
     --jb-file-input-placeholder-title-color: var(--jb-text-primary);
     --jb-file-input-file-name-color: var(--jb-text-primary);
-    --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), var(--jb-success));
+    --jb-file-input-loading-bg: var(--jb-primary);
     --jb-file-input-loading-color: var(--jb-surface);
-    --jb-file-input-overlay-bg-color: oklch(100% 0 0 / 0.78);
+    --jb-file-input-overlay-bg-color: rgb(255 255 255 / 0.92);
     --jb-file-input-reselect-button-color: var(--jb-focus-color);
     --jb-file-input-overlay-button-border-radius-sm: 999px;
     --jb-file-input-overlay-button-border-radius-xs: 999px;
+    border: 1px solid var(--jb-outline-variant);
+    box-sizing: border-box;
 }
 
 jb-file-input.material-style {
-    box-shadow: 0 0.125rem 0.25rem oklch(0% 0 0 / 0.16), 0 0.125rem 0.75rem oklch(0% 0 0 / 0.1);
+    box-shadow: none;
 }
 
 jb-file-input.material-style::part(uploading-title) {
-    font-weight: 700;
+    font-weight: 500;
 }
