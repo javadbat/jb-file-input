@@ -6,7 +6,7 @@ jb-file-input.candy-style {
     --jb-file-input-bg-color-pressed: var(--jb-border-color);
     --jb-file-input-bg-color-error: #fff0f6;
     --jb-file-input-border-color-error: #fb7185;
-    --jb-file-input-border-radius: 2rem;
+    --jb-file-input-border-radius: 1.5rem;
     --jb-file-input-padding: 1.25rem;
     --jb-file-input-icon-base-color: var(--jb-text-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
@@ -18,6 +18,11 @@ jb-file-input.candy-style {
     --jb-file-input-reselect-button-color: var(--jb-text-contrast);
     --jb-file-input-overlay-button-border-radius-sm: 999px;
     --jb-file-input-overlay-button-border-radius-xs: 999px;
+}
+
+jb-file-input.candy-style {
+    border: 1px solid var(--jb-border-color);
+    box-shadow: 0 0.65rem 1.5rem rgb(244 114 182 / 0.12);
 }
 
 jb-file-input.candy-style::part(placeholder-icon),

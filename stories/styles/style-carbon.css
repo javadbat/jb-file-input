@@ -18,15 +18,16 @@ jb-file-input.carbon-style {
     --jb-file-input-reselect-button-color: var(--jb-text-contrast);
     --jb-file-input-overlay-button-border-radius-sm: 0;
     --jb-file-input-overlay-button-border-radius-xs: 0;
+    border: 1px solid var(--jb-border-color);
 }
 
 jb-file-input.carbon-style::part(placeholder-title),
 jb-file-input.carbon-style::part(file-name),
 jb-file-input.carbon-style::part(uploading-title) {
-    letter-spacing: 0;
-    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-transform: none;
 }
 
 jb-file-input.carbon-style::part(file-icon) {
-    filter: drop-shadow(0 0.25rem 0 var(--jb-primary));
+    filter: none;
 }

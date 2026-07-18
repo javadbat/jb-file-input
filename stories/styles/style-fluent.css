@@ -6,13 +6,13 @@ jb-file-input.fluent-style {
     --jb-file-input-bg-color-pressed: var(--jb-border-color);
     --jb-file-input-bg-color-error: #fde7e9;
     --jb-file-input-border-color-error: #a4262c;
-    --jb-file-input-border-radius: 0.5rem;
+    --jb-file-input-border-radius: 0.25rem;
     --jb-file-input-padding: 1rem;
     --jb-file-input-icon-base-color: #605e5c;
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
     --jb-file-input-placeholder-title-color: var(--jb-text-primary);
     --jb-file-input-file-name-color: var(--jb-text-primary);
-    --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), var(--jb-success));
+    --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), var(--jb-primary-hover));
     --jb-file-input-loading-color: var(--jb-text-contrast);
     --jb-file-input-overlay-bg-color: oklch(98% 0 0 / 0.72);
     --jb-file-input-reselect-button-color: var(--jb-focus-color);
@@ -22,7 +22,7 @@ jb-file-input.fluent-style {
 
 jb-file-input.fluent-style {
     border: 1px solid var(--jb-border-color);
-    box-shadow: 0 0.25rem 0.75rem oklch(0% 0 0 / 0.08);
+    box-shadow: 0 0.125rem 0.5rem oklch(0% 0 0 / 0.08);
 }
 
 jb-file-input.fluent-style::part(placeholder-title) {

@@ -1,13 +1,13 @@
 jb-file-input.aurora-style {
     display: block;
     width: 100%;
-    box-shadow: 0 1rem 2.5rem oklch(70% 0.12 250 / 0.2);
+    box-shadow: 0 0.75rem 2rem oklch(70% 0.12 250 / 0.14);
     --jb-file-input-bg-color: var(--jb-surface);
     --jb-file-input-bg-color-hover: #24314b;
     --jb-file-input-bg-color-pressed: var(--jb-background);
     --jb-file-input-bg-color-error: #3a1e2c;
     --jb-file-input-border-color-error: #ff8fb8;
-    --jb-file-input-border-radius: 1.5rem;
+    --jb-file-input-border-radius: 1.25rem;
     --jb-file-input-padding: 1.25rem;
     --jb-file-input-icon-base-color: var(--jb-text-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
