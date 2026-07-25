@@ -353,12 +353,20 @@
               "description": "Overlay action button icon size in extra small height."
             },
             {
-              "name": "--jb-file-input-overlay-button-padding-sm",
-              "description": "Overlay action button padding in small height."
+              "name": "--jb-file-input-overlay-button-inline-padding-sm",
+              "description": "Overlay action button inline padding in small height."
             },
             {
-              "name": "--jb-file-input-overlay-button-padding-xs",
-              "description": "Overlay action button padding in extra small height."
+              "name": "--jb-file-input-overlay-button-block-padding-sm",
+              "description": "Overlay action button block padding in small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-inline-padding-xs",
+              "description": "Overlay action button inline padding in extra small height."
+            },
+            {
+              "name": "--jb-file-input-overlay-button-block-padding-xs",
+              "description": "Overlay action button block padding in extra small height."
             },
             {
               "name": "--jb-file-input-padding",

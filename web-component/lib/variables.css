@@ -19,8 +19,10 @@
   --padding: var(--jb-file-input-padding, 1rem);
   --overlay-button-height-sm: var(--jb-file-input-overlay-button-height-sm, 2rem);
   --overlay-button-height-xs: var(--jb-file-input-overlay-button-height-xs, 1.5rem);
-  --overlay-button-padding-sm: var(--jb-file-input-overlay-button-padding-sm, 0.25rem 0.5rem);
-  --overlay-button-padding-xs: var(--jb-file-input-overlay-button-padding-xs, 0.125rem 0.25rem);
+  --overlay-button-inline-padding-sm: var(--jb-file-input-overlay-button-inline-padding-sm, 0.5rem);
+  --overlay-button-block-padding-sm: var(--jb-file-input-overlay-button-block-padding-sm, 0.25rem);
+  --overlay-button-inline-padding-xs: var(--jb-file-input-overlay-button-inline-padding-xs, 0.25rem);
+  --overlay-button-block-padding-xs: var(--jb-file-input-overlay-button-block-padding-xs, 0.125rem);
   --overlay-button-border-radius-sm: var(--jb-file-input-overlay-button-border-radius-sm, var(--jb-radius-sm));
   --overlay-button-border-radius-xs: var(--jb-file-input-overlay-button-border-radius-xs, var(--jb-radius-xs));
   --overlay-button-icon-size-sm: var(--jb-file-input-overlay-button-icon-size-sm, 1.25rem);

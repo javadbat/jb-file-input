@@ -209,7 +209,8 @@
         @container (max-height:3rem) {
           /*all variables copies from size sm of jb-button*/
           --jb-button-height: var(--overlay-button-height-sm);
-          --jb-button-padding: var(--overlay-button-padding-sm);
+          --jb-button-inline-padding: var(--overlay-button-inline-padding-sm);
+          --jb-button-block-padding: var(--overlay-button-block-padding-sm);
           --jb-button-border-radius: var(--overlay-button-border-radius-sm);
           --jb-button-icon-size: var(--overlay-button-icon-size-sm)
         }
@@ -217,7 +218,8 @@
         @container (max-height:2rem) {
           /*all variables copies from size xs of jb-button*/
           --jb-button-height: var(--overlay-button-height-xs);
-          --jb-button-padding: var(--overlay-button-padding-xs);
+          --jb-button-inline-padding: var(--overlay-button-inline-padding-xs);
+          --jb-button-block-padding: var(--overlay-button-block-padding-xs);
           --jb-button-border-radius: var(--overlay-button-border-radius-xs);
           --jb-button-icon-size: var(--overlay-button-icon-size-xs)
         }
