@@ -11,6 +11,7 @@ export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
   static formAssociated = true;
   #value: File | null = null;
+  #isDirty = false;
   #elements!: ElementObjects;
   #required = false;
   set required(value: boolean) {
@@ -45,17 +46,63 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   get value() {
     return this.#value;
   }
-  set value(value) {
+  set value(value: File | null) {
     if (value == null) {
+      // An explicit live null must continue to take precedence over initialValue.
+      this.#isDirty = true;
       this.resetValue();
     } else if (value instanceof File) {
-      this.#value = value;
-      this.#elements.file.fileName.innerHTML = value.name;
-      this.#internals?.states?.add("fill");
-      this.#internals?.states?.delete("empty")
-      this.#internals?.setFormValue(value);
+      this.#isDirty = true;
+      this.#setValue(value);
       this.#validation.checkValidity({ showError: false });
     }
+  }
+  #setValue(value: File) {
+    this.#value = value;
+    this.#elements.file.fileName.textContent = value.name;
+    this.#internals?.states?.add("fill");
+    this.#internals?.states?.delete("empty")
+    this.#internals?.setFormValue(value);
+    this.setStatus("selected");
+  }
+  #resetValue() {
+    this.#value = null;
+    this.#elements.file.fileName.textContent = "";
+    this.#internals?.states?.add("empty")
+    this.#internals?.states?.delete("fill")
+    this.#internals?.setFormValue(null);
+    this.setStatus("empty");
+    this.#elements.virtualInput.value = "";
+  }
+  #initialValue: File | null = null;
+  /**
+   * Default and reset value. It initializes `value` until the live value is explicitly set.
+   */
+  get initialValue(): File | null {
+    return this.#initialValue;
+  }
+  set initialValue(value: File | null) {
+    this.#initialValue = value instanceof File ? value : null;
+    if (!this.#isDirty) {
+      if (this.#initialValue) {
+        this.#setValue(this.#initialValue);
+      } else {
+        this.#resetValue();
+      }
+    }
+  }
+  get isDirty(): boolean {
+    return this.value !== this.initialValue;
+  }
+  formResetCallback() {
+    this.#isDirty = false;
+    if (this.initialValue) {
+      this.#setValue(this.initialValue);
+    } else {
+      this.#resetValue();
+    }
+    this.#validation.reset();
+    this.#internals?.setValidity({}, '');
   }
   get status() {
     //it is read only variable
@@ -143,9 +190,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     };
   }
   initProp() {
-    this.setStatus("empty");
-    this.#internals?.states?.add("empty")
-    this.#value = null;
+    this.#resetValue();
     this.#required = false;
   }
   registerEventListener() {
@@ -203,8 +248,6 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
       //when user select a image from his computer but dont want to edit
       const file = target.files[0];
       this.value = file;
-      this.#elements.file.fileName.innerHTML = file.name;
-      this.setStatus("selected");
       this.#triggerOnChangeEvent();
     } else {
       //user click on cancel button of file select dialog
@@ -227,13 +270,10 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     if (this.#internals) this.#internals.ariaInvalid = "false";
   }
   resetValue() {
-    //this function is public and called outside of web component and call inside if user set value = null
-    this.#value = null;
-    this.#internals?.states?.add("empty")
-    this.#internals?.states?.delete("fill")
-    this.#internals?.setFormValue(null);
-    this.setStatus("empty");
-    this.#elements.virtualInput.value = "";
+    if (this.#value !== null) {
+      this.#isDirty = true;
+    }
+    this.#resetValue();
   }
   #triggerOnChangeEvent() {
     const event = new Event("change");

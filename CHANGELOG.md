@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added Storybook interaction coverage for initial-value initialization, live-value precedence, explicit `null`, and native form reset.
+
+### Changed
+
+- Added `initialValue` as the default and reset file; it seeds `value` only until the live value is explicitly set.
+- Updated the React wrapper so an omitted `value` does not overwrite `initialValue`, while explicit `null` still clears the selected file.
+
+### Fixed
+
+- A redundant public `resetValue()` call no longer blocks a later `initialValue` from initializing an already-empty file input.
+
 ## [3.1.0] 2026-07-18
 
 ### Added

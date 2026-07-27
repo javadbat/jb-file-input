@@ -70,6 +70,23 @@
             },
             {
               "kind": "field",
+              "name": "initialValue",
+              "description": "Default and reset file. It initializes value until the live value is explicitly set.",
+              "type": {
+                "text": "File | null"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDirty",
+              "description": "True when current value is not the same File reference as initialValue.",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
               "name": "acceptTypes",
               "description": "Native accept string used by the internal file input.",
               "type": {

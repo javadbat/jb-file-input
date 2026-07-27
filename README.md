@@ -53,6 +53,8 @@ just import package with import or from js CDN and write web component tag in yo
 | name | type | readonly | description |
 | --- | --- | --- | --- |
 | [`value`](#value) | `File \| null` | no | Selected file. Set to `null` to reset the component. |
+| `initialValue` | `File \| null` | no | Default and reset file. It initializes `value` until the live value is explicitly set. |
+| `isDirty` | `boolean` | yes | `true` when current `value` is not the same `File` reference as `initialValue`. |
 | `acceptTypes` | `string` | no | Native accept string used by the internal file input. |
 | [`uploadPercent`](#loading-state) | `number \| null` | no | Visual upload progress percentage used by the upload-state background. |
 | `required` | `boolean` | no | Enables required validation. |

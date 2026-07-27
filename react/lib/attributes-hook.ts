@@ -3,12 +3,26 @@ import type { ValidationItem } from "jb-validation";
 import { type RefObject, useEffect } from "react";
 
 export type JBFileInputAttributes = {
+  value?: File | null,
+  initialValue?: File | null,
   acceptTypes?: string,
   placeholderTitle?: string,
   required?: boolean,
   validationList?: ValidationItem<ValidationValue>[],
 }
 export function useJBFileInputAttribute(element: RefObject<JBFileInputWebComponent | null>, props: JBFileInputAttributes) {
+  useEffect(() => {
+    if (element.current && props.initialValue !== undefined) {
+      element.current.initialValue = props.initialValue;
+    }
+  }, [props.initialValue, element]);
+
+  useEffect(() => {
+    if (element.current && props.value !== undefined) {
+      element.current.value = props.value;
+    }
+  }, [props.value, element]);
+
   useEffect(() => {
     if (element.current && props.acceptTypes) {
       element.current.acceptTypes = props.acceptTypes;
