@@ -47,6 +47,7 @@ just import package with import or from js CDN and write web component tag in yo
 | `accept` | `string` | common document/image types | Native file accept string forwarded to the internal file input. |
 | [`uploading`](#loading-state) | `boolean` | `false` | Visual state attribute that shows the upload progress section. |
 | [`hide-download`](#hide-download-button) | `boolean` | `false` | Hides the default download button in the file overlay. |
+| `disabled` | `boolean` | `false` | Disables file selection and mutation actions while keeping download available for a selected file. |
 
 ### Properties
 
@@ -58,6 +59,7 @@ just import package with import or from js CDN and write web component tag in yo
 | `acceptTypes` | `string` | no | Native accept string used by the internal file input. |
 | [`uploadPercent`](#loading-state) | `number \| null` | no | Visual upload progress percentage used by the upload-state background. |
 | `required` | `boolean` | no | Enables required validation. |
+| `disabled` | `boolean` | no | Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state. |
 | `status` | `'empty' \| 'selected'` | yes | Current visual value status. |
 | `selectedFileType` | `string \| null` | yes | Reserved for selected file MIME type. Current implementation returns `null`. |
 | `validation` | `ValidationHelper<{ file: File \| null }>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
@@ -67,7 +69,7 @@ just import package with import or from js CDN and write web component tag in yo
 
 | name | returns | description |
 | --- | --- | --- |
-| `openFileSelector()` | `void` | Opens the native file picker. |
+| `openFileSelector()` | `void` | Opens the native file picker unless the component is disabled. |
 | `resetValue()` | `void` | Clears the selected file and resets the visual state to empty. |
 | `checkValidity()` | `boolean` | Runs validation without showing the error state. Dispatches `invalid` when invalid. |
 | `reportValidity()` | `boolean` | Runs validation and shows the error state. Dispatches `invalid` when invalid. |
@@ -179,6 +181,7 @@ For complete styling guidance, live examples, official parts and states, and the
 | --- | --- |
 | `:state(empty)` | Applied when no file is selected. |
 | `:state(fill)` | Applied when a file is selected. |
+| `:state(disabled)` | Applied when the file input is disabled. |
 | `[uploading]` | Shows the upload progress section. |
 | `[hide-download]` | Hides the default download button. |
 
@@ -189,6 +192,10 @@ jb-file-input::part(file-name) {
 
 jb-file-input:state(fill) {
   --jb-file-input-bg-color: var(--jb-neutral-9);
+}
+
+jb-file-input:state(disabled) {
+  opacity: 0.5;
 }
 
 jb-file-input[uploading] {

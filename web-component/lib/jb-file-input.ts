@@ -13,6 +13,27 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #value: File | null = null;
   #isDirty = false;
   #elements!: ElementObjects;
+  #disabled = false;
+  get disabled() {
+    return this.#disabled;
+  }
+  set disabled(value: boolean) {
+    this.#disabled = value;
+    if (this.#elements) {
+      this.#elements.virtualInput.disabled = value;
+      this.#elements.placeholder.section.disabled = value;
+      this.#elements.file.wrapper.disabled = value;
+      this.#elements.overlay.reselect.disabled = value;
+      this.#elements.overlay.delete.toggleAttribute("disabled", value);
+    }
+    if (value) {
+      this.#internals?.states?.add("disabled");
+      if (this.#internals) this.#internals.ariaDisabled = "true";
+    } else {
+      this.#internals?.states?.delete("disabled");
+      if (this.#internals) this.#internals.ariaDisabled = "false";
+    }
+  }
   #required = false;
   set required(value: boolean) {
     this.#required = value;
@@ -33,6 +54,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     else {
       this.removeAttribute('name')
     }
+  }
+  get form() {
+    return this.#internals?.form;
   }
   get acceptTypes() {
     return this.#acceptTypes;
@@ -206,16 +230,22 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     ) as HTMLInputElement;
     virtualInputFile.type = "file";
     virtualInputFile.accept = this.acceptTypes;
+    virtualInputFile.disabled = this.disabled;
     virtualInputFile.addEventListener("change", (e) => this.#onFileSelected(e));
     return virtualInputFile;
   }
-  openFileSelector() {
+  openFileSelector(event?: Event) {
+    if (this.disabled) {
+      event?.preventDefault();
+      event?.stopPropagation();
+      return;
+    }
     this.#elements.virtualInput.click();
   }
   static get observedAttributes() {
-    return ["required", "placeholder-title", "accept"];
+    return ["required", "placeholder-title", "accept", "disabled"];
   }
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
     // do something when an attribute has changed
     this.onAttributeChange(name, newValue);
   }
@@ -237,11 +267,17 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
         break;
       case "accept":
         this.acceptTypes = value;
-
+        break;
+      case "disabled":
+        this.disabled = (!!value || value === "") && value !== "false";
         break;
     }
   }
   #onFileSelected(e: Event) {
+    if (this.disabled) {
+      this.#elements.virtualInput.value = "";
+      return;
+    }
     const target = e.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
       //if user select file and not click on cancel
@@ -340,6 +376,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   get validationMessage() {
     return this.#internals?.validationMessage ?? null;
   }
+  formDisabledCallback(disabled: boolean) {
+    this.disabled = disabled;
+  }
   #onDownloadClick(e: MouseEvent) {
     e.stopPropagation();
     const event = new CustomEvent("download", { cancelable: false });
@@ -347,6 +386,9 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   }
   #onDeleteClick(e: MouseEvent) {
     e.stopPropagation();
+    if (this.disabled) {
+      return;
+    }
     this.value = null;
     this.validation.checkValiditySync({ showError: true });
     this.#triggerOnChangeEvent();

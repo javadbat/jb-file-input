@@ -7,6 +7,7 @@ export type JBFileInputAttributes = {
   initialValue?: File | null,
   acceptTypes?: string,
   placeholderTitle?: string,
+  disabled?: boolean,
   required?: boolean,
   validationList?: ValidationItem<ValidationValue>[],
 }
@@ -34,6 +35,14 @@ export function useJBFileInputAttribute(element: RefObject<JBFileInputWebCompone
       element.current.setAttribute('placeholder-title', props.placeholderTitle);
     }
   }, [props.placeholderTitle, element]);
+
+  useEffect(() => {
+    if (props.disabled) {
+      element.current?.setAttribute('disabled', '');
+    } else {
+      element.current?.removeAttribute('disabled');
+    }
+  }, [props.disabled, element]);
 
   useEffect(() => {
     if (element.current && props.required) {

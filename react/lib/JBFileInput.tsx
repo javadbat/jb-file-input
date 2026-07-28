@@ -23,8 +23,8 @@ export const JBFileInput = forwardRef((props:Props, ref) => {
     [element],
   );
   // uploadPercent is passed by ...otherProps
-  const {acceptTypes,initialValue,uploading,placeholderTitle,required, hideDownload,value,onChange,onInit,onLoad,children, ...otherProps} = props;
-  useJBFileInputAttribute(element,{acceptTypes,initialValue,placeholderTitle,required,value})
+  const {acceptTypes,initialValue,uploading,placeholderTitle,disabled,required, hideDownload,value,onChange,onInit,onLoad,children, ...otherProps} = props;
+  useJBFileInputAttribute(element,{acceptTypes,initialValue,placeholderTitle,disabled,required,value})
   useEvents(element,{onChange,onInit,onLoad});
   return (
     <jb-file-input ref={element} uploading={props.uploading?"":undefined} hide-download={hideDownload?'':undefined} {...otherProps}>{children}</jb-file-input>

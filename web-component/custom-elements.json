@@ -57,6 +57,13 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "name": "disabled",
+              "description": "Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state.",
+              "type": {
+                "text": "boolean"
+              }
             }
           ],
           "members": [
@@ -111,6 +118,14 @@
             },
             {
               "kind": "field",
+              "name": "disabled",
+              "description": "Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "status",
               "description": "Current file input status.",
               "type": {
@@ -149,7 +164,7 @@
           "methods": [
             {
               "name": "openFileSelector",
-              "description": "Opens the native file picker."
+              "description": "Opens the native file picker unless the component is disabled."
             },
             {
               "name": "resetValue",
@@ -250,6 +265,12 @@
             {
               "name": "file-icon",
               "description": "Default selected-file SVG icon."
+            }
+          ],
+          "cssStates": [
+            {
+              "name": "disabled",
+              "description": "Applied when the disabled property is true."
             }
           ],
           "cssProperties": [

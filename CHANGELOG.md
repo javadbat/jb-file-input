@@ -1,15 +1,17 @@
 # Changelog
 
-## Unreleased
+## [3.2.0] 2026-07-28
 
 ### Added
 
 - Added Storybook interaction coverage for initial-value initialization, live-value precedence, explicit `null`, and native form reset.
+- Added disabled-state support for file selection and mutation actions, including form-disabled callbacks and accessibility/custom state.
 
 ### Changed
 
 - Added `initialValue` as the default and reset file; it seeds `value` only until the live value is explicitly set.
 - Updated the React wrapper so an omitted `value` does not overwrite `initialValue`, while explicit `null` still clears the selected file.
+- Disabled file inputs no longer apply background hover or pressed effects; selected files reveal a download-only overlay.
 
 ### Fixed
 

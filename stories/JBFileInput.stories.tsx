@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import type { JBFileInputWebComponent } from 'jb-file-input';
 import { JBButton } from 'jb-button/react';
 import {JBFileInput} from 'jb-file-input/react';
@@ -142,6 +142,45 @@ export const Required:Story = {
     required:true,
     placeholderTitle:"click and open select file then hit the cancel for test"
   }
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    value: liveFile,
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    const shadowRoot = fileInput?.shadowRoot;
+    const placeholderButton = shadowRoot?.querySelector<HTMLButtonElement>('.placeholder-section');
+    const fileButton = shadowRoot?.querySelector<HTMLButtonElement>('.file-wrapper');
+    const reselectButton = shadowRoot?.querySelector<HTMLButtonElement>('.reselect-button');
+    const deleteButton = shadowRoot?.querySelector<HTMLElement>('.delete-button');
+    const downloadButton = shadowRoot?.querySelector<HTMLElement>('.download-button');
+    let deleteEventCount = 0;
+    let downloadEventCount = 0;
+
+    fileInput?.addEventListener('delete', () => deleteEventCount++);
+    fileInput?.addEventListener('download', () => downloadEventCount++);
+
+    await waitFor(() => {
+      expect(fileInput?.disabled).toBe(true);
+      expect(placeholderButton?.disabled).toBe(true);
+      expect(fileButton?.disabled).toBe(true);
+      expect(reselectButton?.disabled).toBe(true);
+      expect(deleteButton?.hasAttribute('disabled')).toBe(true);
+      expect(downloadButton?.hasAttribute('disabled')).toBe(false);
+      expect(getComputedStyle(reselectButton!).display).toBe('none');
+      expect(getComputedStyle(deleteButton!).display).toBe('none');
+    });
+
+    deleteButton?.click();
+    downloadButton?.click();
+
+    expect(fileInput?.value).toBe(liveFile);
+    expect(deleteEventCount).toBe(0);
+    expect(downloadEventCount).toBe(1);
+  },
 };
 
 export const Uploading:Story = {

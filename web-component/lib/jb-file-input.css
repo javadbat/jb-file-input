@@ -8,6 +8,10 @@
   overflow: hidden;
 }
 
+:host(:state(disabled)) {
+  cursor: not-allowed;
+}
+
 .jb-file-input-web-component {
   background-color: var(--bg-color);
   width: 100%;
@@ -36,15 +40,6 @@
     border: solid 1px var(--border-color-error);
     border-bottom: solid 3px var(--border-color-error);
     background-color: var(--bg-color-error);
-  }
-
-  /*TODO: manage hover and active in disabled and loading state(loading should not have hover state)*/
-  &:hover {
-    background-color: var(--bg-color-hover);
-  }
-
-  &:active {
-    background-color: var(--bg-color-pressed);
   }
 
   .title {
@@ -172,11 +167,6 @@
       }
     }
 
-    &:hover .file-overlay,
-    &:focus-within .file-overlay {
-      opacity: 1;
-    }
-
     .file-overlay {
       cursor: pointer;
       opacity: 0;
@@ -239,4 +229,35 @@
     }
   }
 
+}
+
+:host(:not(:state(disabled))) .jb-file-input-web-component {
+  &:hover {
+    background-color: var(--bg-color-hover);
+  }
+
+  &:active {
+    background-color: var(--bg-color-pressed);
+  }
+}
+
+.jb-file-input-web-component .file-section:hover .file-overlay,
+.jb-file-input-web-component .file-section:focus-within .file-overlay {
+  opacity: 1;
+}
+
+:host(:state(disabled)) .jb-file-input-web-component {
+  .placeholder-wrapper,
+  .file-wrapper {
+    cursor: not-allowed;
+  }
+
+  .file-overlay {
+    cursor: default;
+
+    .reselect-button,
+    .delete-button {
+      display: none;
+    }
+  }
 }
