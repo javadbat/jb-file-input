@@ -7,8 +7,9 @@ import { registerDefaultVariables } from 'jb-core/theme';
 import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
+import type { JBFormInputStandards } from "jb-form";
 export * from "./types.js";
-export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue> {
+export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
   static formAssociated = true;
   #value: File | null = null;
   #isDirty = false;
@@ -46,7 +47,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   #fileInputStatus: FileInputStatus = "empty";
   #acceptTypes =
     "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
-  get name() { return this.getAttribute('name') || ''; }
+  get name():string { return this.getAttribute('name') || ''; }
   set name(value: string | null | undefined) {
     if (value) {
       this.setAttribute('name', value)
@@ -56,7 +57,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     }
   }
   get form() {
-    return this.#internals?.form;
+    return this.#internals!.form;
   }
   get acceptTypes() {
     return this.#acceptTypes;

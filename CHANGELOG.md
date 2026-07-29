@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.0] 2026-07-29
+
+### Added
+
+- add `implements JBFormInputStandards<File | null>` to make sure it compatible with jb-form standards.
+
 ## [3.2.0] 2026-07-28
 
 ### Added
