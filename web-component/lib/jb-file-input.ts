@@ -8,6 +8,7 @@ import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
 import type { JBFormInputStandards } from "jb-form";
+import { parseBooleanAttribute } from "jb-core";
 export * from "./types.js";
 export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
   static formAssociated = true;
@@ -253,13 +254,8 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
   onAttributeChange(name: string, value: string) {
     switch (name) {
       case "required":
-        if (value == "" || value == "true") {
-          this.#required = true;
-          if (this.#internals) { this.#internals.ariaRequired = "true"; }
-        } else {
-          this.#required = false;
-          if (this.#internals) { this.#internals.ariaRequired = "false"; }
-        }
+        this.#required = parseBooleanAttribute(value);
+        if (this.#internals) { this.#internals.ariaRequired = String(this.#required); }
         break;
       case "placeholder-title":
         this.#elements.placeholder.title.innerHTML = value;
@@ -270,7 +266,7 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
         this.acceptTypes = value;
         break;
       case "disabled":
-        this.disabled = (!!value || value === "") && value !== "false";
+        this.disabled = parseBooleanAttribute(value);
         break;
     }
   }
