@@ -16,10 +16,10 @@ Use `uploading` and `uploadPercent` only to reflect an upload flow you own elsew
 
 ## Samples
  - [Codepen](https://codepen.io/javadbat/pen/xxgmWNB)
- - [Storybook](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput)
+ - [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--overview)
 
 ## Using With JS Frameworks
-<a href="https://github.com/javadbat/jb-file-input/tree/main/react" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React.js-jb--file--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" /></a>
+<a href="https://github.com/javadbat/jb-file-input/tree/main/react" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/React.js-jb--file--input%2Freact-000.svg?logo=react&logoColor=%2361DAFB" height="30" /></a> See the [React documentation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-react-readme--docs).
 
 Other integrations: <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#angular" target="_blank" rel="noopener noreferrer">Angular</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#vue" target="_blank" rel="noopener noreferrer">Vue</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nuxt" target="_blank" rel="noopener noreferrer">Nuxt</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#svelte" target="_blank" rel="noopener noreferrer">Svelte</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#sveltekit" target="_blank" rel="noopener noreferrer">SvelteKit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#solidjs" target="_blank" rel="noopener noreferrer">SolidJS</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#lit" target="_blank" rel="noopener noreferrer">Lit</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#nextjs" target="_blank" rel="noopener noreferrer">Next.js</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#astro" target="_blank" rel="noopener noreferrer">Astro</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#blazor" target="_blank" rel="noopener noreferrer">Blazor</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#server-rendered-templates" target="_blank" rel="noopener noreferrer">Server-rendered templates</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#wordpress" target="_blank" rel="noopener noreferrer">WordPress</a> · <a href="https://javadbat.github.io/design-system/?path=/docs/getting-started-framework-integration--docs#alpinejs-and-htmx" target="_blank" rel="noopener noreferrer">Alpine.js and HTMX</a>
 
@@ -41,68 +41,68 @@ just import package with import or from js CDN and write web component tag in yo
 
 | name | type | default | description |
 | --- | --- | --- | --- |
-| `name` | `string` | `""` | Form field name. |
-| [`required`](#validation) | `boolean` | `false` | Enables required validation. |
-| [`placeholder-title`](#placeholder-title) | `string` | localized default | Text shown in the default placeholder area. |
-| `accept` | `string` | common document/image types | Native file accept string forwarded to the internal file input. |
-| [`uploading`](#loading-state) | `boolean` | `false` | Visual state attribute that shows the upload progress section. |
-| [`hide-download`](#hide-download-button) | `boolean` | `false` | Hides the default download button in the file overlay. |
-| `disabled` | `boolean` | `false` | Disables file selection and mutation actions while keeping download available for a selected file. |
+| `name` | `string` | `""` | Form field name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| [`required`](#validation) | `boolean` | `false` | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
+| [`placeholder-title`](#placeholder-title) | `string` | localized default | Text shown in the default placeholder area. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title) |
+| `accept` | `string` | common document/image types | Native file accept string forwarded to the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| [`uploading`](#loading-state) | `boolean` | `false` | Visual state attribute that shows the upload progress section. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
+| [`hide-download`](#hide-download-button) | `boolean` | `false` | Hides the default download button in the file overlay. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button) |
+| `disabled` | `boolean` | `false` | Disables file selection and mutation actions while keeping download available for a selected file. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--disabled) |
 
 ### Properties
 
 | name | type | readonly | description |
 | --- | --- | --- | --- |
-| [`value`](#value) | `File \| null` | no | Selected file. Set to `null` to reset the component. |
-| `initialValue` | `File \| null` | no | Default and reset file. It initializes `value` until the live value is explicitly set. |
-| `isDirty` | `boolean` | yes | `true` when current `value` is not the same `File` reference as `initialValue`. |
-| `acceptTypes` | `string` | no | Native accept string used by the internal file input. |
-| [`uploadPercent`](#loading-state) | `number \| null` | no | Visual upload progress percentage used by the upload-state background. |
-| `required` | `boolean` | no | Enables required validation. |
-| `disabled` | `boolean` | no | Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state. |
+| [`value`](#value) | `File \| null` | no | Selected file. Set to `null` to reset the component. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
+| `initialValue` | `File \| null` | no | Default and reset file. It initializes `value` until the live value is explicitly set. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
+| `isDirty` | `boolean` | yes | `true` when current `value` is not the same `File` reference as `initialValue`. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
+| `acceptTypes` | `string` | no | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| [`uploadPercent`](#loading-state) | `number \| null` | no | Visual upload progress percentage used by the upload-state background. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
+| `required` | `boolean` | no | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
+| `disabled` | `boolean` | no | Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--disabled) |
 | `status` | `'empty' \| 'selected'` | yes | Current visual value status. |
 | `selectedFileType` | `string \| null` | yes | Reserved for selected file MIME type. Current implementation returns `null`. |
-| `validation` | `ValidationHelper<{ file: File \| null }>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. |
-| `validationMessage` | `string` | yes | Current native validation message from `ElementInternals`. |
+| `validation` | `ValidationHelper<{ file: File \| null }>` | yes | Validation helper from `jb-validation`; set `validation.list` for custom rules. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) |
+| `validationMessage` | `string` | yes | Current native validation message from `ElementInternals`. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
 
 ### Methods
 
 | name | returns | description |
 | --- | --- | --- |
-| `openFileSelector()` | `void` | Opens the native file picker unless the component is disabled. |
-| `resetValue()` | `void` | Clears the selected file and resets the visual state to empty. |
-| `checkValidity()` | `boolean` | Runs validation without showing the error state. Dispatches `invalid` when invalid. |
-| `reportValidity()` | `boolean` | Runs validation and shows the error state. Dispatches `invalid` when invalid. |
+| `openFileSelector()` | `void` | Opens the native file picker unless the component is disabled. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| `resetValue()` | `void` | Clears the selected file and resets the visual state to empty. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
+| `checkValidity()` | `boolean` | Runs validation without showing the error state. Dispatches `invalid` when invalid. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
+| `reportValidity()` | `boolean` | Runs validation and shows the error state. Dispatches `invalid` when invalid. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
 
 ### Events
 
 | event | cancelable | when it fires |
 | --- | --- | --- |
-| `change` | no | When a file is selected or deleted. |
-| `download` | no | When the default download button is clicked. |
-| `delete` | no | After the selected file is cleared from the default delete button. |
-| `invalid` | no | When `checkValidity()` or `reportValidity()` finds an invalid value. |
+| `change` | no | When a file is selected or deleted. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
+| `download` | no | When the default download button is clicked. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
+| `delete` | no | After the selected file is cleared from the default delete button. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
+| `invalid` | no | When `checkValidity()` or `reportValidity()` finds an invalid value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
 
 
 ## Placeholder Title
 
-you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom
+you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom. See the [placeholder title demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title).
 
 ## Value
-`jb-file-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`.
+`jb-file-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`; the [initial value demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) shows controlled and reset behavior.
 
 ### Reset Value
-you can reset input file value by `dom.value = null` or `dom.resetValue()`
+you can reset input file value by `dom.value = null` or `dom.resetValue()` in the [imperative methods demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods).
 
 ## Validation
 
-Use `required` when the user must select a file before submitting a form.
+Use `required` when the user must select a file before submitting a form; see the [required validation demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required).
 
 ```html
 <jb-file-input required></jb-file-input>
 ```
 
-For custom validation, set `validation.list` from `jb-validation`.
+For custom validation, set `validation.list` from `jb-validation`; the [custom validation demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) shows a file-size rule.
 
 ```js
 const fileInput = document.querySelector("jb-file-input");
@@ -116,7 +116,7 @@ fileInput.validation.list = [
 ```
 
 ## Loading State
-jb-file-input does not show any loading by default because it's just a file input and not file uploader. You can show upload state in your file uploader flow by setting the `uploading` attribute and `uploadPercent` property.
+jb-file-input does not show any loading by default because it's just a file input and not file uploader. You can show upload state in your file uploader flow by setting the `uploading` attribute and `uploadPercent` property; see the [uploading demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading).
 
 in HTML
 
@@ -134,7 +134,7 @@ document.querySelector("jb-file-input").uploadPercent = 10; //10% of file upload
 ```
 ## Download Button
 
-when file upload is complete user access to download button and you can add your own function to download file by add event listener:
+when file upload is complete user access to download button and you can add your own function to download file by add event listener; the [events demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) exercises download and delete events:
 
 ```ts
 document.querySelector("jb-file-input").addEventListener("download",()=>{
@@ -144,16 +144,18 @@ document.querySelector("jb-file-input").addEventListener("download",()=>{
 download button has no default functionality because file download in every project has it's own way so we just create a ui button to enable you ad function for it.
 
 ### Hide Download Button
-if you don't want download button to be shown add `hide-download` attribute to dom:
+if you don't want download button to be shown add `hide-download` attribute to dom; see the [hidden download demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button):
 ```HTML
 <jb-file-input hide-download></jb-file-input>
 ```
 
 ## CSS Variables
 
-For complete styling guidance, live examples, official parts and states, and the full CSS variable reference, see [Styling](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput-styling).
+For complete styling guidance, live examples, official parts and states, and the full CSS variable reference, see the [Styling docs](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-styling--docs) and [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
 
 ## Slots
+
+Use the supported placeholder and overlay slots in the [slots demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--slots).
 
 | slot | description |
 | --- | --- |
@@ -166,6 +168,8 @@ For complete styling guidance, live examples, official parts and states, and the
 | `overlay-content` | Replaces the content inside the default overlay. |
 
 ## CSS parts and states
+
+The [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery) shows the shared parts, states, and themes in context.
 
 | part | description |
 | --- | --- |

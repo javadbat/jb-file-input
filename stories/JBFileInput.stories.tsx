@@ -25,6 +25,106 @@ export const Normal:Story = {
   }
 };
 
+export const PlaceholderTitle: Story = {
+  args: {
+    placeholderTitle: 'Select a contract file',
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    await waitFor(() => {
+      expect(fileInput?.shadowRoot?.querySelector('.placeholder-title')?.textContent).toBe('Select a contract file');
+    });
+  },
+};
+
+export const ImperativeMethods: Story = {
+  args: {
+    required: true,
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    const invalid = new File([''], 'empty.txt', { type: 'text/plain' });
+
+    expect(fileInput).toBeTruthy();
+    expect(typeof fileInput?.openFileSelector).toBe('function');
+    expect(typeof fileInput?.resetValue).toBe('function');
+    expect(fileInput?.checkValidity()).toBe(false);
+    expect(fileInput?.reportValidity()).toBe(false);
+
+    fileInput!.value = invalid;
+    await waitFor(() => {
+      expect(fileInput?.value?.name).toBe('empty.txt');
+      expect(fileInput?.checkValidity()).toBe(true);
+    });
+
+    fileInput!.resetValue();
+    expect(fileInput?.value).toBeNull();
+    expect(fileInput?.status).toBe('empty');
+  },
+};
+
+export const CustomValidation: Story = {
+  args: {
+    value: liveFile,
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+
+    fileInput!.validation.list = [
+      {
+        validator: ({ file }) => file !== null && file.size < 3,
+        message: 'File must be smaller than 3 bytes',
+      },
+    ];
+
+    expect(fileInput?.checkValidity()).toBe(false);
+    expect(fileInput?.reportValidity()).toBe(false);
+    expect(fileInput?.shadowRoot?.querySelector('.jb-file-input-web-component')?.classList.contains('--has-error')).toBe(true);
+  },
+};
+
+export const Events: Story = {
+  args: {
+    value: liveFile,
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    const downloadButton = fileInput?.shadowRoot?.querySelector<HTMLElement>('.download-button');
+    const deleteButton = fileInput?.shadowRoot?.querySelector<HTMLElement>('.delete-button');
+    let changeCount = 0;
+    let downloadCount = 0;
+    let deleteCount = 0;
+
+    fileInput?.addEventListener('change', () => changeCount++);
+    fileInput?.addEventListener('download', () => downloadCount++);
+    fileInput?.addEventListener('delete', () => deleteCount++);
+
+    downloadButton?.click();
+    deleteButton?.click();
+
+    await waitFor(() => {
+      expect(downloadCount).toBe(1);
+      expect(deleteCount).toBe(1);
+      expect(changeCount).toBe(1);
+      expect(fileInput?.value).toBeNull();
+    });
+  },
+};
+
+export const Slots: Story = {
+  render: (args) => (
+    <JBFileInput {...args}>
+      <span slot="placeholder">Drop a file here</span>
+      <span slot="overlay-content">Ready to download</span>
+    </JBFileInput>
+  ),
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    expect(fileInput?.querySelector('[slot="placeholder"]')?.textContent).toBe('Drop a file here');
+    expect(fileInput?.querySelector('[slot="overlay-content"]')?.textContent).toBe('Ready to download');
+  },
+};
+
 export const InitialValue: Story = {
   render: (args) => {
     const formRef = useRef<HTMLFormElement>(null);

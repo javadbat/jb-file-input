@@ -12,7 +12,7 @@ this component is a simple react component that use [jb-file-input](https://gith
 ## Demo
 in codeSandBox: [codeSandbox preview](https://3f63dj.csb.app/samples/jb-file-input) for just see the demo and [codeSandbox editor](https://codesandbox.io/p/sandbox/jb-design-system-3f63dj?file=%2Fsrc%2Fsamples%2FJBFileInput.tsx) if you want to see and play with code
 
-Storybook: [JBFileInput docs](https://javadbat.github.io/design-system/?path=/docs/components-form-elements-jbfileinput)
+[Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--overview)
 
 ## Usage
 just import the component and write jsx like this:
@@ -25,33 +25,33 @@ import {JBFileInput} from 'jb-file-input/react';
 
 ## When to use
 
-Use `JBFileInput` when the user needs to choose one local file and your application will handle upload, download, storage, or preview behavior outside the component.
+Use `JBFileInput` when the user needs to choose one local file and your application will handle upload, download, storage, or preview behavior outside the component. See the [React wrapper demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal).
 
 ## Props
 
 | prop | type | description |
 | --- | --- | --- |
-| `name` | `string` | Form field name. |
-| `value` | `File` | Selected file value. |
-| `acceptTypes` | `string` | Native accept string used by the internal file input. |
-| `placeholderTitle` | `string` | Text shown in the default placeholder area. |
-| `required` | `boolean` | Enables required validation. |
-| `validationList` | `ValidationItem<ValidationValue>[]` | Custom validation rules from `jb-validation`. |
-| `uploading` | `boolean` | Shows the upload progress section. Upload is still handled by your app. |
-| `uploadPercent` | `number` | Visual upload progress percentage. |
-| `hideDownload` | `boolean` | Hides the default download button. |
+| `name` | `string` | Form field name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| `value` | `File` | Selected file value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
+| `acceptTypes` | `string` | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| `placeholderTitle` | `string` | Text shown in the default placeholder area. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title) |
+| `required` | `boolean` | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
+| `validationList` | `ValidationItem<ValidationValue>[]` | Custom validation rules from `jb-validation`. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) |
+| `uploading` | `boolean` | Shows the upload progress section. Upload is still handled by your app. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
+| `uploadPercent` | `number` | Visual upload progress percentage. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
+| `hideDownload` | `boolean` | Hides the default download button. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button) |
 
 ## Events
 
 | prop | event |
 | --- | --- |
-| `onChange` | `change` |
+| `onChange` | `change` — see the [events demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
 
-The web component also dispatches `download` and `delete` events. Use a ref and `addEventListener` if you need those from React.
+The web component also dispatches `download` and `delete` events. Use a ref and `addEventListener` if you need those from React; both are covered in the [events demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events).
 
 ## Value
 
-`event.target.value` and `ref.current.value` are the selected `File` or `null`. Set the underlying value to `null` or call `ref.current.resetValue()` when you need to clear the selection imperatively.
+`event.target.value` and `ref.current.value` are the selected `File` or `null`. Set the underlying value to `null` or call `ref.current.resetValue()` when you need to clear the selection imperatively; see the [value and reset demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods).
 
 ```jsx
 const fileInputRef = useRef(null);
@@ -66,7 +66,7 @@ fileInputRef.current?.resetValue();
 
 ## Validation
 
-Use `required` when the user must select a file. Use `validationList` for custom file checks such as size or MIME type.
+Use `required` when the user must select a file. Use `validationList` for custom file checks such as size or MIME type; compare the [required](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) and [custom validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) demos.
 
 ```jsx
 const validationList = [
@@ -81,7 +81,7 @@ const validationList = [
 
 ## Loading State
 
-`JBFileInput` does not upload files by itself. Use `uploading` and `uploadPercent` to display progress from an upload flow owned by your app.
+`JBFileInput` does not upload files by itself. Use `uploading` and `uploadPercent` to display progress from an upload flow owned by your app; see the [loading-state demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading).
 
 ```jsx
 <JBFileInput uploading uploadPercent={45} />
@@ -89,7 +89,7 @@ const validationList = [
 
 ## Download Button
 
-The default download button has no built-in download logic. Listen for the underlying `download` event with a ref when you use the default overlay button.
+The default download button has no built-in download logic. Listen for the underlying `download` event with a ref when you use the default overlay button; the [events demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) shows the event flow.
 
 ```jsx
 useEffect(() => {
@@ -102,13 +102,15 @@ useEffect(() => {
 }, []);
 ```
 
-Use `hideDownload` to hide the default button.
+Use `hideDownload` to hide the default button in the [hidden download demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button).
 
 ```jsx
 <JBFileInput hideDownload />
 ```
 
 ## Slots
+
+Pass custom slot content as JSX children as shown in the [slots demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--slots).
 
 Pass custom slot content as JSX children. Supported slot names include `placeholder`, `placeholder-icon`, `upload`, `uploader-icon`, `file-icon`, `overlay`, and `overlay-content`.
 
@@ -120,7 +122,7 @@ Pass custom slot content as JSX children. Supported slot names include `placehol
 
 ## CSS parts and states
 
-The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[uploading]`, and `[hide-download]`.
+The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[uploading]`, and `[hide-download]`. See the shared [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
 
 ```css
 .contract-file::part(file-name) {
@@ -134,7 +136,7 @@ The React wrapper uses the same parts, states, attributes, and CSS variables as 
 
 ## Shared Documentation
 
-For web-component behavior, events, slots, and CSS variables, see [`jb-file-input`](https://github.com/javadbat/jb-file-input).
+For web-component behavior, events, slots, and CSS variables, see [`jb-file-input`](../README.md) and the [shared documentation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-readme--docs).
 
 ## Related Docs
 - see [jb-file-input](https://github.com/javadbat/jb-file-input) if you want to use this component as a web-component
