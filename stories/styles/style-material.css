@@ -8,12 +8,12 @@ jb-file-input.material-style {
     --jb-file-input-border-color-error: var(--jb-error);
     --jb-file-input-border-radius: var(--jb-radius-lg);
     --jb-file-input-padding: 1rem;
-    --jb-file-input-icon-base-color: var(--jb-text-secondary);
+    --jb-file-input-icon-base-color: var(--jb-content-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
-    --jb-file-input-placeholder-title-color: var(--jb-text-primary);
-    --jb-file-input-file-name-color: var(--jb-text-primary);
+    --jb-file-input-placeholder-title-color: var(--jb-content-primary);
+    --jb-file-input-file-name-color: var(--jb-content-primary);
     --jb-file-input-loading-bg: var(--jb-primary);
-    --jb-file-input-loading-color: var(--jb-surface);
+    --jb-file-input-loading-color: var(--jb-surface-primary);
     --jb-file-input-overlay-bg-color: rgb(255 255 255 / 0.92);
     --jb-file-input-reselect-button-color: var(--jb-focus-color);
     --jb-file-input-overlay-button-border-radius-sm: 999px;

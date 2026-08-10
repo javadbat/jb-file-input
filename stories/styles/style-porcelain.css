@@ -1,19 +1,19 @@
 jb-file-input.porcelain-style {
     display: block;
     width: 100%;
-    --jb-file-input-bg-color: var(--jb-surface);
+    --jb-file-input-bg-color: var(--jb-surface-primary);
     --jb-file-input-bg-color-hover: var(--jb-surface-hover);
     --jb-file-input-bg-color-pressed: var(--jb-border-color);
     --jb-file-input-bg-color-error: #fff6f1;
     --jb-file-input-border-color-error: var(--jb-success);
     --jb-file-input-border-radius: 0.9rem;
     --jb-file-input-padding: 1rem;
-    --jb-file-input-icon-base-color: var(--jb-text-secondary);
+    --jb-file-input-icon-base-color: var(--jb-content-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
-    --jb-file-input-placeholder-title-color: var(--jb-text-primary);
-    --jb-file-input-file-name-color: var(--jb-text-primary);
+    --jb-file-input-placeholder-title-color: var(--jb-content-primary);
+    --jb-file-input-file-name-color: var(--jb-content-primary);
     --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), var(--jb-success));
-    --jb-file-input-loading-color: var(--jb-surface);
+    --jb-file-input-loading-color: var(--jb-surface-primary);
     --jb-file-input-overlay-bg-color: oklch(98% 0.02 240 / 0.8);
     --jb-file-input-reselect-button-color: var(--jb-focus-color);
     --jb-file-input-overlay-button-border-radius-sm: 0.5rem;

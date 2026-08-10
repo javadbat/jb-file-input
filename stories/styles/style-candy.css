@@ -1,21 +1,21 @@
 jb-file-input.candy-style {
     display: block;
     width: 100%;
-    --jb-file-input-bg-color: var(--jb-background);
+    --jb-file-input-bg-color: var(--jb-surface-secondary);
     --jb-file-input-bg-color-hover: var(--jb-surface-hover);
     --jb-file-input-bg-color-pressed: var(--jb-border-color);
     --jb-file-input-bg-color-error: #fff0f6;
     --jb-file-input-border-color-error: #fb7185;
     --jb-file-input-border-radius: 1.5rem;
     --jb-file-input-padding: 1.25rem;
-    --jb-file-input-icon-base-color: var(--jb-text-secondary);
+    --jb-file-input-icon-base-color: var(--jb-content-secondary);
     --jb-file-input-icon-primary-color: var(--jb-focus-color);
-    --jb-file-input-placeholder-title-color: var(--jb-text-primary);
-    --jb-file-input-file-name-color: var(--jb-text-primary);
+    --jb-file-input-placeholder-title-color: var(--jb-content-primary);
+    --jb-file-input-file-name-color: var(--jb-content-primary);
     --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), #f9a8d4, #a78bfa);
-    --jb-file-input-loading-color: var(--jb-text-primary);
+    --jb-file-input-loading-color: var(--jb-content-primary);
     --jb-file-input-overlay-bg-color: oklch(72% 0.13 345 / 0.62);
-    --jb-file-input-reselect-button-color: var(--jb-text-inverse);
+    --jb-file-input-reselect-button-color: var(--jb-content-inverse);
     --jb-file-input-overlay-button-border-radius-sm: 999px;
     --jb-file-input-overlay-button-border-radius-xs: 999px;
 }
