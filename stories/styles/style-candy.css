@@ -15,7 +15,7 @@ jb-file-input.candy-style {
     --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), #f9a8d4, #a78bfa);
     --jb-file-input-loading-color: var(--jb-text-primary);
     --jb-file-input-overlay-bg-color: oklch(72% 0.13 345 / 0.62);
-    --jb-file-input-reselect-button-color: var(--jb-text-contrast);
+    --jb-file-input-reselect-button-color: var(--jb-text-inverse);
     --jb-file-input-overlay-button-border-radius-sm: 999px;
     --jb-file-input-overlay-button-border-radius-xs: 999px;
 }

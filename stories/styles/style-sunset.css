@@ -13,7 +13,7 @@ jb-file-input.sunset-style {
     --jb-file-input-placeholder-title-color: var(--jb-text-primary);
     --jb-file-input-file-name-color: var(--jb-text-primary);
     --jb-file-input-loading-bg: linear-gradient(90deg, var(--jb-focus-color), #ff7a90, var(--jb-success));
-    --jb-file-input-loading-color: var(--jb-text-contrast);
+    --jb-file-input-loading-color: var(--jb-text-inverse);
     --jb-file-input-overlay-bg-color: oklch(30% 0.09 20 / 0.72);
     --jb-file-input-reselect-button-color: var(--jb-text-primary);
     --jb-file-input-overlay-button-border-radius-sm: 1rem;
