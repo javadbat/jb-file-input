@@ -397,3 +397,9 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
 }
 defineWebComponent("jb-file-input", JBFileInputWebComponent);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "jb-file-input": JBFileInputWebComponent;
+  }
+}
