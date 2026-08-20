@@ -1,3 +1,4 @@
+import { defineWebComponent, JBBaseComponent, parseBooleanAttribute } from "jb-core";
 import { ValidationHelper, type ShowValidationErrorParameters, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
@@ -8,9 +9,8 @@ import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
 import type { JBFormInputStandards } from "jb-form";
-import { parseBooleanAttribute } from "jb-core";
 export * from "./types.js";
-export class JBFileInputWebComponent extends HTMLElement implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
+export class JBFileInputWebComponent extends JBBaseComponent implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
   static formAssociated = true;
   #value: File | null = null;
   #isDirty = false;
@@ -396,7 +396,4 @@ export class JBFileInputWebComponent extends HTMLElement implements WithValidati
     this.dispatchEvent(e);
   }
 }
-const myElementNotExists = !customElements.get("jb-file-input");
-if (myElementNotExists) {
-  window.customElements.define("jb-file-input", JBFileInputWebComponent);
-}
+defineWebComponent("jb-file-input", JBFileInputWebComponent);
