@@ -31,7 +31,7 @@
   "types": "./dist/JBFileInput.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/javadbat/jb-file-input"
+    "url": "https://github.com/javadbat/jb-file-input.git"
   },
   "dependencies": {
     "jb-file-input": "^2.0.2"
