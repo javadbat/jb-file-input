@@ -8,10 +8,17 @@
   --icon-base-color: var(--jb-file-input-icon-base-color, var(--jb-neutral));
   --icon-primary-color: var(--jb-file-input-icon-primary-color, var(--jb-primary));
   --placeholder-title-color: var(--jb-file-input-placeholder-title-color, var(--jb-neutral));
+  --message-color: var(--jb-file-input-message-color, var(--jb-content-secondary));
+  --message-color-error: var(--jb-file-input-message-color-error, var(--jb-error));
+  --message-font-size: var(--jb-file-input-message-font-size, 0.75rem);
   --file-name-color: var(--jb-file-input-file-name-color, var(--jb-neutral));
   --loading-bg: var(--jb-file-input-loading-bg, linear-gradient(90deg, var(--jb-primary-l), var(--jb-secondary-l)));
   --upload-loading-color: var(--jb-file-input-loading-color, var(--jb-primary-subtle));
   --overlay-bg-color: var(--jb-file-input-overlay-bg-color, oklch(from var(--jb-neutral) l c h / calc(alpha - 0.5)));
+  --error-overlay-bg-color: var(--jb-file-input-error-overlay-bg-color, oklch(from var(--jb-red) l c h / calc(alpha - 0.5)));
+  --error-overlay-color: var(--jb-file-input-error-overlay-color, var(--jb-content-inverse));
+  --error-overlay-icon-color: var(--jb-file-input-error-overlay-icon-color, var(--jb-content-inverse));
+  --error-overlay-outline: var(--jb-file-input-error-overlay-outline, none);
   --reselect-button-color: var(--jb-file-input-reselect-button-color, var(--jb-content-inverse));
 
   /* Size */
@@ -28,6 +35,11 @@
   --overlay-button-icon-size-sm: var(--jb-file-input-overlay-button-icon-size-sm, 1.25rem);
   --overlay-button-icon-size-xs: var(--jb-file-input-overlay-button-icon-size-xs, 1rem);
   --download-button-display: var(--jb-file-input-download-button-display, block);
+
+  /* Default to the empty state even when CustomStateSet is unavailable. */
+  --display-placeholder: var(--jb-file-input-display-placeholder-empty, block);
+  --display-file: var(--jb-file-input-display-file-empty, none);
+  --display-upload: var(--jb-file-input-display-upload-empty, none);
 }
 
 .jb-file-input-web-component {

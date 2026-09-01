@@ -6,9 +6,12 @@ export type JBFileInputAttributes = {
   value?: File | null,
   initialValue?: File | null,
   acceptTypes?: string,
-  placeholderTitle?: string,
+  label?: string,
+  message?: string,
+  error?: string,
   disabled?: boolean,
   required?: boolean,
+  maxSize?: number | null,
   validationList?: ValidationItem<ValidationValue>[],
 }
 export function useJBFileInputAttribute(element: RefObject<JBFileInputWebComponent | null>, props: JBFileInputAttributes) {
@@ -31,10 +34,22 @@ export function useJBFileInputAttribute(element: RefObject<JBFileInputWebCompone
   }, [props.acceptTypes, element]);
 
   useEffect(() => {
-    if (element.current && props.placeholderTitle) {
-      element.current.setAttribute('placeholder-title', props.placeholderTitle);
+    if (element.current) {
+      element.current.label = props.label;
     }
-  }, [props.placeholderTitle, element]);
+  }, [props.label, element]);
+
+  useEffect(() => {
+    if (element.current) {
+      element.current.message = props.message;
+    }
+  }, [props.message, element]);
+
+  useEffect(() => {
+    if (element.current) {
+      element.current.error = props.error;
+    }
+  }, [props.error, element]);
 
   useEffect(() => {
     if (props.disabled) {
@@ -51,10 +66,21 @@ export function useJBFileInputAttribute(element: RefObject<JBFileInputWebCompone
   }, [props.required, element]);
 
   useEffect(() => {
+    let isActive = true;
+    void customElements.whenDefined("jb-file-input").then(() => {
+      if (isActive && element.current && props.maxSize !== undefined) {
+        element.current.maxSize = props.maxSize;
+      }
+    });
+    return () => {
+      isActive = false;
+    };
+  }, [props.maxSize, element]);
+
+  useEffect(() => {
     if (element.current && Array.isArray(props.validationList)) {
       element.current.validation.list = props.validationList;
     }
   }, [props.validationList, element]);
 
 }
-

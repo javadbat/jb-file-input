@@ -43,7 +43,9 @@ just import package with import or from js CDN and write web component tag in yo
 | --- | --- | --- | --- |
 | `name` | `string` | `""` | Form field name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | [`required`](#validation) | `boolean` | `false` | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
-| [`placeholder-title`](#placeholder-title) | `string` | localized default | Text shown in the default placeholder area. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title) |
+| [`label`](#label-message-and-error) | `string` | localized default | Placeholder label and accessible name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
+| [`message`](#label-message-and-error) | `string` | `""` | Helper text shown below the label. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
+| [`error`](#label-message-and-error) | `string` | `""` | External validation error that makes the component invalid. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--external-error) |
 | `accept` | `string` | common document/image types | Native file accept string forwarded to the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | [`uploading`](#loading-state) | `boolean` | `false` | Visual state attribute that shows the upload progress section. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
 | [`hide-download`](#hide-download-button) | `boolean` | `false` | Hides the default download button in the file overlay. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button) |
@@ -59,6 +61,10 @@ just import package with import or from js CDN and write web component tag in yo
 | `acceptTypes` | `string` | no | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | [`uploadPercent`](#loading-state) | `number \| null` | no | Visual upload progress percentage used by the upload-state background. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
 | `required` | `boolean` | no | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
+| `label` | `string` | no | Placeholder label and accessible name. |
+| `message` | `string` | no | Helper text restored after validation errors clear. |
+| `error` | `string \| null` | no | External validation error; set to `null` to clear it. |
+| `maxSize` | `number \| null` | no | Maximum allowed file size in KB. Set to `null` to disable size validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--max-size-validation) |
 | `disabled` | `boolean` | no | Disables file selection, reselection, and deletion while keeping download available, and sets disabled accessibility/custom state. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--disabled) |
 | `status` | `'empty' \| 'selected'` | yes | Current visual value status. |
 | `selectedFileType` | `string \| null` | yes | Reserved for selected file MIME type. Current implementation returns `null`. |
@@ -84,9 +90,14 @@ just import package with import or from js CDN and write web component tag in yo
 | `invalid` | no | When `checkValidity()` or `reportValidity()` finds an invalid value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
 
 
-## Placeholder Title
+## Label, message, and error
 
-you can change file input place holder text by set `placeholder-title="select your special file"` attribute in dom. See the [placeholder title demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title).
+Use `label` for the visible placeholder label and accessible name, `message` for helper text, and `error` for an external validation failure. Clearing `error` restores `message`.
+
+```html
+<jb-file-input label="Contract" message="PDF files up to 1 MB"></jb-file-input>
+<jb-file-input label="Contract" error="The selected file is not allowed"></jb-file-input>
+```
 
 ## Value
 `jb-file-input` use file as default value type. means you can get value by `dom.value` and set it by `dom.value= yourFile`; the [initial value demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) shows controlled and reset behavior.
@@ -100,6 +111,13 @@ Use `required` when the user must select a file before submitting a form; see th
 
 ```html
 <jb-file-input required></jb-file-input>
+```
+
+Set the `maxSize` property to a number in KB to reject larger files, or set it to `null` to remove the limit.
+
+```js
+const fileInput = document.querySelector("jb-file-input");
+fileInput.maxSize = 1024;
 ```
 
 For custom validation, set `validation.list` from `jb-validation`; the [custom validation demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) shows a file-size rule.
@@ -173,7 +191,8 @@ The [style gallery](https://javadbat.github.io/design-system/?path=/story/compon
 
 | part | description |
 | --- | --- |
-| `placeholder-title` | Title text in the default placeholder section. |
+| `placeholder-title` | Label text in the default placeholder section. |
+| `message` | Helper or validation message in the empty state. Selected-file errors use the error overlay. |
 | `uploading-title` | Title text in the default upload section. |
 | `loading` | Default loading element. |
 | `upload-loading` | Default loading element in the upload section. |

@@ -8,6 +8,8 @@ declare module "react" {
         }
         interface JBFileInputType extends React.DetailedHTMLProps<React.HTMLAttributes<JBFileInputWebComponent>, JBFileInputWebComponent> {
             label?: string,
+            message?: string,
+            error?: string,
             name?: string,
             uploading?:string,
             "hide-download"?:string

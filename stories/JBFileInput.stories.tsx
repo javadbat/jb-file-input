@@ -25,15 +25,39 @@ export const Normal:Story = {
   }
 };
 
-export const PlaceholderTitle: Story = {
+export const Label: Story = {
   args: {
-    placeholderTitle: 'Select a contract file',
+    label: 'Select a contract file',
+    message: 'PDF files up to 1 MB',
   },
   play: async ({ canvasElement }) => {
     const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
     await waitFor(() => {
       expect(fileInput?.shadowRoot?.querySelector('.placeholder-title')?.textContent).toBe('Select a contract file');
+      expect(fileInput?.shadowRoot?.querySelector('.message-box')?.textContent).toBe('PDF files up to 1 MB');
     });
+  },
+};
+
+export const ExternalError: Story = {
+  args: {
+    label: "Select a contract file",
+    message: "PDF files up to 1 MB",
+    error: "The selected file is not allowed",
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>("jb-file-input");
+    const message = fileInput?.shadowRoot?.querySelector<HTMLElement>(".message-box");
+
+    await waitFor(() => {
+      expect(fileInput?.checkValidity()).toBe(false);
+      expect(message?.textContent).toBe("The selected file is not allowed");
+      expect(message?.classList.contains("error")).toBe(true);
+    });
+
+    fileInput!.error = null;
+    fileInput!.reportValidity();
+    expect(message?.textContent).toBe("PDF files up to 1 MB");
   },
 };
 
@@ -80,6 +104,39 @@ export const CustomValidation: Story = {
     expect(fileInput?.checkValidity()).toBe(false);
     expect(fileInput?.reportValidity()).toBe(false);
     expect(fileInput?.shadowRoot?.querySelector('.jb-file-input-web-component')?.classList.contains('--has-error')).toBe(true);
+  },
+};
+
+export const MaxSizeValidation: Story = {
+  args: {
+    maxSize: 1,
+    value: new File(["a".repeat(1025)], "too-large.txt", { type: "text/plain" }),
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>("jb-file-input");
+    const component = fileInput?.shadowRoot?.querySelector<HTMLElement>(".jb-file-input-web-component");
+    const errorOverlay = fileInput?.shadowRoot?.querySelector<HTMLElement>(".error-overlay");
+    const errorMessage = errorOverlay?.querySelector<HTMLElement>(".error-message");
+
+    await waitFor(() => {
+      expect(fileInput?.maxSize).toBe(1);
+      expect(fileInput?.checkValidity()).toBe(false);
+      expect(fileInput?.validationMessage).toBe("File size must not exceed 1 KB");
+      expect(component?.classList.contains("--has-error")).toBe(true);
+      expect(errorMessage?.textContent).toBe("File size must not exceed 1 KB");
+      expect(getComputedStyle(errorOverlay!).display).toBe("flex");
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(component?.classList.contains("--has-error")).toBe(true);
+    expect(errorMessage?.textContent).toBe("File size must not exceed 1 KB");
+    expect(getComputedStyle(errorOverlay!).display).toBe("flex");
+
+    fileInput!.maxSize = null;
+    await waitFor(() => {
+      expect(fileInput?.checkValidity()).toBe(true);
+      expect(getComputedStyle(errorOverlay!).display).toBe("none");
+    });
   },
 };
 
@@ -136,7 +193,7 @@ export const InitialValue: Story = {
     );
   },
   args: {
-    placeholderTitle: 'initial file',
+    label: 'initial file',
     initialValue: initialFile,
   },
   play: async ({ canvasElement }) => {
@@ -240,8 +297,22 @@ export const ExplicitNullValueDoesNotFallBackToInitialValue: Story = {
 export const Required:Story = {
   args:{
     required:true,
-    placeholderTitle:"click and open select file then hit the cancel for test"
-  }
+    label:"Select a required file"
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>("jb-file-input");
+    const placeholderSection = fileInput?.shadowRoot?.querySelector<HTMLElement>(".placeholder-section");
+    const uploadSection = fileInput?.shadowRoot?.querySelector<HTMLElement>(".upload-section");
+    const fileSection = fileInput?.shadowRoot?.querySelector<HTMLElement>(".file-section");
+
+    await waitFor(() => {
+      expect(getComputedStyle(placeholderSection!).display).toBe("block");
+      expect(getComputedStyle(uploadSection!).display).toBe("none");
+      expect(getComputedStyle(fileSection!).display).toBe("none");
+    });
+
+    expect(fileInput?.checkValidity()).toBe(false);
+  },
 };
 
 export const Disabled: Story = {

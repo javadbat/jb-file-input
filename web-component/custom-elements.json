@@ -31,8 +31,22 @@
               }
             },
             {
-              "name": "placeholder-title",
-              "description": "Text shown in the default placeholder area.",
+              "name": "label",
+              "description": "Placeholder label and accessible name.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "message",
+              "description": "Helper text shown below the placeholder label.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "description": "External validation error. A non-empty value makes the component invalid and displays the value as its error message.",
               "type": {
                 "text": "string"
               }
@@ -114,6 +128,38 @@
               "description": "Enables required validation.",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "description": "Placeholder label and accessible name.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "message",
+              "description": "Helper text restored whenever validation errors clear.",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "description": "External validation error, or null when no external error is set.",
+              "type": {
+                "text": "string | null"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxSize",
+              "description": "Maximum allowed file size in KB. Set to null to disable size validation.",
+              "type": {
+                "text": "number | null"
               }
             },
             {
@@ -241,6 +287,10 @@
             {
               "name": "placeholder-title",
               "description": "Title text in the default placeholder section."
+            },
+            {
+              "name": "message",
+              "description": "Helper or validation message in the empty state."
             },
             {
               "name": "uploading-title",
@@ -413,6 +463,34 @@
             {
               "name": "--jb-file-input-placeholder-title-color",
               "description": "Placeholder title color."
+            },
+            {
+              "name": "--jb-file-input-message-color",
+              "description": "Helper message color."
+            },
+            {
+              "name": "--jb-file-input-message-color-error",
+              "description": "Validation message color."
+            },
+            {
+              "name": "--jb-file-input-message-font-size",
+              "description": "Helper and validation message font size."
+            },
+            {
+              "name": "--jb-file-input-error-overlay-bg-color",
+              "description": "Selected-file validation error overlay background color."
+            },
+            {
+              "name": "--jb-file-input-error-overlay-color",
+              "description": "Selected-file validation error overlay text color."
+            },
+            {
+              "name": "--jb-file-input-error-overlay-icon-color",
+              "description": "Selected-file validation error overlay icon color."
+            },
+            {
+              "name": "--jb-file-input-error-overlay-outline",
+              "description": "Selected-file validation error overlay text outline."
             },
             {
               "name": "--jb-file-input-reselect-button-color",

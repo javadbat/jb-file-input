@@ -8,7 +8,8 @@ export type ElementObjects = {
     placeholder:{
         section:HTMLButtonElement
         wrapper:HTMLSpanElement,
-        title:HTMLSpanElement
+        title:HTMLSpanElement,
+        message:HTMLSpanElement
     }
     file:{
         section:HTMLDivElement,
@@ -23,6 +24,10 @@ export type ElementObjects = {
         reselect:HTMLButtonElement,
         delete:JBButtonWebComponent,
         download:JBButtonWebComponent
+    },
+    errorOverlay:{
+        container:HTMLDivElement,
+        message:HTMLSpanElement
     }
 }
 export type ValidationErrorType = "REQUIRED";

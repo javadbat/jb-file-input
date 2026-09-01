@@ -1,6 +1,7 @@
 import {JBDictionary} from 'jb-core/i18n';
 export type JBFileInputDictionary = {
   requiredMessage:string,
+  maxSizeMessage:(maxSize: number) => string,
   chooseFile:string,
   uploading: string,
   reselectFile:string,
@@ -23,6 +24,7 @@ export type JBFileInputDictionary = {
 export const dictionary = new JBDictionary<JBFileInputDictionary>({
   "fa":{
     requiredMessage:"فایل حتما باید انتخاب شود",
+    maxSizeMessage:(maxSize) => `حجم فایل نباید بیشتر از ${maxSize} کیلوبایت باشد`,
     chooseFile:"انتخاب فایل",
     uploading:"در حال آپلود",
     reselectFile:"انتخاب مجدد فایل",
@@ -32,6 +34,7 @@ export const dictionary = new JBDictionary<JBFileInputDictionary>({
   },
   "en":{
     requiredMessage:"you must select a file",
+    maxSizeMessage:(maxSize) => `File size must not exceed ${maxSize} KB`,
     chooseFile:"Choose File",
     uploading:"Uploading",
     reselectFile: "Re-select File",

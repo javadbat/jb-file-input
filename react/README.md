@@ -34,8 +34,11 @@ Use `JBFileInput` when the user needs to choose one local file and your applicat
 | `name` | `string` | Form field name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | `value` | `File` | Selected file value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
 | `acceptTypes` | `string` | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
-| `placeholderTitle` | `string` | Text shown in the default placeholder area. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--placeholder-title) |
+| `label` | `string` | Placeholder label and accessible name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
+| `message` | `string` | Helper text shown below the label and restored after errors clear. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
+| `error` | `string` | External validation error that makes the component invalid. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--external-error) |
 | `required` | `boolean` | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
+| `maxSize` | `number \| null` | Maximum allowed file size in KB. Set to `null` to disable size validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--max-size-validation) |
 | `validationList` | `ValidationItem<ValidationValue>[]` | Custom validation rules from `jb-validation`. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) |
 | `uploading` | `boolean` | Shows the upload progress section. Upload is still handled by your app. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
 | `uploadPercent` | `number` | Visual upload progress percentage. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
@@ -66,7 +69,13 @@ fileInputRef.current?.resetValue();
 
 ## Validation
 
-Use `required` when the user must select a file. Use `validationList` for custom file checks such as size or MIME type; compare the [required](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) and [custom validation](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) demos.
+Use `required` when the user must select a file. Use `error` for an external validation failure and `validationList` for custom checks such as MIME type.
+
+Use `maxSize` for the built-in file-size check. The value is in KB.
+
+```jsx
+<JBFileInput maxSize={1024} />
+```
 
 ```jsx
 const validationList = [
@@ -150,5 +159,5 @@ For web-component behavior, events, slots, and CSS variables, see [`jb-file-inpu
 - Import `JBFileInput` from `jb-file-input/react`; the wrapper imports and registers the underlying `jb-file-input` web component.
 - The component only selects a file; upload and download logic must be implemented by the app.
 - Use `uploading` and `uploadPercent` to reflect external upload progress.
-- Use `placeholderTitle`, `acceptTypes`, and `hideDownload` in React; the wrapper maps them to the underlying web-component API.
+- Use `label`, `message`, `error`, `acceptTypes`, and `hideDownload` in React; the wrapper maps them to the underlying web-component API.
 - Use a ref for imperative methods such as `openFileSelector()`, `resetValue()`, `checkValidity()`, and `reportValidity()`.

@@ -1,11 +1,24 @@
 # Changelog
 
-## Unreleased
+## [3.4.0] - 2026-09-01
+
+### Added
+
+- Added the nullable `maxSize` web-component property and React prop for built-in file-size validation in KB.
+- Added `message` helper text and externally controlled `error` validation to the web component and React wrapper.
+- Added a transient selected-file `.error-overlay`, matching `jb-image-input`, for validation failures such as oversized files.
 
 ### Changed
 
+- Renamed the `placeholder-title` attribute and React `placeholderTitle` prop to `label`.
 - Made custom-element module evaluation SSR-safe by extending `JBBaseComponent` where needed and registering elements through the shared `defineWebComponent()` helper; raised the minimum `jb-core` version to `0.35.0`.
 - Updated component color defaults to use the shared semantic content and surface tokens.
+
+### Fixed
+
+- Wait for the `jb-file-input` custom element definition before applying the initial React `maxSize` prop.
+- Show and retain the built-in max-size error for oversized files supplied through the web-component value property or React controlled value, without a stale asynchronous validation clearing it.
+- Added empty-state display fallbacks so the placeholder, upload, and selected-file sections are not rendered together when custom element states are unavailable.
 
 ## [3.3.0] 2026-07-29
 

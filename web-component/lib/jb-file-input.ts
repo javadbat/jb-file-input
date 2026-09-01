@@ -4,7 +4,7 @@ import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
 import type { ElementObjects, FileInputStatus, ValidationValue } from "./types";
 import type { JBButtonWebComponent } from "jb-button";
-import { registerDefaultVariables } from 'jb-core/theme';
+import { registerDefaultVariables } from "jb-core/theme";
 import { renderHTML } from "./render";
 import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
@@ -39,22 +39,51 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   #required = false;
   set required(value: boolean) {
     this.#required = value;
-    this.#validation.checkValidity({ showError: false });
+    this.#validation.checkValiditySync({ showError: false });
   }
   get required() {
     return this.#required;
   }
+  get label() {
+    return this.getAttribute("label") ?? dictionary.get(i18n, "chooseFile");
+  }
+  set label(value: string | null | undefined) {
+    value == null ? this.removeAttribute("label") : this.setAttribute("label", value);
+  }
+  get message(): string {
+    return this.getAttribute("message") ?? "";
+  }
+  set message(value: string | null | undefined) {
+    value == null ? this.removeAttribute("message") : this.setAttribute("message", value);
+  }
+  get error() {
+    return this.getAttribute("error");
+  }
+  set error(value: string | null | undefined) {
+    value == null || value.trim().length === 0 ? this.removeAttribute("error") : this.setAttribute("error", value);
+  }
+  #maxSize: number | null = null;
+  /**
+   * Maximum allowed file size in KB. Set to null to disable size validation.
+   */
+  get maxSize() {
+    return this.#maxSize;
+  }
+  set maxSize(value: number | null) {
+    this.#maxSize = value;
+    this.#validation.checkValiditySync({ showError: this.#value !== null });
+  }
   #internals?: ElementInternals;
   #fileInputStatus: FileInputStatus = "empty";
-  #acceptTypes =
-    "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
-  get name():string { return this.getAttribute('name') || ''; }
+  #acceptTypes = "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
+  get name(): string {
+    return this.getAttribute("name") || "";
+  }
   set name(value: string | null | undefined) {
     if (value) {
-      this.setAttribute('name', value)
-    }
-    else {
-      this.removeAttribute('name')
+      this.setAttribute("name", value);
+    } else {
+      this.removeAttribute("name");
     }
   }
   get form() {
@@ -80,22 +109,22 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     } else if (value instanceof File) {
       this.#isDirty = true;
       this.#setValue(value);
-      this.#validation.checkValidity({ showError: false });
+      this.#validation.checkValiditySync({ showError: this.#maxSize !== null });
     }
   }
   #setValue(value: File) {
     this.#value = value;
     this.#elements.file.fileName.textContent = value.name;
     this.#internals?.states?.add("fill");
-    this.#internals?.states?.delete("empty")
+    this.#internals?.states?.delete("empty");
     this.#internals?.setFormValue(value);
     this.setStatus("selected");
   }
   #resetValue() {
     this.#value = null;
     this.#elements.file.fileName.textContent = "";
-    this.#internals?.states?.add("empty")
-    this.#internals?.states?.delete("fill")
+    this.#internals?.states?.add("empty");
+    this.#internals?.states?.delete("fill");
     this.#internals?.setFormValue(null);
     this.setStatus("empty");
     this.#elements.virtualInput.value = "";
@@ -128,7 +157,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       this.#resetValue();
     }
     this.#validation.reset();
-    this.#internals?.setValidity({}, '');
+    this.#internals?.setValidity({}, "");
   }
   get status() {
     //it is read only variable
@@ -145,17 +174,21 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     return this.#uploadPercent;
   }
   set uploadPercent(value: number | null) {
-    this.#elements
     this.#uploadPercent = value;
-    this.#elements.uploader.bg.style.setProperty("--upload-percent", `${value}%`);
+    this.#updateUploadPercent();
+  }
+  #updateUploadPercent() {
+    if (this.#elements) {
+      this.#elements.uploader.bg.style.setProperty("--upload-percent", `${this.#uploadPercent ?? 0}%`);
+    }
   }
   #validation = new ValidationHelper<ValidationValue>({
     clearValidationError: this.clearValidationError.bind(this),
     getValue: () => ({ file: this.#value }),
     getValidations: this.#getInsideValidation.bind(this),
-    getValueString: (val) => (val.file?.name ?? ""),
+    getValueString: val => val.file?.name ?? "",
     setValidationResult: this.#setValidationResult.bind(this),
-    showValidationError: this.showValidationError.bind(this)
+    showValidationError: this.showValidationError.bind(this),
   });
   get validation() {
     return this.#validation;
@@ -167,18 +200,20 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   set isAutoValidationDisabled(value: boolean) {
     this.#isAutoValidationDisabled = value;
   }
-  constructor() {
-    super();
-    if (typeof this.attachInternals == "function") {
-      //some browser dont support attachInternals
-      this.#internals = this.attachInternals();
-      this.#internals.role = "group";
+  connectedCallback() {
+    if (!this.shadowRoot) {
+      this.initWebComponent();
+      if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, "chooseFile");
+      this.initProp();
+      this.registerEventListener();
+      if (typeof this.attachInternals == "function") {
+        //some browser dont support attachInternals
+        this.#internals = this.attachInternals();
+        this.#internals.role = "group";
+      }
     }
-    this.initWebComponent();
-    if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, "chooseFile");
-    this.initProp();
-    this.registerEventListener();
   }
+
   initWebComponent() {
     const shadowRoot = this.attachShadow({
       mode: "open",
@@ -196,24 +231,30 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       placeholder: {
         section: shadowRoot.querySelector(".placeholder-section") as HTMLButtonElement,
         wrapper: shadowRoot.querySelector(".placeholder-wrapper") as HTMLSpanElement,
-        title: shadowRoot.querySelector(".placeholder-title") as HTMLSpanElement
+        title: shadowRoot.querySelector(".placeholder-title") as HTMLSpanElement,
+        message: shadowRoot.querySelector(".message-box") as HTMLSpanElement,
       },
       file: {
         section: shadowRoot.querySelector(".file-section") as HTMLDivElement,
         wrapper: shadowRoot.querySelector(".file-wrapper") as HTMLButtonElement,
-        fileName: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLSpanElement
+        fileName: shadowRoot.querySelector(".file-wrapper .file-name") as HTMLSpanElement,
       },
       virtualInput: this.#createVirtualInputFile(),
       uploader: {
-        bg: shadowRoot.querySelector(".upload-bg") as HTMLDivElement
+        bg: shadowRoot.querySelector(".upload-bg") as HTMLDivElement,
       },
       overlay: {
         delete: shadowRoot.querySelector(".delete-button") as JBButtonWebComponent,
         download: shadowRoot.querySelector(".download-button") as JBButtonWebComponent,
         wrapper: shadowRoot.querySelector(".file-overlay") as HTMLDivElement,
-        reselect: shadowRoot.querySelector(".reselect-button") as HTMLButtonElement
-      }
+        reselect: shadowRoot.querySelector(".reselect-button") as HTMLButtonElement,
+      },
+      errorOverlay: {
+        container: shadowRoot.querySelector(".error-overlay") as HTMLDivElement,
+        message: shadowRoot.querySelector(".error-overlay .error-message") as HTMLSpanElement,
+      },
     };
+    this.#updateUploadPercent();
   }
   initProp() {
     this.#resetValue();
@@ -222,18 +263,16 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   registerEventListener() {
     this.#elements.placeholder.section.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.file.wrapper.addEventListener("click", this.openFileSelector.bind(this));
-    this.#elements.overlay.reselect.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.overlay.wrapper.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.overlay.delete.addEventListener("click", this.#onDeleteClick.bind(this));
     this.#elements.overlay.download.addEventListener("click", this.#onDownloadClick.bind(this));
   }
   #createVirtualInputFile() {
-    const virtualInputFile = document.createElement(
-      "input"
-    ) as HTMLInputElement;
+    const virtualInputFile = document.createElement("input") as HTMLInputElement;
     virtualInputFile.type = "file";
     virtualInputFile.accept = this.acceptTypes;
     virtualInputFile.disabled = this.disabled;
-    virtualInputFile.addEventListener("change", (e) => this.#onFileSelected(e));
+    virtualInputFile.addEventListener("change", e => this.#onFileSelected(e));
     return virtualInputFile;
   }
   openFileSelector(event?: Event) {
@@ -242,28 +281,44 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       event?.stopPropagation();
       return;
     }
+    const path = event?.composedPath();
+    if (path?.includes(this.#elements.overlay.delete) || path?.includes(this.#elements.overlay.download)) {
+      return;
+    }
     this.#elements.virtualInput.click();
   }
   static get observedAttributes() {
-    return ["required", "placeholder-title", "accept", "disabled"];
+    return ["required", "label", "message", "error", "accept", "disabled"];
   }
-  attributeChangedCallback(name: string, _oldValue: string, newValue: string) {
+  attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     // do something when an attribute has changed
     this.onAttributeChange(name, newValue);
   }
-  onAttributeChange(name: string, value: string) {
+  onAttributeChange(name: string, value: string | null) {
     switch (name) {
       case "required":
         this.#required = parseBooleanAttribute(value);
-        if (this.#internals) { this.#internals.ariaRequired = String(this.#required); }
+        if (this.#internals) {
+          this.#internals.ariaRequired = String(this.#required);
+        }
         break;
-      case "placeholder-title":
-        this.#elements.placeholder.title.innerHTML = value;
-        if (this.#internals) { this.#internals.ariaPlaceholder = value; }
-        if (this.#internals) { this.#internals.ariaLabel = value; }
+      case "label": {
+        const label = value ?? dictionary.get(i18n, "chooseFile");
+        this.#elements.placeholder.title.textContent = label;
+        if (this.#internals) this.#internals.ariaLabel = label;
+        break;
+      }
+      case "message":
+        if (!this.#elements.placeholder.message.classList.contains("error")) {
+          this.#elements.placeholder.message.textContent = value ?? "";
+        }
+        if (this.#internals && !this.error) this.#internals.ariaDescription = value ?? "";
+        break;
+      case "error":
+        this.reportValidity();
         break;
       case "accept":
-        this.acceptTypes = value;
+        this.acceptTypes = value ?? "";
         break;
       case "disabled":
         this.disabled = parseBooleanAttribute(value);
@@ -293,6 +348,13 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   showValidationError(error: ShowValidationErrorParameters) {
     this.#elements.componentWrapper.classList.add("--has-error");
+    if (this.#value) {
+      this.#showOverlayError(error.message);
+    } else {
+      this.#elements.placeholder.message.textContent = error.message;
+      this.#elements.placeholder.message.classList.add("error");
+    }
+    this.#internals?.states?.add("invalid");
     if (this.#internals) {
       this.#internals.ariaInvalid = "true";
       this.#internals.ariaDescription = error.message;
@@ -300,7 +362,25 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   clearValidationError() {
     this.#elements.componentWrapper.classList.remove("--has-error");
+    this.#elements.placeholder.message.textContent = this.message;
+    this.#elements.placeholder.message.classList.remove("error");
+    this.#hideOverlayError();
+    this.#internals?.states?.delete("invalid");
     if (this.#internals) this.#internals.ariaInvalid = "false";
+    if (this.#internals) this.#internals.ariaDescription = this.message;
+  }
+  #errorOverlayTimeout?: ReturnType<typeof setTimeout>;
+  #showOverlayError(message: string) {
+    if (this.#errorOverlayTimeout) clearTimeout(this.#errorOverlayTimeout);
+    this.#elements.errorOverlay.message.textContent = message;
+    this.#elements.errorOverlay.container.style.display = "flex";
+    this.#errorOverlayTimeout = setTimeout(() => this.#hideOverlayError(), 2000);
+  }
+  #hideOverlayError() {
+    if (this.#errorOverlayTimeout) clearTimeout(this.#errorOverlayTimeout);
+    this.#errorOverlayTimeout = undefined;
+    this.#elements.errorOverlay.message.textContent = "";
+    this.#elements.errorOverlay.container.style.display = "none";
   }
   resetValue() {
     if (this.#value !== null) {
@@ -321,10 +401,28 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
           return file !== null;
         },
         message: message,
-        stateType: "valueMissing"
+        stateType: "valueMissing",
       });
     }
-    //TODO: add validation for file size
+    const maxSize = this.#maxSize;
+    if (maxSize !== null) {
+      ValidationList.push({
+        validator: ({ file }) => {
+          const res = file === null || file.size <= maxSize * 1024;
+          return res;
+        },
+        message: dictionary.get(i18n, "maxSizeMessage")(maxSize),
+        stateType: "customError",
+      });
+    }
+    const error = this.error;
+    if (error && error.trim().length > 0) {
+      ValidationList.push({
+        validator: undefined,
+        message: error,
+        stateType: "customError",
+      });
+    }
     return ValidationList;
   }
   /**
@@ -335,19 +433,19 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   checkValidity(): boolean {
     const validationResult = this.#validation.checkValiditySync({ showError: false });
     if (!validationResult.isAllValid) {
-      const event = new CustomEvent('invalid');
+      const event = new CustomEvent("invalid");
       this.dispatchEvent(event);
     }
     return validationResult.isAllValid;
   }
   /**
-  * @public
- * @description this method used to check for validity and show error to user
- */
+   * @public
+   * @description this method used to check for validity and show error to user
+   */
   reportValidity(): boolean {
     const validationResult = this.#validation.checkValiditySync({ showError: true });
     if (!validationResult.isAllValid) {
-      const event = new CustomEvent('invalid');
+      const event = new CustomEvent("invalid");
       this.dispatchEvent(event);
     }
     return validationResult.isAllValid;
@@ -357,14 +455,18 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
    */
   #setValidationResult(result: ValidationResult<ValidationValue>) {
     if (result.isAllValid) {
-      this.#internals?.setValidity({}, '');
+      this.#internals?.setValidity({}, "");
     } else {
       const states: ValidityStateFlags = {};
       let message = "";
-      result.validationList.forEach((res) => {
+      result.validationList.forEach(res => {
         if (!res.isValid) {
-          if (res.validation.stateType) { states[res.validation.stateType] = true; }
-          if (message == '') { message = res.message ?? ""; }
+          if (res.validation.stateType) {
+            states[res.validation.stateType] = true;
+          }
+          if (message == "") {
+            message = res.message ?? "";
+          }
         }
       });
       this.#internals?.setValidity(states, message);
