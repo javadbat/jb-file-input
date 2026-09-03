@@ -25,6 +25,22 @@ export const Normal:Story = {
   }
 };
 
+export const Accept: Story = {
+  args: {
+    accept: '.pdf,image/*',
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input');
+    const nativeInput = fileInput?.shadowRoot?.querySelector<HTMLInputElement>('input[type="file"]');
+
+    await waitFor(() => {
+      expect(fileInput?.accept).toBe('.pdf,image/*');
+      expect(fileInput?.getAttribute('accept')).toBe('.pdf,image/*');
+      expect(nativeInput?.accept).toBe('.pdf,image/*');
+    });
+  },
+};
+
 export const Label: Story = {
   args: {
     label: 'Select a contract file',
@@ -71,7 +87,7 @@ export const ImperativeMethods: Story = {
 
     expect(fileInput).toBeTruthy();
     expect(typeof fileInput?.openFileSelector).toBe('function');
-    expect(typeof fileInput?.resetValue).toBe('function');
+    expect(typeof fileInput?.reset).toBe('function');
     expect(fileInput?.checkValidity()).toBe(false);
     expect(fileInput?.reportValidity()).toBe(false);
 
@@ -81,7 +97,7 @@ export const ImperativeMethods: Story = {
       expect(fileInput?.checkValidity()).toBe(true);
     });
 
-    fileInput!.resetValue();
+    fileInput!.reset();
     expect(fileInput?.value).toBeNull();
     expect(fileInput?.status).toBe('empty');
   },
@@ -268,7 +284,7 @@ export const RedundantResetDoesNotBlockInitialValue: Story = {
 
     expect(fileInput?.value).toBeNull();
 
-    fileInput!.resetValue();
+    fileInput!.reset();
     fileInput!.initialValue = initialFile;
 
     await waitFor(() => {
@@ -356,9 +372,17 @@ export const Disabled: Story = {
 
 export const Uploading:Story = {
   args:{
-    uploading:true,
+    isUploading:true,
     uploadPercent:70
-  }
+  },
+  play: async ({ canvasElement }) => {
+    const fileInput = canvasElement.querySelector<JBFileInputWebComponent>('jb-file-input')!;
+    await waitFor(() => {
+      expect(fileInput.isUploading).toBe(true);
+      expect(fileInput.isLoading).toBe(true);
+      expect(fileInput.hasAttribute('is-uploading')).toBe(true);
+    });
+  },
 };
 export const HideDownloadButton:Story = {
   args:{
@@ -373,22 +397,22 @@ export const Sizes:Story = {
       <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:`1rem`}}>
         <JBFileInput style={{height:`8rem`}} />
         <JBFileInput style={{height:`8rem`}} value={file}/>
-        <JBFileInput style={{height:`8rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`8rem`}} isUploading uploadPercent={70}/>
         <JBFileInput style={{height:`7rem`}}/>
         <JBFileInput style={{height:`7rem`}} value={file}/>
-        <JBFileInput style={{height:`7rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`7rem`}} isUploading uploadPercent={70}/>
         <JBFileInput style={{height:`5rem`}}/>
         <JBFileInput style={{height:`5rem`}} value={file}/>
-        <JBFileInput style={{height:`5rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`5rem`}} isUploading uploadPercent={70}/>
         <JBFileInput style={{height:`4rem`}}/>
         <JBFileInput style={{height:`4rem`}} value={file}/>
-        <JBFileInput style={{height:`4rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`4rem`}} isUploading uploadPercent={70}/>
         <JBFileInput style={{height:`3rem`}}/>
         <JBFileInput style={{height:`3rem`}} value={file}/>
-        <JBFileInput style={{height:`3rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`3rem`}} isUploading uploadPercent={70}/>
         <JBFileInput style={{height:`2rem`}}/>
         <JBFileInput style={{height:`2rem`}} value={file}/>
-        <JBFileInput style={{height:`2rem`}} uploading uploadPercent={70}/>
+        <JBFileInput style={{height:`2rem`}} isUploading uploadPercent={70}/>
       </div>
     )
   }

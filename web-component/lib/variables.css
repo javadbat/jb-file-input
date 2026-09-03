@@ -65,7 +65,7 @@
   --display-upload: var(--jb-file-input-display-upload-fill, none);
 }
 
-:host([uploading]) {
+:host([is-uploading]) {
   --display-placeholder: var(--jb-file-input-display-placeholder-uploading, none);
   --display-file: var(--jb-file-input-display-file-uploading, none);
   --display-upload: var(--jb-file-input-display-upload-uploading, block);

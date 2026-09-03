@@ -33,14 +33,14 @@ Use `JBFileInput` when the user needs to choose one local file and your applicat
 | --- | --- | --- |
 | `name` | `string` | Form field name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | `value` | `File` | Selected file value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--initial-value) |
-| `acceptTypes` | `string` | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
+| `accept` | `string` | Native accept string used by the internal file input. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--normal) |
 | `label` | `string` | Placeholder label and accessible name. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
 | `message` | `string` | Helper text shown below the label and restored after errors clear. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--label) |
 | `error` | `string` | External validation error that makes the component invalid. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--external-error) |
 | `required` | `boolean` | Enables required validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--required) |
 | `maxSize` | `number \| null` | Maximum allowed file size in KB. Set to `null` to disable size validation. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--max-size-validation) |
 | `validationList` | `ValidationItem<ValidationValue>[]` | Custom validation rules from `jb-validation`. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--custom-validation) |
-| `uploading` | `boolean` | Shows the upload progress section. Upload is still handled by your app. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
+| `isUploading` | `boolean` | Shows the upload progress section. Upload is still handled by your app. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
 | `uploadPercent` | `number` | Visual upload progress percentage. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading) |
 | `hideDownload` | `boolean` | Hides the default download button. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--hide-download-button) |
 
@@ -54,7 +54,7 @@ The web component also dispatches `download` and `delete` events. Use a ref and 
 
 ## Value
 
-`event.target.value` and `ref.current.value` are the selected `File` or `null`. Set the underlying value to `null` or call `ref.current.resetValue()` when you need to clear the selection imperatively; see the [value and reset demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods).
+`event.target.value` and `ref.current.value` are the selected `File` or `null`. Set the underlying value to `null` to clear it, or call `ref.current.reset()` to restore `initialValue`; see the [value and reset demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods).
 
 ```jsx
 const fileInputRef = useRef(null);
@@ -64,7 +64,7 @@ const fileInputRef = useRef(null);
   onChange={(event) => console.log(event.target.value)}
 />;
 
-fileInputRef.current?.resetValue();
+fileInputRef.current?.reset();
 ```
 
 ## Validation
@@ -90,10 +90,10 @@ const validationList = [
 
 ## Loading State
 
-`JBFileInput` does not upload files by itself. Use `uploading` and `uploadPercent` to display progress from an upload flow owned by your app; see the [loading-state demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading).
+`JBFileInput` does not upload files by itself. Use `isUploading` and `uploadPercent` to display progress from an upload flow owned by your app; see the [loading-state demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--uploading).
 
 ```jsx
-<JBFileInput uploading uploadPercent={45} />
+<JBFileInput isUploading uploadPercent={45} />
 ```
 
 ## Download Button
@@ -131,14 +131,14 @@ Pass custom slot content as JSX children. Supported slot names include `placehol
 
 ## CSS parts and states
 
-The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[uploading]`, and `[hide-download]`. See the shared [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
+The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[is-uploading]`, and `[hide-download]`. See the shared [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
 
 ```css
 .contract-file::part(file-name) {
   font-weight: 600;
 }
 
-.contract-file[uploading] {
+.contract-file[is-uploading] {
   --jb-file-input-loading-bg: linear-gradient(90deg, #2563eb, #14b8a6);
 }
 ```
@@ -158,6 +158,6 @@ For web-component behavior, events, slots, and CSS variables, see [`jb-file-inpu
 
 - Import `JBFileInput` from `jb-file-input/react`; the wrapper imports and registers the underlying `jb-file-input` web component.
 - The component only selects a file; upload and download logic must be implemented by the app.
-- Use `uploading` and `uploadPercent` to reflect external upload progress.
-- Use `label`, `message`, `error`, `acceptTypes`, and `hideDownload` in React; the wrapper maps them to the underlying web-component API.
-- Use a ref for imperative methods such as `openFileSelector()`, `resetValue()`, `checkValidity()`, and `reportValidity()`.
+- Use `isUploading` and `uploadPercent` to reflect external upload progress.
+- Use `label`, `message`, `error`, `accept`, and `hideDownload` in React; the wrapper maps them to the underlying web-component API.
+- Use a ref for imperative methods such as `openFileSelector()`, `reset()`, `checkValidity()`, and `reportValidity()`.

@@ -60,7 +60,7 @@ function FileInputStyleSample({ className }: { className: string }) {
     }}>
       <JBFileInput className={className} style={{ height: "11rem" }} />
       <JBFileInput className={className} style={{ height: "11rem" }} value={file} />
-      <JBFileInput className={className} style={{ height: "11rem" }} uploading uploadPercent={68} />
+      <JBFileInput className={className} style={{ height: "11rem" }} isUploading uploadPercent={68} />
     </div>
   );
 }

@@ -59,7 +59,7 @@
               }
             },
             {
-              "name": "uploading",
+              "name": "is-uploading",
               "description": "Visual state attribute that shows the upload progress section. The upload itself must be handled outside the component.",
               "type": {
                 "text": "boolean"
@@ -108,11 +108,28 @@
             },
             {
               "kind": "field",
-              "name": "acceptTypes",
+              "name": "accept",
               "description": "Native accept string used by the internal file input.",
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "isUploading",
+              "description": "Shows or hides the upload progress section.",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isLoading",
+              "description": "Computed aggregate loading state. True while the component is uploading.",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true
             },
             {
               "kind": "field",
@@ -213,8 +230,8 @@
               "description": "Opens the native file picker unless the component is disabled."
             },
             {
-              "name": "resetValue",
-              "description": "Clears the selected file and resets the visual state to empty."
+              "name": "reset",
+              "description": "Restores initialValue and clears displayed validation."
             },
             {
               "name": "checkValidity",

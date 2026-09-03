@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.0.0] - 2026-09-03
+
+### Changed
+
+- Breaking: renamed the `uploading` property/React prop and HTML attribute to `isUploading` and `is-uploading`; added the read-only aggregate `isLoading` property.
+- Standardized private empty-value and form synchronization helpers as `#clearValue()` and `#updateFormValue()`.
+- Breaking: renamed the `acceptTypes` web-component property and React prop to the native-compatible `accept`; the existing `accept` HTML attribute is unchanged.
+- Breaking: replaced `resetValue()` with the standard `reset()` method. `reset()` restores `initialValue`; assign `value = null` to clear the live selection.
+- Native form reset now delegates to the same public `reset()` behavior.
+
 ## [3.4.0] - 2026-09-01
 
 ### Added

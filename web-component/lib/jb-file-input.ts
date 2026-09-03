@@ -75,7 +75,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   #internals?: ElementInternals;
   #fileInputStatus: FileInputStatus = "empty";
-  #acceptTypes = "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
+  #accept = "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*";
   get name(): string {
     return this.getAttribute("name") || "";
   }
@@ -89,14 +89,16 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   get form() {
     return this.#internals!.form;
   }
-  get acceptTypes() {
-    return this.#acceptTypes;
+  get accept() {
+    return this.#accept;
   }
-  set acceptTypes(value: string) {
-    if (value) {
-      this.#acceptTypes = value;
-      this.#elements.virtualInput.accept = value;
-    }
+  set accept(value: string) {
+    this.#setAccept(value);
+    if (this.getAttribute("accept") !== value) this.setAttribute("accept", value);
+  }
+  #setAccept(value: string) {
+    this.#accept = value;
+    if (this.#elements) this.#elements.virtualInput.accept = value;
   }
   get value() {
     return this.#value;
@@ -105,7 +107,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     if (value == null) {
       // An explicit live null must continue to take precedence over initialValue.
       this.#isDirty = true;
-      this.resetValue();
+      this.#clearValue();
     } else if (value instanceof File) {
       this.#isDirty = true;
       this.#setValue(value);
@@ -117,17 +119,20 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#elements.file.fileName.textContent = value.name;
     this.#internals?.states?.add("fill");
     this.#internals?.states?.delete("empty");
-    this.#internals?.setFormValue(value);
+    this.#updateFormValue();
     this.setStatus("selected");
   }
-  #resetValue() {
+  #clearValue() {
     this.#value = null;
     this.#elements.file.fileName.textContent = "";
     this.#internals?.states?.add("empty");
     this.#internals?.states?.delete("fill");
-    this.#internals?.setFormValue(null);
+    this.#updateFormValue();
     this.setStatus("empty");
     this.#elements.virtualInput.value = "";
+  }
+  #updateFormValue() {
+    this.#internals?.setFormValue(this.#value);
   }
   #initialValue: File | null = null;
   /**
@@ -142,22 +147,25 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       if (this.#initialValue) {
         this.#setValue(this.#initialValue);
       } else {
-        this.#resetValue();
+        this.#clearValue();
       }
     }
   }
   get isDirty(): boolean {
     return this.value !== this.initialValue;
   }
-  formResetCallback() {
+  reset() {
     this.#isDirty = false;
     if (this.initialValue) {
       this.#setValue(this.initialValue);
     } else {
-      this.#resetValue();
+      this.#clearValue();
     }
     this.#validation.reset();
     this.#internals?.setValidity({}, "");
+  }
+  formResetCallback() {
+    this.reset();
   }
   get status() {
     //it is read only variable
@@ -170,6 +178,18 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     return null;
   }
   #uploadPercent: number | null = null;
+  #isUploading = false;
+  get isUploading(): boolean {
+    return this.#isUploading;
+  }
+  set isUploading(value: boolean) {
+    this.#isUploading = Boolean(value);
+    this.toggleAttribute("is-uploading", this.#isUploading);
+    this.setAttribute("aria-busy", this.#isUploading ? "true" : "false");
+  }
+  get isLoading(): boolean {
+    return this.#isUploading;
+  }
   get uploadPercent() {
     return this.#uploadPercent;
   }
@@ -257,7 +277,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#updateUploadPercent();
   }
   initProp() {
-    this.#resetValue();
+    this.#clearValue();
     this.#required = false;
   }
   registerEventListener() {
@@ -270,7 +290,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   #createVirtualInputFile() {
     const virtualInputFile = document.createElement("input") as HTMLInputElement;
     virtualInputFile.type = "file";
-    virtualInputFile.accept = this.acceptTypes;
+    virtualInputFile.accept = this.accept;
     virtualInputFile.disabled = this.disabled;
     virtualInputFile.addEventListener("change", e => this.#onFileSelected(e));
     return virtualInputFile;
@@ -288,7 +308,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#elements.virtualInput.click();
   }
   static get observedAttributes() {
-    return ["required", "label", "message", "error", "accept", "disabled"];
+    return ["required", "label", "message", "error", "accept", "disabled", "is-uploading"];
   }
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     // do something when an attribute has changed
@@ -318,10 +338,13 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
         this.reportValidity();
         break;
       case "accept":
-        this.acceptTypes = value ?? "";
+        this.#setAccept(value ?? "");
         break;
       case "disabled":
         this.disabled = parseBooleanAttribute(value);
+        break;
+      case "is-uploading":
+        this.isUploading = parseBooleanAttribute(value);
         break;
     }
   }
@@ -381,12 +404,6 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#errorOverlayTimeout = undefined;
     this.#elements.errorOverlay.message.textContent = "";
     this.#elements.errorOverlay.container.style.display = "none";
-  }
-  resetValue() {
-    if (this.#value !== null) {
-      this.#isDirty = true;
-    }
-    this.#resetValue();
   }
   #triggerOnChangeEvent() {
     const event = new Event("change");
@@ -474,6 +491,9 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   get validationMessage() {
     return this.#internals?.validationMessage ?? null;
+  }
+  get validity() {
+    return this.#internals?.validity;
   }
   formDisabledCallback(disabled: boolean) {
     this.disabled = disabled;

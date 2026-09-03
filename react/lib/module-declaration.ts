@@ -11,7 +11,8 @@ declare module "react" {
             message?: string,
             error?: string,
             name?: string,
-            uploading?:string,
+            accept?: string,
+            "is-uploading"?:string,
             "hide-download"?:string
         }
     }

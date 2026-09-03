@@ -5,16 +5,23 @@ import { type RefObject, useEffect } from "react";
 export type JBFileInputAttributes = {
   value?: File | null,
   initialValue?: File | null,
-  acceptTypes?: string,
+  accept?: string,
   label?: string,
   message?: string,
   error?: string,
   disabled?: boolean,
   required?: boolean,
   maxSize?: number | null,
+  isUploading?: boolean,
   validationList?: ValidationItem<ValidationValue>[],
 }
 export function useJBFileInputAttribute(element: RefObject<JBFileInputWebComponent | null>, props: JBFileInputAttributes) {
+  useEffect(() => {
+    if (element.current && props.isUploading !== undefined) {
+      element.current.isUploading = props.isUploading;
+    }
+  }, [props.isUploading, element]);
+
   useEffect(() => {
     if (element.current && props.initialValue !== undefined) {
       element.current.initialValue = props.initialValue;
@@ -28,10 +35,10 @@ export function useJBFileInputAttribute(element: RefObject<JBFileInputWebCompone
   }, [props.value, element]);
 
   useEffect(() => {
-    if (element.current && props.acceptTypes) {
-      element.current.acceptTypes = props.acceptTypes;
+    if (element.current && props.accept !== undefined) {
+      element.current.accept = props.accept;
     }
-  }, [props.acceptTypes, element]);
+  }, [props.accept, element]);
 
   useEffect(() => {
     if (element.current) {
