@@ -10,6 +10,7 @@ import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
 import type { JBFormInputStandards } from "jb-form";
 export * from "./types.js";
+import type { JBIconDeleteWebComponent } from "jb-icons/delete";5
 export class JBFileInputWebComponent extends JBBaseComponent implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
   static formAssociated = true;
   #value: File | null = null;
@@ -286,6 +287,12 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#elements.overlay.wrapper.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.overlay.delete.addEventListener("click", this.#onDeleteClick.bind(this));
     this.#elements.overlay.download.addEventListener("click", this.#onDownloadClick.bind(this));
+
+    const deleteIcon = this.#elements.overlay.delete.querySelector("jb-icon-delete") as JBIconDeleteWebComponent | null;
+    if (deleteIcon) {
+      this.#elements.overlay.delete.addEventListener("mouseenter", () => deleteIcon.playOpenAnimation());
+      this.#elements.overlay.delete.addEventListener("mouseleave", () => deleteIcon.playCloseAnimation());
+    }
   }
   #createVirtualInputFile() {
     const virtualInputFile = document.createElement("input") as HTMLInputElement;

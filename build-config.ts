@@ -7,7 +7,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
     outputPath: "./web-component/dist/jb-file-input.js",
     tsConfigPath: "./web-component/tsconfig.json",
     umdName: "JBFileInput",
-    external:["jb-validation", "jb-loading", "jb-button","jb-core", "jb-core/i18n", "jb-core/theme"],
+    external:["jb-validation", "jb-loading", "jb-button","jb-core", "jb-core/i18n", "jb-core/theme", "jb-icons/delete"],
     globals: {
       "jb-validation": "JBValidation",
       "jb-loading":"JBLoading",
@@ -15,6 +15,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
       "jb-core": "JBCore",
       "jb-core/i18n": "JBCoreI18N",
       "jb-core/theme": "JBCoreTheme",
+      "jb-icons/delete": "JBIconDelete",
     },
   },
 ];

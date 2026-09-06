@@ -66,6 +66,7 @@
     svg,
     jb-loading {
       height: 100%;
+      width: auto;
       aspect-ratio: 1 / 1;
       fill: var(--icon-base-color);
       color: var(--icon-base-color);
