@@ -200,7 +200,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   #updateUploadPercent() {
     if (this.#elements) {
-      this.#elements.uploader.bg.style.setProperty("--upload-percent", `${this.#uploadPercent ?? 0}%`);
+      this.style.setProperty("--upload-percent", `${this.#uploadPercent ?? 0}%`);
     }
   }
   #validation = new ValidationHelper<ValidationValue>({

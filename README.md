@@ -198,6 +198,7 @@ The [style gallery](https://javadbat.github.io/design-system/?path=/story/compon
 | `uploading-title` | Title text in the default upload section. |
 | `loading` | Default loading element. |
 | `upload-loading` | Default loading element in the upload section. |
+| `progress-top-level` | Upload progress overlay whose width follows the current upload percentage. |
 | `file-name` | Selected file name text. |
 | `placeholder-icon` | Default placeholder SVG icon. |
 | `file-icon` | Default selected-file SVG icon. |

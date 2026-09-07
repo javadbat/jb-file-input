@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+
+
+
 ## [4.0.0] - 2026-09-03
 
 ### Changed
@@ -9,6 +14,11 @@
 - Breaking: renamed the `acceptTypes` web-component property and React prop to the native-compatible `accept`; the existing `accept` HTML attribute is unchanged.
 - Breaking: replaced `resetValue()` with the standard `reset()` method. `reset()` restores `initialValue`; assign `value = null` to clear the live selection.
 - Native form reset now delegates to the same public `reset()` behavior.
+- add revert layer on loading state so text and loading content can get reverted 
+
+### Added
+
+- Added the `progress-top-level` CSS part for styling the upload progress overlay.
 
 ## [3.4.0] - 2026-09-01
 

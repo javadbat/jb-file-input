@@ -26,6 +26,7 @@ export function renderHTML(): string {
             <div class="icon-wrapper"><slot name="uploader-icon"><jb-loading class="loading-icon" part="loading upload-loading"/></slot></div>
             <div class="uploading-title title" part="uploading-title">${dictionary.get(i18n, "uploading")}</div>
           </div>
+          <div class="progress-top-level" part="progress-top-level"></div>
         </div>
       </slot>
     </section>

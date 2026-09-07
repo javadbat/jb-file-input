@@ -44,8 +44,8 @@
   },
   "dependencies":{
     "jb-validation":"^1.0.0",
-    "jb-button":"^4.2.0",
-    "jb-loading":"^1.8.1",
+    "jb-button":"^5.1.0",
+    "jb-loading":"^2.1.0",
     "jb-core":"^0.36.0"
   },
   "devDependencies": {

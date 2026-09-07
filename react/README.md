@@ -131,7 +131,7 @@ Pass custom slot content as JSX children. Supported slot names include `placehol
 
 ## CSS parts and states
 
-The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `:state(empty)`, `:state(fill)`, `[is-uploading]`, and `[hide-download]`. See the shared [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
+The React wrapper uses the same parts, states, attributes, and CSS variables as the web component, including `::part(file-name)`, `::part(progress-top-level)`, `:state(empty)`, `:state(fill)`, `[is-uploading]`, and `[hide-download]`. The `progress-top-level` part exposes the upload progress overlay whose width follows `uploadPercent`. See the shared [style gallery](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput-style--gallery).
 
 ```css
 .contract-file::part(file-name) {

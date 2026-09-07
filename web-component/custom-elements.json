@@ -322,6 +322,10 @@
               "description": "Default loading element in the upload section."
             },
             {
+              "name": "progress-top-level",
+              "description": "Upload progress overlay whose width follows the current upload percentage."
+            },
+            {
               "name": "file-name",
               "description": "Selected file name text."
             },
