@@ -13,7 +13,7 @@ export const webComponentList: WebComponentBuildConfig[] = [
       "jb-loading":"JBLoading",
       "jb-button":"JBButton",
       "jb-core": "JBCore",
-      "jb-core/i18n": "JBCoreI18N",
+      "jb-core/i18n": "JBCoreI18n",
       "jb-core/theme": "JBCoreTheme",
       "jb-icons/delete": "JBIconDelete",
     },
