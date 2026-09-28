@@ -40,6 +40,8 @@
   --display-placeholder: var(--jb-file-input-display-placeholder-empty, block);
   --display-file: var(--jb-file-input-display-file-empty, none);
   --display-upload: var(--jb-file-input-display-upload-empty, none);
+  --box-shadow: var(--jb-file-input-box-shadow, var(--jb-control-shadow));
+  --box-corner-shape: var(--jb-corner-shape);
 }
 
 .jb-file-input-web-component {
