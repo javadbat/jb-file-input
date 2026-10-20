@@ -1,10 +1,16 @@
 # Changelog
 
+## [4.1.1] - 2026-10-20
+
+### Fixed
+
+- fix SSR hydration Error for setting `--upload-percent` variable in initial load
+
 ## [4.1.0] - 2026-09-28
 
 ### Added
 
-- - add corner shape and box-shadow design system token support   
+- add corner shape and box-shadow design system token support   
 
 ## [4.0.0] - 2026-09-03
 

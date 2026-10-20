@@ -17,6 +17,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   #isDirty = false;
   #elements!: ElementObjects;
   #disabled = false;
+  #dynamicVariablesStylesheet = new CSSStyleSheet();
   get disabled() {
     return this.#disabled;
   }
@@ -199,8 +200,12 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     this.#updateUploadPercent();
   }
   #updateUploadPercent() {
-    if (this.#elements) {
-      this.style.setProperty("--upload-percent", `${this.#uploadPercent ?? 0}%`);
+    if (this.#dynamicVariablesStylesheet) {
+          this.#dynamicVariablesStylesheet.replaceSync(`
+      :host {
+        --upload-percent: ${this.uploadPercent??0}%;
+      }
+    `);
     }
   }
   #validation = new ValidationHelper<ValidationValue>({
@@ -242,6 +247,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       slotAssignment: "named",
       serializable: true,
     });
+    shadowRoot.adoptedStyleSheets = [this.#dynamicVariablesStylesheet];
     registerDefaultVariables();
     const html = `<style>${CSS} ${VariablesCSS}</style>\n${renderHTML()}`;
     const element = document.createElement("template");
