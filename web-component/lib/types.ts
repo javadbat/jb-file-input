@@ -21,7 +21,8 @@ export type ElementObjects = {
     },
     overlay:{
         wrapper:HTMLDivElement,
-        reselect:HTMLButtonElement,
+        mainActionButton: HTMLButtonElement,
+        overlayExtraActionsSlot: HTMLSlotElement,
         delete:JBButtonWebComponent,
         download:JBButtonWebComponent
     },

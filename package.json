@@ -12,7 +12,7 @@
     "file input",
     "web component"
   ],
-  "version": "4.1.1",
+  "version": "4.2.0",
   "bugs": "https://github.com/javadbat/jb-file-input/issues",
   "license": "MIT",
   "files": [
@@ -44,7 +44,7 @@
   },
   "dependencies":{
     "jb-validation":"^1.1.0",
-    "jb-button":"^5.1.1",
+    "jb-button":"^5.2.1",
     "jb-loading":"^2.1.1",
     "jb-core":"^0.38.0"
   },

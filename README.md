@@ -90,6 +90,7 @@ just import package with import or from js CDN and write web component tag in yo
 | `download` | no | When the default download button is clicked. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
 | `delete` | no | After the selected file is cleared from the default delete button. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--events) |
 | `invalid` | no | When `checkValidity()` or `reportValidity()` finds an invalid value. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--imperative-methods) |
+| `overlay-click` | yes | when user click on overlay and run it's main action (reselect by default) you can use `e.preventDefault()` beside `overlay-text` to change it's default behavior. [Demo](https://javadbat.github.io/design-system/?path=/story/components-form-elements-jbfileinput--overlay-action) |
 
 
 ## Label, message, and error
@@ -186,6 +187,7 @@ Use the supported placeholder and overlay slots in the [slots demo](https://java
 | `file-icon` | Replaces the default selected-file icon. |
 | `overlay` | Replaces the entire selected-file hover overlay. |
 | `overlay-content` | Replaces the content inside the default overlay. |
+| `overlay-extra-actions` | Place to add new action button on file overlay. |
 
 ## CSS parts and states
 

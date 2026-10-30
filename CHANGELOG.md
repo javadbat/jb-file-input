@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.0] - 2026-10-30
+
+### Added
+
+- Overlay action button text override via `overlay-text` attribute
+- `onOverlayClick` React prop and `overlay-click` custom event for overlay click handling. Cancellable via `preventDefault()`; when prevented, the default overlay action (opening the image selector) is skipped.
+- Add new `overlay-extra-actions` slot.
+
 ## [4.1.1] - 2026-10-20
 
 ### Fixed

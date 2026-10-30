@@ -15,10 +15,12 @@ export type EventProps = {
    * base on standard js `change` event so it only called on blur. use onInput to get every keyStroke 
    */
   onChange?: (e: JBFileInputEventType<Event>) => void,
+  onOverlayClick?: (e: JBFileInputEventType<Event>) => void,
 
 }
 export function useEvents(element:RefObject<JBFileInputWebComponent | null>,props:EventProps){
   useEvent(element, 'load', props.onLoad, true);
   useEvent(element, 'init', props.onInit, true);
   useEvent(element, 'change', props.onChange, true);
+  useEvent(element, 'overlay-click', props.onOverlayClick);
 }

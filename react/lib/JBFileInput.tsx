@@ -20,20 +20,23 @@ export const JBFileInput = forwardRef((props:Props, ref) => {
     () => {
       return (element ? element.current as JBFileInputWebComponent : undefined);
     },
-    [element],
+    [],
   );
   // uploadPercent is passed by ...otherProps
-  const {accept,initialValue,isUploading,label,message,error,disabled,required,maxSize,hideDownload,value,onChange,onInit,onLoad,children, ...otherProps} = props;
+  const {accept,initialValue,isUploading,label,overlayText,message,error,disabled,required,maxSize,hideDownload,value,onChange,onInit,onLoad,onOverlayClick,children, ...otherProps} = props;
   useJBFileInputAttribute(element,{accept,initialValue,label,message,error,disabled,required,maxSize,isUploading,value})
-  useEvents(element,{onChange,onInit,onLoad});
+  useEvents(element,{onChange,onInit,onLoad,onOverlayClick});
   return (
-    <jb-file-input ref={element} hide-download={hideDownload?'':undefined} {...otherProps}>{children}</jb-file-input>
+    <jb-file-input ref={element} hide-download={hideDownload?'':undefined} {...otherProps} overlay-text={overlayText}>
+      {children}
+    </jb-file-input>
   );
 });
 
 JBFileInput.displayName = "JBFileInput";
 type JBFileInputProps = PropsWithChildren<EventProps & JBFileInputAttributes & {
   name?:string,
+  overlayText?:string,
   isUploading?:boolean,
   uploadPercent?:number,
   hideDownload?:boolean

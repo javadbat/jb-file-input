@@ -1,4 +1,4 @@
-import { defineWebComponent, JBBaseComponent, parseBooleanAttribute } from "jb-core";
+import { defineWebComponent, JBBaseComponent, parseBooleanAttribute, createMouseEvent } from "jb-core";
 import { ValidationHelper, type ShowValidationErrorParameters, type ValidationItem, type ValidationResult, type WithValidation } from "jb-validation";
 import CSS from "./jb-file-input.css";
 import VariablesCSS from "./variables.css";
@@ -10,7 +10,7 @@ import { dictionary } from "./i18n";
 import { i18n } from "jb-core/i18n";
 import type { JBFormInputStandards } from "jb-form";
 export * from "./types.js";
-import type { JBIconDeleteWebComponent } from "jb-icons/delete";5
+import type { JBIconDeleteWebComponent } from "jb-icons/delete";
 export class JBFileInputWebComponent extends JBBaseComponent implements WithValidation<ValidationValue>, JBFormInputStandards<File | null> {
   static formAssociated = true;
   #value: File | null = null;
@@ -27,7 +27,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       this.#elements.virtualInput.disabled = value;
       this.#elements.placeholder.section.disabled = value;
       this.#elements.file.wrapper.disabled = value;
-      this.#elements.overlay.reselect.disabled = value;
+      this.#elements.overlay.mainActionButton.disabled = value;
       this.#elements.overlay.delete.toggleAttribute("disabled", value);
     }
     if (value) {
@@ -201,9 +201,9 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   }
   #updateUploadPercent() {
     if (this.#dynamicVariablesStylesheet) {
-          this.#dynamicVariablesStylesheet.replaceSync(`
+      this.#dynamicVariablesStylesheet.replaceSync(`
       :host {
-        --upload-percent: ${this.uploadPercent??0}%;
+        --upload-percent: ${this.uploadPercent ?? 0}%;
       }
     `);
     }
@@ -229,6 +229,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   connectedCallback() {
     if (!this.shadowRoot) {
       this.initWebComponent();
+      this.#callOnLoadEvent();
       if (this.#internals) this.#internals.ariaLabel = dictionary.get(i18n, "chooseFile");
       this.initProp();
       this.registerEventListener();
@@ -238,6 +239,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
         this.#internals.role = "group";
       }
     }
+    this.#callOnInitEvent();
   }
 
   initWebComponent() {
@@ -274,7 +276,8 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
         delete: shadowRoot.querySelector(".delete-button") as JBButtonWebComponent,
         download: shadowRoot.querySelector(".download-button") as JBButtonWebComponent,
         wrapper: shadowRoot.querySelector(".file-overlay") as HTMLDivElement,
-        reselect: shadowRoot.querySelector(".reselect-button") as HTMLButtonElement,
+        mainActionButton: shadowRoot.querySelector(".reselect-button") as HTMLButtonElement,
+        overlayExtraActionsSlot: shadowRoot.querySelector(`slot[name="overlay-extra-actions"]`) as HTMLSlotElement,
       },
       errorOverlay: {
         container: shadowRoot.querySelector(".error-overlay") as HTMLDivElement,
@@ -290,7 +293,7 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
   registerEventListener() {
     this.#elements.placeholder.section.addEventListener("click", this.openFileSelector.bind(this));
     this.#elements.file.wrapper.addEventListener("click", this.openFileSelector.bind(this));
-    this.#elements.overlay.wrapper.addEventListener("click", this.openFileSelector.bind(this));
+    this.#elements.overlay.wrapper.addEventListener("click", this.#onOverlayClick.bind(this));
     this.#elements.overlay.delete.addEventListener("click", this.#onDeleteClick.bind(this));
     this.#elements.overlay.download.addEventListener("click", this.#onDownloadClick.bind(this));
 
@@ -300,6 +303,25 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
       this.#elements.overlay.delete.addEventListener("mouseleave", () => deleteIcon.playCloseAnimation());
     }
   }
+  #callOnLoadEvent() {
+    const event = new CustomEvent("load", { bubbles: true, composed: false });
+    this.dispatchEvent(event);
+  }
+  #callOnInitEvent() {
+    const event = new CustomEvent("init", { bubbles: true, composed: false });
+    this.dispatchEvent(event);
+  }
+  #onOverlayClick(e: MouseEvent) {
+    const path = e.composedPath();
+    if (path?.includes(this.#elements.overlay.download) || path?.includes(this.#elements.overlay.delete) || path?.includes(this.#elements.overlay.overlayExtraActionsSlot)) {
+      return;
+    }
+    const event = createMouseEvent("overlay-click", e, { cancelable: true });
+    this.dispatchEvent(event);
+    
+    if (event.defaultPrevented) return;
+    this.openFileSelector();
+  }
   #createVirtualInputFile() {
     const virtualInputFile = document.createElement("input") as HTMLInputElement;
     virtualInputFile.type = "file";
@@ -308,26 +330,24 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
     virtualInputFile.addEventListener("change", e => this.#onFileSelected(e));
     return virtualInputFile;
   }
-  openFileSelector(event?: Event) {
+  openFileSelector() {
     if (this.disabled) {
-      event?.preventDefault();
-      event?.stopPropagation();
-      return;
-    }
-    const path = event?.composedPath();
-    if (path?.includes(this.#elements.overlay.delete) || path?.includes(this.#elements.overlay.download)) {
       return;
     }
     this.#elements.virtualInput.click();
   }
   static get observedAttributes() {
-    return ["required", "label", "message", "error", "accept", "disabled", "is-uploading"];
+    return ["overlay-text", "required", "label", "message", "error", "accept", "disabled", "is-uploading"];
   }
   attributeChangedCallback(name: string, _oldValue: string | null, newValue: string | null) {
     // do something when an attribute has changed
     this.onAttributeChange(name, newValue);
   }
   onAttributeChange(name: string, value: string | null) {
+    if (!this.#elements) {
+      this.addEventListener("init", () => this.onAttributeChange(name, value), { once: true });
+      return;
+    }
     switch (name) {
       case "required":
         this.#required = parseBooleanAttribute(value);
@@ -335,6 +355,10 @@ export class JBFileInputWebComponent extends JBBaseComponent implements WithVali
           this.#internals.ariaRequired = String(this.#required);
         }
         break;
+      case "overlay-text": {
+        this.#elements.overlay.mainActionButton.textContent = value;
+        break;
+      }
       case "label": {
         const label = value ?? dictionary.get(i18n, "chooseFile");
         this.#elements.placeholder.title.textContent = label;
